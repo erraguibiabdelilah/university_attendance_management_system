@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -12,44 +12,37 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+
 import { useEffect } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
 
-// Soft UI Dashboard React examples
+// Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
-import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
-
-// Soft UI Dashboard React base styles
-import typography from "assets/theme/base/typography";
-
-// RTL layout components
-import BuildByDevelopers from "layouts/rtl/components/BuildByDevelopers";
-import WorkWithTheRockets from "layouts/rtl/components/WorkWithTheRockets";
-import Projects from "layouts/rtl/components/Projects";
-import OrderOverview from "layouts/rtl/components/OrderOverview";
+import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
+import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
 
 // Data
 import reportsBarChartData from "layouts/rtl/data/reportsBarChartData";
-import gradientLineChartData from "layouts/rtl/data/gradientLineChartData";
+import reportsLineChartData from "layouts/rtl/data/reportsLineChartData";
 
-// Soft UI Dashboard React contexts
-import { useSoftUIController, setDirection } from "context";
+// RTL components
+import Projects from "layouts/rtl/components/Projects";
+import OrdersOverview from "layouts/rtl/components/OrdersOverview";
+
+// Material Dashboard 2 React contexts
+import { useMaterialUIController, setDirection } from "context";
 
 function RTL() {
-  const [, dispatch] = useSoftUIController();
-  const { size } = typography;
-  const { chart, items } = reportsBarChartData;
+  const [, dispatch] = useMaterialUIController();
+  const { sales, tasks } = reportsLineChartData;
 
   // Changing the direction to rtl
   useEffect(() => {
@@ -61,101 +54,120 @@ function RTL() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <SoftBox py={3}>
-        <SoftBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "أموال اليوم" }}
-                count="$53,000"
-                percentage={{ color: "success", text: "+55%" }}
-                icon={{ color: "info", component: "paid" }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "مستخدمو اليوم" }}
-                count="2,300"
-                percentage={{ color: "success", text: "+3%" }}
-                icon={{ color: "info", component: "public" }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "عملاء جدد" }}
-                count="+3,462"
-                percentage={{ color: "error", text: "-2%" }}
-                icon={{ color: "info", component: "emoji_events" }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "مبيعات" }}
-                count="$103,430"
-                percentage={{ color: "success", text: "+5%" }}
-                icon={{
-                  color: "info",
-                  component: "shopping_cart",
+      <MDBox py={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6} lg={3}>
+            <MDBox mb={1.5}>
+              <ComplexStatisticsCard
+                color="dark"
+                icon="weekend"
+                title="أموال اليوم"
+                count={281}
+                percentage={{
+                  color: "success",
+                  amount: "+55%",
+                  label: "من الأسبوع الماضي",
                 }}
               />
-            </Grid>
+            </MDBox>
           </Grid>
-        </SoftBox>
-        <SoftBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={7}>
-              <BuildByDevelopers />
-            </Grid>
-            <Grid item xs={12} lg={5}>
-              <WorkWithTheRockets />
-            </Grid>
-          </Grid>
-        </SoftBox>
-        <SoftBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={5}>
-              <ReportsBarChart
-                title="المستخدمين النشطين"
-                description={
-                  <>
-                    (<strong>+23%</strong>) من الأسبوع الماضي
-                  </>
-                }
-                chart={chart}
-                items={items}
+          <Grid item xs={12} md={6} lg={3}>
+            <MDBox mb={1.5}>
+              <ComplexStatisticsCard
+                icon="leaderboard"
+                title="مستخدمو اليوم"
+                count="2,300"
+                percentage={{
+                  color: "success",
+                  amount: "+3%",
+                  label: "من الأسبوع الماضي",
+                }}
               />
-            </Grid>
-            <Grid item xs={12} lg={7}>
-              <GradientLineChart
-                title="نظرة عامة على المبيعات"
-                description={
-                  <SoftBox display="flex" alignItems="center">
-                    <SoftBox fontSize={size.lg} color="success" mb={0.3} mr={0.5} lineHeight={0}>
-                      <Icon className="font-bold">arrow_upward</Icon>
-                    </SoftBox>
-                    <SoftTypography variant="button" color="text" fontWeight="medium">
-                      4% أكثر في عام{" "}
-                      <SoftTypography variant="button" color="text" fontWeight="regular">
-                        2021
-                      </SoftTypography>
-                    </SoftTypography>
-                  </SoftBox>
-                }
-                height="20.25rem"
-                chart={gradientLineChartData}
+            </MDBox>
+          </Grid>
+          <Grid item xs={12} md={6} lg={3}>
+            <MDBox mb={1.5}>
+              <ComplexStatisticsCard
+                color="success"
+                icon="store"
+                title="عملاء جدد"
+                count="34k"
+                percentage={{
+                  color: "success",
+                  amount: "+1%",
+                  label: "من الشهر الماضي",
+                }}
               />
-            </Grid>
+            </MDBox>
           </Grid>
-        </SoftBox>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={8}>
-            <Projects />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
+          <Grid item xs={12} md={6} lg={3}>
+            <MDBox mb={1.5}>
+              <ComplexStatisticsCard
+                color="primary"
+                icon="person_add"
+                title="مبيعات"
+                count="+91"
+                percentage={{
+                  color: "success",
+                  amount: "",
+                  label: "مقارنة بيوم أمس",
+                }}
+              />
+            </MDBox>
           </Grid>
         </Grid>
-      </SoftBox>
+        <MDBox mt={4.5}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={3}>
+                <ReportsBarChart
+                  color="info"
+                  title="مشاهدات الموقع"
+                  description="آخر أداء للحملة"
+                  date="الحملة أرسلت قبل يومين"
+                  chart={reportsBarChartData}
+                />
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={3}>
+                <ReportsLineChart
+                  color="success"
+                  title="المبيعات اليومية"
+                  description={
+                    <>
+                      (<strong>+15%</strong>) زيادة في مبيعات اليوم..
+                    </>
+                  }
+                  date="تم التحديث منذ 4 دقائق"
+                  chart={sales}
+                />
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={3}>
+                <ReportsLineChart
+                  color="dark"
+                  title="المهام المكتملة"
+                  description="آخر أداء للحملة"
+                  date="تم تحديثه للتو"
+                  chart={tasks}
+                />
+              </MDBox>
+            </Grid>
+          </Grid>
+        </MDBox>
+        <MDBox>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6} lg={8}>
+              <Projects />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <OrdersOverview />
+            </Grid>
+          </Grid>
+        </MDBox>
+      </MDBox>
       <Footer />
     </DashboardLayout>
   );

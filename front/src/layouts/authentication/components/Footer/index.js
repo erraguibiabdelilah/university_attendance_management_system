@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -13,85 +13,133 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+// prop-types is a library for typechecking of props
+import PropTypes from "prop-types";
+
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import Icon from "@mui/material/Icon";
 
-// @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import PinterestIcon from "@mui/icons-material/Pinterest";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+// Material Dashboard 2 React base styles
+import typography from "assets/theme/base/typography";
 
-function Footer() {
+function Footer({ light }) {
+  const { size } = typography;
+
   return (
-    <SoftBox component="footer" py={6}>
-      <Grid container justifyContent="center">
-        <Grid item xs={10} lg={8}>
-          <SoftBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
-            <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Company
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                About Us
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox mr={{ xs: 0, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Team
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Product
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Blog
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Pricing
-              </SoftTypography>
-            </SoftBox>
-          </SoftBox>
-        </Grid>
-        <Grid item xs={12} lg={8}>
-          <SoftBox display="flex" justifyContent="center" mt={1} mb={3}>
-            <SoftBox mr={3} color="secondary">
-              <FacebookIcon fontSize="small" />
-            </SoftBox>
-            <SoftBox mr={3} color="secondary">
-              <TwitterIcon fontSize="small" />
-            </SoftBox>
-            <SoftBox mr={3} color="secondary">
-              <InstagramIcon fontSize="small" />
-            </SoftBox>
-            <SoftBox mr={3} color="secondary">
-              <PinterestIcon fontSize="small" />
-            </SoftBox>
-            <SoftBox color="secondary">
-              <LinkedInIcon fontSize="small" />
-            </SoftBox>
-          </SoftBox>
-        </Grid>
-        <Grid item xs={12} lg={8} sx={{ textAlign: "center" }}>
-          <SoftTypography variant="body2" color="secondary">
-            Copyright &copy; 2021 Soft by Creative Tim.
-          </SoftTypography>
-        </Grid>
-      </Grid>
-    </SoftBox>
+    <MDBox position="absolute" width="100%" bottom={0} py={4}>
+      <Container>
+        <MDBox
+          width="100%"
+          display="flex"
+          flexDirection={{ xs: "column", lg: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+          px={1.5}
+        >
+          <MDBox
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexWrap="wrap"
+            color={light ? "white" : "text"}
+            fontSize={size.sm}
+          >
+            &copy; {new Date().getFullYear()}, made with
+            <MDBox fontSize={size.md} color={light ? "white" : "dark"} mb={-0.5} mx={0.25}>
+              <Icon color="inherit" fontSize="inherit">
+                favorite
+              </Icon>
+            </MDBox>
+            by
+            <Link href="https://www.creative-tim.com/" target="_blank">
+              <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
+                &nbsp;Creative Tim&nbsp;
+              </MDTypography>
+            </Link>
+            for a better web.
+          </MDBox>
+          <MDBox
+            component="ul"
+            sx={({ breakpoints }) => ({
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "center",
+              listStyle: "none",
+              mt: 3,
+              mb: 0,
+              p: 0,
+
+              [breakpoints.up("lg")]: {
+                mt: 0,
+              },
+            })}
+          >
+            <MDBox component="li" pr={2} lineHeight={1}>
+              <Link href="https://www.creative-tim.com/" target="_blank">
+                <MDTypography
+                  variant="button"
+                  fontWeight="regular"
+                  color={light ? "white" : "dark"}
+                >
+                  Creative Tim
+                </MDTypography>
+              </Link>
+            </MDBox>
+            <MDBox component="li" px={2} lineHeight={1}>
+              <Link href="https://www.creative-tim.com/presentation" target="_blank">
+                <MDTypography
+                  variant="button"
+                  fontWeight="regular"
+                  color={light ? "white" : "dark"}
+                >
+                  About Us
+                </MDTypography>
+              </Link>
+            </MDBox>
+            <MDBox component="li" px={2} lineHeight={1}>
+              <Link href="https://www.creative-tim.com/blog" target="_blank">
+                <MDTypography
+                  variant="button"
+                  fontWeight="regular"
+                  color={light ? "white" : "dark"}
+                >
+                  Blog
+                </MDTypography>
+              </Link>
+            </MDBox>
+            <MDBox component="li" pl={2} lineHeight={1}>
+              <Link href="https://www.creative-tim.com/license" target="_blank">
+                <MDTypography
+                  variant="button"
+                  fontWeight="regular"
+                  color={light ? "white" : "dark"}
+                >
+                  License
+                </MDTypography>
+              </Link>
+            </MDBox>
+          </MDBox>
+        </MDBox>
+      </Container>
+    </MDBox>
   );
 }
+
+// Setting default props for the Footer
+Footer.defaultProps = {
+  light: false,
+};
+
+// Typechecking props for the Footer
+Footer.propTypes = {
+  light: PropTypes.bool,
+};
 
 export default Footer;

@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2  React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -24,13 +24,12 @@ function configs(labels, datasets) {
           borderWidth: 0,
           borderRadius: 4,
           borderSkipped: false,
-          backgroundColor: "#fff",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
           data: datasets.data,
           maxBarThickness: 6,
         },
       ],
     },
-
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -47,17 +46,20 @@ function configs(labels, datasets) {
         y: {
           grid: {
             drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
+            display: true,
+            drawOnChartArea: true,
             drawTicks: false,
+            borderDash: [5, 5],
+            color: "rgba(255, 255, 255, .2)",
           },
           ticks: {
             suggestedMin: 0,
             suggestedMax: 500,
             beginAtZero: true,
-            padding: 15,
+            padding: 10,
             font: {
               size: 14,
+              weight: 300,
               family: "Roboto",
               style: "normal",
               lineHeight: 2,
@@ -68,12 +70,23 @@ function configs(labels, datasets) {
         x: {
           grid: {
             drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
+            display: true,
+            drawOnChartArea: true,
             drawTicks: false,
+            borderDash: [5, 5],
+            color: "rgba(255, 255, 255, .2)",
           },
           ticks: {
-            display: false,
+            display: true,
+            color: "#f8f9fa",
+            padding: 10,
+            font: {
+              size: 14,
+              weight: 300,
+              family: "Roboto",
+              style: "normal",
+              lineHeight: 2,
+            },
           },
         },
       },

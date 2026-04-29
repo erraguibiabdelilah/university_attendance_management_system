@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -24,16 +24,16 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Tooltip from "@mui/material/Tooltip";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-import SoftButton from "components/SoftButton";
-import SoftAvatar from "components/SoftAvatar";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
+import MDAvatar from "components/MDAvatar";
 
 function DefaultProjectCard({ image, label, title, description, action, authors }) {
   const renderAuthors = authors.map(({ image: media, name }) => (
     <Tooltip key={name} title={name} placement="bottom">
-      <SoftAvatar
+      <MDAvatar
         src={media}
         alt={name}
         size="xs"
@@ -61,7 +61,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
         overflow: "visible",
       }}
     >
-      <SoftBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">
+      <MDBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">
         <CardMedia
           src={image}
           component="img"
@@ -74,30 +74,23 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
             objectPosition: "center",
           }}
         />
-      </SoftBox>
-      <SoftBox pt={3} px={0.5}>
-        <SoftBox mb={1}>
-          <SoftTypography
-            variant="button"
-            fontWeight="regular"
-            textTransform="capitalize"
-            textGradient
-          >
-            {label}
-          </SoftTypography>
-        </SoftBox>
-        <SoftBox mb={1}>
+      </MDBox>
+      <MDBox mt={1} mx={0.5}>
+        <MDTypography variant="button" fontWeight="regular" color="text" textTransform="capitalize">
+          {label}
+        </MDTypography>
+        <MDBox mb={1}>
           {action.type === "internal" ? (
-            <SoftTypography
+            <MDTypography
               component={Link}
               to={action.route}
               variant="h5"
               textTransform="capitalize"
             >
               {title}
-            </SoftTypography>
+            </MDTypography>
           ) : (
-            <SoftTypography
+            <MDTypography
               component="a"
               href={action.route}
               target="_blank"
@@ -106,17 +99,17 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               textTransform="capitalize"
             >
               {title}
-            </SoftTypography>
+            </MDTypography>
           )}
-        </SoftBox>
-        <SoftBox mb={3} lineHeight={0}>
-          <SoftTypography variant="button" fontWeight="regular" color="text">
+        </MDBox>
+        <MDBox mb={3} lineHeight={0}>
+          <MDTypography variant="button" fontWeight="light" color="text">
             {description}
-          </SoftTypography>
-        </SoftBox>
-        <SoftBox display="flex" justifyContent="space-between" alignItems="center">
+          </MDTypography>
+        </MDBox>
+        <MDBox display="flex" justifyContent="space-between" alignItems="center">
           {action.type === "internal" ? (
-            <SoftButton
+            <MDButton
               component={Link}
               to={action.route}
               variant="outlined"
@@ -124,9 +117,9 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               color={action.color}
             >
               {action.label}
-            </SoftButton>
+            </MDButton>
           ) : (
-            <SoftButton
+            <MDButton
               component="a"
               href={action.route}
               target="_blank"
@@ -136,11 +129,11 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
               color={action.color}
             >
               {action.label}
-            </SoftButton>
+            </MDButton>
           )}
-          <SoftBox display="flex">{renderAuthors}</SoftBox>
-        </SoftBox>
-      </SoftBox>
+          <MDBox display="flex">{renderAuthors}</MDBox>
+        </MDBox>
+      </MDBox>
     </Card>
   );
 }

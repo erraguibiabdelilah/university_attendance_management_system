@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -19,76 +19,77 @@ import PropTypes from "prop-types";
 // @mui material components
 import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-import SoftButton from "components/SoftButton";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
+
+// Material Dashboard 2 React context
+import { useMaterialUIController } from "context";
 
 function Bill({ name, company, email, vat, noGutter }) {
+  const [controller] = useMaterialUIController();
+  const { darkMode } = controller;
+
   return (
-    <SoftBox
+    <MDBox
       component="li"
       display="flex"
       justifyContent="space-between"
       alignItems="flex-start"
-      bgColor="grey-100"
+      bgColor={darkMode ? "transparent" : "grey-100"}
       borderRadius="lg"
       p={3}
       mb={noGutter ? 0 : 1}
       mt={2}
     >
-      <SoftBox width="100%" display="flex" flexDirection="column">
-        <SoftBox
+      <MDBox width="100%" display="flex" flexDirection="column">
+        <MDBox
           display="flex"
           justifyContent="space-between"
           alignItems={{ xs: "flex-start", sm: "center" }}
           flexDirection={{ xs: "column", sm: "row" }}
           mb={2}
         >
-          <SoftTypography variant="button" fontWeight="medium" textTransform="capitalize">
+          <MDTypography variant="button" fontWeight="medium" textTransform="capitalize">
             {name}
-          </SoftTypography>
+          </MDTypography>
 
-          <SoftBox
-            display="flex"
-            alignItems="center"
-            mt={{ xs: 2, sm: 0 }}
-            ml={{ xs: -1.5, sm: 0 }}
-          >
-            <SoftBox mr={1}>
-              <SoftButton variant="text" color="error">
+          <MDBox display="flex" alignItems="center" mt={{ xs: 2, sm: 0 }} ml={{ xs: -1.5, sm: 0 }}>
+            <MDBox mr={1}>
+              <MDButton variant="text" color="error">
                 <Icon>delete</Icon>&nbsp;delete
-              </SoftButton>
-            </SoftBox>
-            <SoftButton variant="text" color="dark">
+              </MDButton>
+            </MDBox>
+            <MDButton variant="text" color={darkMode ? "white" : "dark"}>
               <Icon>edit</Icon>&nbsp;edit
-            </SoftButton>
-          </SoftBox>
-        </SoftBox>
-        <SoftBox mb={1} lineHeight={0}>
-          <SoftTypography variant="caption" color="text">
+            </MDButton>
+          </MDBox>
+        </MDBox>
+        <MDBox mb={1} lineHeight={0}>
+          <MDTypography variant="caption" color="text">
             Company Name:&nbsp;&nbsp;&nbsp;
-            <SoftTypography variant="caption" fontWeight="medium" textTransform="capitalize">
+            <MDTypography variant="caption" fontWeight="medium" textTransform="capitalize">
               {company}
-            </SoftTypography>
-          </SoftTypography>
-        </SoftBox>
-        <SoftBox mb={1} lineHeight={0}>
-          <SoftTypography variant="caption" color="text">
+            </MDTypography>
+          </MDTypography>
+        </MDBox>
+        <MDBox mb={1} lineHeight={0}>
+          <MDTypography variant="caption" color="text">
             Email Address:&nbsp;&nbsp;&nbsp;
-            <SoftTypography variant="caption" fontWeight="medium">
+            <MDTypography variant="caption" fontWeight="medium">
               {email}
-            </SoftTypography>
-          </SoftTypography>
-        </SoftBox>
-        <SoftTypography variant="caption" color="text">
+            </MDTypography>
+          </MDTypography>
+        </MDBox>
+        <MDTypography variant="caption" color="text">
           VAT Number:&nbsp;&nbsp;&nbsp;
-          <SoftTypography variant="caption" fontWeight="medium">
+          <MDTypography variant="caption" fontWeight="medium">
             {vat}
-          </SoftTypography>
-        </SoftTypography>
-      </SoftBox>
-    </SoftBox>
+          </MDTypography>
+        </MDTypography>
+      </MDBox>
+    </MDBox>
   );
 }
 

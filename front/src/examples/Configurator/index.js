@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -14,6 +14,9 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect } from "react";
+
+// react-github-btn
+import GitHubButton from "react-github-btn";
 
 // @mui material components
 import Divider from "@mui/material/Divider";
@@ -26,26 +29,35 @@ import Icon from "@mui/material/Icon";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-import SoftButton from "components/SoftButton";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
 
 // Custom styles for the Configurator
 import ConfiguratorRoot from "examples/Configurator/ConfiguratorRoot";
 
-// Soft UI Dashboard React context
+// Material Dashboard 2 React context
 import {
-  useSoftUIController,
+  useMaterialUIController,
   setOpenConfigurator,
   setTransparentSidenav,
+  setWhiteSidenav,
   setFixedNavbar,
   setSidenavColor,
+  setDarkMode,
 } from "context";
 
 function Configurator() {
-  const [controller, dispatch] = useSoftUIController();
-  const { openConfigurator, transparentSidenav, fixedNavbar, sidenavColor } = controller;
+  const [controller, dispatch] = useMaterialUIController();
+  const {
+    openConfigurator,
+    fixedNavbar,
+    sidenavColor,
+    transparentSidenav,
+    whiteSidenav,
+    darkMode,
+  } = controller;
   const [disabled, setDisabled] = useState(false);
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
 
@@ -67,71 +79,114 @@ function Configurator() {
   }, []);
 
   const handleCloseConfigurator = () => setOpenConfigurator(dispatch, false);
-  const handleTransparentSidenav = () => setTransparentSidenav(dispatch, true);
-  const handleWhiteSidenav = () => setTransparentSidenav(dispatch, false);
+  const handleTransparentSidenav = () => {
+    setTransparentSidenav(dispatch, true);
+    setWhiteSidenav(dispatch, false);
+  };
+  const handleWhiteSidenav = () => {
+    setWhiteSidenav(dispatch, true);
+    setTransparentSidenav(dispatch, false);
+  };
+  const handleDarkSidenav = () => {
+    setWhiteSidenav(dispatch, false);
+    setTransparentSidenav(dispatch, false);
+  };
   const handleFixedNavbar = () => setFixedNavbar(dispatch, !fixedNavbar);
+  const handleDarkMode = () => setDarkMode(dispatch, !darkMode);
 
   // sidenav type buttons styles
   const sidenavTypeButtonsStyles = ({
     functions: { pxToRem },
-    boxShadows: { buttonBoxShadow },
+    palette: { white, dark, background },
+    borders: { borderWidth },
   }) => ({
-    height: pxToRem(42),
-    boxShadow: buttonBoxShadow.main,
+    height: pxToRem(39),
+    background: darkMode ? background.sidenav : white.main,
+    color: darkMode ? white.main : dark.main,
+    border: `${borderWidth[1]} solid ${darkMode ? white.main : dark.main}`,
 
-    "&:hover, &:focus": {
-      opacity: 1,
+    "&:hover, &:focus, &:focus:not(:hover)": {
+      background: darkMode ? background.sidenav : white.main,
+      color: darkMode ? white.main : dark.main,
+      border: `${borderWidth[1]} solid ${darkMode ? white.main : dark.main}`,
+    },
+  });
+
+  // sidenav type active button styles
+  const sidenavTypeActiveButtonStyles = ({
+    functions: { pxToRem, linearGradient },
+    palette: { white, gradients, background },
+  }) => ({
+    height: pxToRem(39),
+    background: darkMode ? white.main : linearGradient(gradients.dark.main, gradients.dark.state),
+    color: darkMode ? background.sidenav : white.main,
+
+    "&:hover, &:focus, &:focus:not(:hover)": {
+      background: darkMode ? white.main : linearGradient(gradients.dark.main, gradients.dark.state),
+      color: darkMode ? background.sidenav : white.main,
     },
   });
 
   return (
     <ConfiguratorRoot variant="permanent" ownerState={{ openConfigurator }}>
-      <SoftBox
+      <MDBox
         display="flex"
         justifyContent="space-between"
         alignItems="baseline"
-        pt={3}
-        pb={0.8}
+        pt={4}
+        pb={0.5}
         px={3}
       >
-        <SoftBox>
-          <SoftTypography variant="h5">Soft UI Configurator</SoftTypography>
-          <SoftTypography variant="body2" color="text">
+        <MDBox>
+          <MDTypography variant="h5">Material UI Configurator</MDTypography>
+          <MDTypography variant="body2" color="text">
             See our dashboard options.
-          </SoftTypography>
-        </SoftBox>
+          </MDTypography>
+        </MDBox>
 
         <Icon
-          sx={({ typography: { size, fontWeightBold }, palette: { dark } }) => ({
-            fontSize: `${size.md} !important`,
-            fontWeight: `${fontWeightBold} !important`,
-            stroke: dark.main,
+          sx={({ typography: { size }, palette: { dark, white } }) => ({
+            fontSize: `${size.lg} !important`,
+            color: darkMode ? white.main : dark.main,
+            stroke: "currentColor",
             strokeWidth: "2px",
             cursor: "pointer",
-            mt: 2,
+            transform: "translateY(5px)",
           })}
           onClick={handleCloseConfigurator}
         >
           close
         </Icon>
-      </SoftBox>
+      </MDBox>
 
       <Divider />
 
-      <SoftBox pt={1.25} pb={3} px={3}>
-        <SoftBox>
-          <SoftTypography variant="h6">Sidenav Colors</SoftTypography>
+      <MDBox pt={0.5} pb={3} px={3}>
+        <MDBox>
+          <MDTypography variant="h6">Sidenav Colors</MDTypography>
 
-          <SoftBox mb={0.5}>
+          <MDBox mb={0.5}>
             {sidenavColors.map((color) => (
               <IconButton
                 key={color}
-                sx={({ borders: { borderWidth }, palette: { white, dark }, transitions }) => ({
+                sx={({
+                  borders: { borderWidth },
+                  palette: { white, dark, background },
+                  transitions,
+                }) => ({
                   width: "24px",
                   height: "24px",
                   padding: 0,
-                  border: `${borderWidth[1]} solid ${white.main}`,
-                  borderColor: sidenavColor === color && dark.main,
+                  border: `${borderWidth[1]} solid ${darkMode ? background.sidenav : white.main}`,
+                  borderColor: () => {
+                    let borderColorValue = sidenavColor === color && dark.main;
+
+                    if (darkMode && sidenavColor === color) {
+                      borderColorValue = white.main;
+                    }
+
+                    return borderColorValue;
+                  },
                   transition: transitions.create("border-color", {
                     easing: transitions.easing.sharp,
                     duration: transitions.duration.shorter,
@@ -144,129 +199,147 @@ function Configurator() {
                   },
 
                   "&:hover, &:focus, &:active": {
-                    borderColor: dark.main,
+                    borderColor: darkMode ? white.main : dark.main,
                   },
                 })}
                 onClick={() => setSidenavColor(dispatch, color)}
               />
             ))}
-          </SoftBox>
-        </SoftBox>
+          </MDBox>
+        </MDBox>
 
-        <SoftBox mt={3} lineHeight={1}>
-          <SoftTypography variant="h6">Sidenav Type</SoftTypography>
-          <SoftTypography variant="button" color="text" fontWeight="regular">
-            Choose between 2 different sidenav types.
-          </SoftTypography>
+        <MDBox mt={3} lineHeight={1}>
+          <MDTypography variant="h6">Sidenav Type</MDTypography>
+          <MDTypography variant="button" color="text">
+            Choose between different sidenav types.
+          </MDTypography>
 
-          <SoftBox
+          <MDBox
             sx={{
               display: "flex",
               mt: 2,
+              mr: 1,
             }}
           >
-            <SoftButton
-              color="info"
-              variant={transparentSidenav ? "gradient" : "outlined"}
-              onClick={handleTransparentSidenav}
+            <MDButton
+              color="dark"
+              variant="gradient"
+              onClick={handleDarkSidenav}
               disabled={disabled}
               fullWidth
-              sx={{
-                mr: 1,
-                ...sidenavTypeButtonsStyles,
-              }}
+              sx={
+                !transparentSidenav && !whiteSidenav
+                  ? sidenavTypeActiveButtonStyles
+                  : sidenavTypeButtonsStyles
+              }
             >
-              Transparent
-            </SoftButton>
-            <SoftButton
-              color="info"
-              variant={transparentSidenav ? "outlined" : "gradient"}
+              Dark
+            </MDButton>
+            <MDBox sx={{ mx: 1, width: "8rem", minWidth: "8rem" }}>
+              <MDButton
+                color="dark"
+                variant="gradient"
+                onClick={handleTransparentSidenav}
+                disabled={disabled}
+                fullWidth
+                sx={
+                  transparentSidenav && !whiteSidenav
+                    ? sidenavTypeActiveButtonStyles
+                    : sidenavTypeButtonsStyles
+                }
+              >
+                Transparent
+              </MDButton>
+            </MDBox>
+            <MDButton
+              color="dark"
+              variant="gradient"
               onClick={handleWhiteSidenav}
               disabled={disabled}
               fullWidth
-              sx={sidenavTypeButtonsStyles}
+              sx={
+                whiteSidenav && !transparentSidenav
+                  ? sidenavTypeActiveButtonStyles
+                  : sidenavTypeButtonsStyles
+              }
             >
               White
-            </SoftButton>
-          </SoftBox>
-        </SoftBox>
-        <SoftBox mt={3} mb={2} lineHeight={1}>
-          <SoftTypography variant="h6">Navbar Fixed</SoftTypography>
+            </MDButton>
+          </MDBox>
+        </MDBox>
+        <MDBox
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mt={3}
+          lineHeight={1}
+        >
+          <MDTypography variant="h6">Navbar Fixed</MDTypography>
 
           <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
-        </SoftBox>
-
+        </MDBox>
         <Divider />
+        <MDBox display="flex" justifyContent="space-between" alignItems="center" lineHeight={1}>
+          <MDTypography variant="h6">Light / Dark</MDTypography>
 
-        <SoftBox mt={3} mb={2}>
-          <SoftBox mb={2}>
-            <SoftButton
-              component={Link}
-              href="https://www.creative-tim.com/product/soft-ui-dashboard-react"
-              target="_blank"
-              rel="noreferrer"
-              color="dark"
-              variant="gradient"
-              fullWidth
-            >
-              free download
-            </SoftButton>
-          </SoftBox>
-          <SoftButton
+          <Switch checked={darkMode} onChange={handleDarkMode} />
+        </MDBox>
+        <Divider />
+        <MDBox mt={3} mb={2}>
+          <MDButton
             component={Link}
-            href="https://www.creative-tim.com/learning-lab/react/quick-start/soft-ui-dashboard/"
+            href="https://www.creative-tim.com/learning-lab/react/quick-start/material-dashboard/"
             target="_blank"
             rel="noreferrer"
-            color="dark"
+            color={darkMode ? "light" : "dark"}
             variant="outlined"
             fullWidth
           >
             view documentation
-          </SoftButton>
-        </SoftBox>
-        <SoftBox display="flex" justifyContent="center">
-          <a
-            className="github-button"
-            href="https://github.com/creativetimofficial/soft-ui-dashboard-react"
+          </MDButton>
+        </MDBox>
+        <MDBox display="flex" justifyContent="center">
+          <GitHubButton
+            href="https://github.com/creativetimofficial/material-dashboard-react"
             data-icon="octicon-star"
             data-size="large"
             data-show-count="true"
-            aria-label="Star creativetimofficial/soft-ui-dashboard-react on GitHub"
+            aria-label="Star creativetimofficial/material-dashboard-react on GitHub"
           >
             Star
-          </a>
-        </SoftBox>
-        <SoftBox mt={3} textAlign="center">
-          <SoftBox mb={0.5}>
-            <SoftTypography variant="h6">Thank you for sharing!</SoftTypography>
-          </SoftBox>
+          </GitHubButton>
+        </MDBox>
+        <MDBox mt={2} textAlign="center">
+          <MDBox mb={0.5}>
+            <MDTypography variant="h6">Thank you for sharing!</MDTypography>
+          </MDBox>
 
-          <SoftBox display="flex" justifyContent="center">
-            <SoftBox mr={1.5}>
-              <SoftButton
+          <MDBox display="flex" justifyContent="center">
+            <MDBox mr={1.5}>
+              <MDButton
                 component={Link}
-                href="//twitter.com/intent/tweet?text=Check%20Soft%20UI%20Dashboard%20React%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23react%23mui&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard-react"
+                href="//twitter.com/intent/tweet?text=Check%20Material%20Dashboard%20React%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23react%20%mui&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-dashboard-react"
                 target="_blank"
                 rel="noreferrer"
                 color="dark"
               >
                 <TwitterIcon />
                 &nbsp; Tweet
-              </SoftButton>
-            </SoftBox>
-            <SoftButton
+              </MDButton>
+            </MDBox>
+            <MDButton
               component={Link}
-              href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/soft-ui-dashboard-react"
+              href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard-react"
               target="_blank"
               rel="noreferrer"
               color="dark"
             >
               <FacebookIcon />
               &nbsp; Share
-            </SoftButton>
-          </SoftBox>
-        </SoftBox>
-      </SoftBox>
+            </MDButton>
+          </MDBox>
+        </MDBox>
+      </MDBox>
     </ConfiguratorRoot>
   );
 }

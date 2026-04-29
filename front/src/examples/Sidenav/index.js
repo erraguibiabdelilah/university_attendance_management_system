@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -27,28 +27,39 @@ import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-import SoftButton from "components/SoftButton";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
 
-// Soft UI Dashboard React examples
+// Material Dashboard 2 React example components
 import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
-import SidenavCard from "examples/Sidenav/SidenavCard";
 
 // Custom styles for the Sidenav
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 
-// Soft UI Dashboard React context
-import { useSoftUIController, setMiniSidenav } from "context";
+// Material Dashboard 2 React context
+import {
+  useMaterialUIController,
+  setMiniSidenav,
+  setTransparentSidenav,
+  setWhiteSidenav,
+} from "context";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
-  const [controller, dispatch] = useSoftUIController();
-  const { miniSidenav, transparentSidenav } = controller;
+  const [controller, dispatch] = useMaterialUIController();
+  const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
   const location = useLocation();
-  const { pathname } = location;
-  const collapseName = pathname.split("/").slice(1)[0];
+  const collapseName = location.pathname.replace("/", "");
+
+  let textColor = "white";
+
+  if (transparentSidenav || (whiteSidenav && !darkMode)) {
+    textColor = "dark";
+  } else if (whiteSidenav && darkMode) {
+    textColor = "inherit";
+  }
 
   const closeSidenav = () => setMiniSidenav(dispatch, true);
 
@@ -56,6 +67,8 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     // A function that sets the mini state of the sidenav.
     function handleMiniSidenav() {
       setMiniSidenav(dispatch, window.innerWidth < 1200);
+      setTransparentSidenav(dispatch, window.innerWidth < 1200 ? false : transparentSidenav);
+      setWhiteSidenav(dispatch, window.innerWidth < 1200 ? false : whiteSidenav);
     }
 
     /** 
@@ -71,7 +84,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   }, [dispatch, location]);
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
+  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, href, route }) => {
     let returnValue;
 
     if (type === "collapse") {
@@ -84,7 +97,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           sx={{ textDecoration: "none" }}
         >
           <SidenavCollapse
-            color={color}
             name={name}
             icon={icon}
             active={key === collapseName}
@@ -92,45 +104,50 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           />
         </Link>
       ) : (
-        <NavLink to={route} key={key}>
-          <SidenavCollapse
-            color={color}
-            key={key}
-            name={name}
-            icon={icon}
-            active={key === collapseName}
-            noCollapse={noCollapse}
-          />
+        <NavLink key={key} to={route}>
+          <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
         </NavLink>
       );
     } else if (type === "title") {
       returnValue = (
-        <SoftTypography
+        <MDTypography
           key={key}
+          color={textColor}
           display="block"
           variant="caption"
           fontWeight="bold"
           textTransform="uppercase"
-          opacity={0.6}
           pl={3}
           mt={2}
           mb={1}
           ml={1}
         >
           {title}
-        </SoftTypography>
+        </MDTypography>
       );
     } else if (type === "divider") {
-      returnValue = <Divider key={key} />;
+      returnValue = (
+        <Divider
+          key={key}
+          light={
+            (!darkMode && !whiteSidenav && !transparentSidenav) ||
+            (darkMode && !transparentSidenav && whiteSidenav)
+          }
+        />
+      );
     }
 
     return returnValue;
   });
 
   return (
-    <SidenavRoot {...rest} variant="permanent" ownerState={{ transparentSidenav, miniSidenav }}>
-      <SoftBox pt={3} pb={1} px={4} textAlign="center">
-        <SoftBox
+    <SidenavRoot
+      {...rest}
+      variant="permanent"
+      ownerState={{ transparentSidenav, whiteSidenav, miniSidenav, darkMode }}
+    >
+      <MDBox pt={3} pb={1} px={4} textAlign="center">
+        <MDBox
           display={{ xs: "block", xl: "none" }}
           position="absolute"
           top={0}
@@ -139,40 +156,42 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           onClick={closeSidenav}
           sx={{ cursor: "pointer" }}
         >
-          <SoftTypography variant="h6" color="secondary">
+          <MDTypography variant="h6" color="secondary">
             <Icon sx={{ fontWeight: "bold" }}>close</Icon>
-          </SoftTypography>
-        </SoftBox>
-        <SoftBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && <SoftBox component="img" src={brand} alt="Soft UI Logo" width="2rem" />}
-          <SoftBox
+          </MDTypography>
+        </MDBox>
+        <MDBox component={NavLink} to="/" display="flex" alignItems="center">
+          {brand && <MDBox component="img" src={brand} alt="Brand" width="2rem" />}
+          <MDBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
-            <SoftTypography component="h6" variant="button" fontWeight="medium">
+            <MDTypography component="h6" variant="button" fontWeight="medium" color={textColor}>
               {brandName}
-            </SoftTypography>
-          </SoftBox>
-        </SoftBox>
-      </SoftBox>
-      <Divider />
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+      </MDBox>
+      <Divider
+        light={
+          (!darkMode && !whiteSidenav && !transparentSidenav) ||
+          (darkMode && !transparentSidenav && whiteSidenav)
+        }
+      />
       <List>{renderRoutes}</List>
-      <SoftBox pt={2} my={2} mx={2} mt="auto">
-        <SidenavCard />
-        <SoftBox mt={2}>
-          <SoftButton
-            component="a"
-            href="https://creative-tim.com/product/soft-ui-dashboard-pro-react"
-            target="_blank"
-            rel="noreferrer"
-            variant="gradient"
-            color={color}
-            fullWidth
-          >
-            upgrade to pro
-          </SoftButton>
-        </SoftBox>
-      </SoftBox>
+      <MDBox p={2} mt="auto">
+        <MDButton
+          component="a"
+          href="https://www.creative-tim.com/product/material-dashboard-pro-react"
+          target="_blank"
+          rel="noreferrer"
+          variant="gradient"
+          color={sidenavColor}
+          fullWidth
+        >
+          upgrade to pro
+        </MDButton>
+      </MDBox>
     </SidenavRoot>
   );
 }

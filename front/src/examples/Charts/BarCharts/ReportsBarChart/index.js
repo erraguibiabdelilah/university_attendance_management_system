@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2  React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -20,79 +20,79 @@ import PropTypes from "prop-types";
 
 // react-chartjs-2 components
 import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
+import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-
-// Soft UI Dashboard React examples
-import BarReportsChartItem from "examples/Charts/BarCharts/ReportsBarChart/ReportsBarChartItem";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
 // ReportsBarChart configurations
 import configs from "examples/Charts/BarCharts/ReportsBarChart/configs";
 
-function ReportsBarChart({ color, title, description, chart, items }) {
-  const { data, options } = configs(chart.labels || [], chart.datasets || {});
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-  const renderItems = items.map(({ icon, label, progress }) => (
-    <Grid item xs={6} sm={3} key={label}>
-      <BarReportsChartItem
-        color={color}
-        icon={{ color: icon.color, component: icon.component }}
-        label={label}
-        progress={{ content: progress.content, percentage: progress.percentage }}
-      />
-    </Grid>
-  ));
+function ReportsBarChart({ color, title, description, date, chart }) {
+  const { data, options } = configs(chart.labels || [], chart.datasets || {});
 
   return (
     <Card sx={{ height: "100%" }}>
-      <SoftBox padding="1rem">
+      <MDBox padding="1rem">
         {useMemo(
           () => (
-            <SoftBox
+            <MDBox
               variant="gradient"
               bgColor={color}
               borderRadius="lg"
+              coloredShadow={color}
               py={2}
               pr={0.5}
-              mb={3}
+              mt={-5}
               height="12.5rem"
             >
-              <Bar data={data} options={options} />
-            </SoftBox>
+              <Bar data={data} options={options} redraw />
+            </MDBox>
           ),
-          [chart, color]
+          [color, chart]
         )}
-        <SoftBox px={1}>
-          <SoftBox mb={2}>
-            <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-              {title}
-            </SoftTypography>
-            <SoftTypography component="div" variant="button" color="text" fontWeight="regular">
-              {description}
-            </SoftTypography>
-          </SoftBox>
-          <SoftBox py={1} px={0.5}>
-            <Grid container spacing={2}>
-              {renderItems}
-            </Grid>
-          </SoftBox>
-        </SoftBox>
-      </SoftBox>
+        <MDBox pt={3} pb={1} px={1}>
+          <MDTypography variant="h6" textTransform="capitalize">
+            {title}
+          </MDTypography>
+          <MDTypography component="div" variant="button" color="text" fontWeight="light">
+            {description}
+          </MDTypography>
+          <Divider />
+          <MDBox display="flex" alignItems="center">
+            <MDTypography variant="button" color="text" lineHeight={1} sx={{ mt: 0.15, mr: 0.5 }}>
+              <Icon>schedule</Icon>
+            </MDTypography>
+            <MDTypography variant="button" color="text" fontWeight="light">
+              {date}
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+      </MDBox>
     </Card>
   );
 }
 
 // Setting default values for the props of ReportsBarChart
 ReportsBarChart.defaultProps = {
-  color: "dark",
+  color: "info",
   description: "",
-  items: [],
 };
 
 // Typechecking props for the ReportsBarChart
@@ -100,8 +100,8 @@ ReportsBarChart.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  date: PropTypes.string.isRequired,
   chart: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired,
-  items: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default ReportsBarChart;

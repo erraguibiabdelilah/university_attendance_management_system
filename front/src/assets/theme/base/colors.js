@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v3.1.0
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -14,19 +14,19 @@ Coded by www.creative-tim.com
 */
 
 /**
- * The base colors for the Soft UI Dashboard React.
+ * The base colors for the Material Dashboard 2 React.
  * You can add new color using this file.
- * You can customized the colors for the entire Soft UI Dashboard React using thie file.
+ * You can customized the colors for the entire Material Dashboard 2 React using thie file.
  */
 
 const colors = {
   background: {
-    default: "#f8f9fa",
+    default: "#f0f2f5",
   },
 
   text: {
-    main: "#67748e",
-    focus: "#67748e",
+    main: "#7b809a",
+    focus: "#7b809a",
   },
 
   transparent: {
@@ -39,54 +39,54 @@ const colors = {
   },
 
   black: {
-    light: "#141414",
+    light: "#000000",
     main: "#000000",
     focus: "#000000",
   },
 
   primary: {
-    main: "#cb0c9f",
-    focus: "#ad0a87",
+    main: "#e91e63",
+    focus: "#e91e63",
   },
 
   secondary: {
-    main: "#8392ab",
-    focus: "#96a2b8",
+    main: "#7b809a",
+    focus: "#8f93a9",
   },
 
   info: {
-    main: "#17c1e8",
-    focus: "#3acaeb",
+    main: "#1A73E8",
+    focus: "#1662C4",
   },
 
   success: {
-    main: "#82d616",
-    focus: "#95dc39",
+    main: "#4CAF50",
+    focus: "#67bb6a",
   },
 
   warning: {
-    main: "#fbcf33",
-    focus: "#fcd652",
+    main: "#fb8c00",
+    focus: "#fc9d26",
   },
 
   error: {
-    main: "#ea0606",
-    focus: "#c70505",
+    main: "#F44335",
+    focus: "#f65f53",
   },
 
   light: {
-    main: "#e9ecef",
-    focus: "#e9ecef",
+    main: "#f0f2f5",
+    focus: "#f0f2f5",
   },
 
   dark: {
     main: "#344767",
-    focus: "#344767",
+    focus: "#2c3c58",
   },
 
   grey: {
     100: "#f8f9fa",
-    200: "#e9ecef",
+    200: "#f0f2f5",
     300: "#dee2e6",
     400: "#ced4da",
     500: "#adb5bd",
@@ -98,43 +98,43 @@ const colors = {
 
   gradients: {
     primary: {
-      main: "#7928ca",
-      state: "#ff0080",
+      main: "#EC407A",
+      state: "#D81B60",
     },
 
     secondary: {
-      main: "#627594",
-      state: "#a8b8d8",
+      main: "#747b8a",
+      state: "#495361",
     },
 
     info: {
-      main: "#2152ff",
-      state: "#21d4fd",
+      main: "#49a3f1",
+      state: "#1A73E8",
     },
 
     success: {
-      main: "#17ad37",
-      state: "#98ec2d",
+      main: "#66BB6A",
+      state: "#43A047",
     },
 
     warning: {
-      main: "#f53939",
-      state: "#fbcf33",
+      main: "#FFA726",
+      state: "#FB8C00",
     },
 
     error: {
-      main: "#ea0606",
-      state: "#ff667c",
+      main: "#EF5350",
+      state: "#E53935",
     },
 
     light: {
-      main: "#ced4da",
-      state: "#ebeff4",
+      main: "#EBEFF4",
+      state: "#CED4DA",
     },
 
     dark: {
-      main: "#141727",
-      state: "#3a416f",
+      main: "#42424a",
+      state: "#191919",
     },
   },
 
@@ -200,85 +200,35 @@ const colors = {
     },
   },
 
-  alertColors: {
-    primary: {
-      main: "#7928ca",
-      state: "#d6006c",
-      border: "#efb6e2",
-    },
-
-    secondary: {
-      main: "#627594",
-      state: "#8ca1cb",
-      border: "#dadee6",
-    },
-
-    info: {
-      main: "#2152ff",
-      state: "#02c6f3",
-      border: "#b9ecf8",
-    },
-
-    success: {
-      main: "#17ad37",
-      state: "#84dc14",
-      border: "#daf3b9",
-    },
-
-    warning: {
-      main: "#f53939",
-      state: "#fac60b",
-      border: "#fef1c2",
-    },
-
-    error: {
-      main: "#ea0606",
-      state: "#ff3d59",
-      border: "#f9b4b4",
-    },
-
-    light: {
-      main: "#ced4da",
-      state: "#d1dae6",
-      border: "#f8f9fa",
-    },
-
-    dark: {
-      main: "#141727",
-      state: "#2c3154",
-      border: "#c2c8d1",
-    },
-  },
-
   badgeColors: {
     primary: {
-      background: "#f883dd",
-      text: "#a3017e",
+      background: "#f8b3ca",
+      text: "#cc084b",
     },
 
     secondary: {
-      background: "#e4e8ed",
-      text: "#5974a2",
+      background: "#d7d9e1",
+      text: "#6c757d",
     },
 
     info: {
-      background: "#abe9f7",
-      text: "#08a1c4",
+      background: "#aecef7",
+      text: "#095bc6",
     },
 
     success: {
-      background: "#cdf59b",
-      text: "#67b108",
+      background: "#bce2be",
+      text: "#339537",
     },
 
     warning: {
-      background: "#fef5d3",
-      text: "#fbc400",
+      background: "#ffd59f",
+      text: "#c87000",
     },
 
     error: {
-      background: "#fc9797",
-      text: "#bd0000",
+      background: "#fcd3d0",
+      text: "#f61200",
     },
 
     light: {
@@ -292,20 +242,18 @@ const colors = {
     },
   },
 
-  inputColors: {
-    borderColor: { main: "#d2d6da", focus: "#35d1f5" },
-    boxShadow: "#81e3f9",
-    error: "#fd5c70",
-    success: "#66d432",
+  coloredShadows: {
+    primary: "#e91e62",
+    secondary: "#110e0e",
+    info: "#00bbd4",
+    success: "#4caf4f",
+    warning: "#ff9900",
+    error: "#f44336",
+    light: "#adb5bd",
+    dark: "#404040",
   },
 
-  sliderColors: {
-    thumb: { borderColor: "#d9d9d9" },
-  },
-
-  circleSliderColors: {
-    background: "#d3d3d3",
-  },
+  inputBorderColor: "#d2d6da",
 
   tabs: {
     indicator: { boxShadow: "#ddd" },

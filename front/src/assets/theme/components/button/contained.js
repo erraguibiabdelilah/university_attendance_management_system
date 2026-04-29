@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v3.1.0
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -13,42 +13,29 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// Soft UI Dashboard React Base Styles
+// Material Dashboard 2 React Base Styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
-import boxShadows from "assets/theme/base/boxShadows";
 
-// Soft UI Dashboard React Helper Functions
+// Material Dashboard 2 React Helper Functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
 const { white, text, info, secondary } = colors;
 const { size } = typography;
-const { buttonBoxShadow } = boxShadows;
 
 const contained = {
   base: {
     backgroundColor: white.main,
     minHeight: pxToRem(40),
     color: text.main,
-    boxShadow: buttonBoxShadow.main,
-    padding: `${pxToRem(12)} ${pxToRem(24)}`,
+    padding: `${pxToRem(10)} ${pxToRem(24)}`,
 
     "&:hover": {
       backgroundColor: white.main,
-      boxShadow: buttonBoxShadow.stateOf,
-    },
-
-    "&:focus": {
-      boxShadow: buttonBoxShadow.stateOf,
     },
 
     "&:active, &:active:focus, &:active:hover": {
       opacity: 0.85,
-      boxShadow: buttonBoxShadow.stateOf,
-    },
-
-    "&:disabled": {
-      boxShadow: buttonBoxShadow.main,
     },
 
     "& .material-icon, .material-icons-round, svg": {
@@ -58,7 +45,7 @@ const contained = {
 
   small: {
     minHeight: pxToRem(32),
-    padding: `${pxToRem(8)} ${pxToRem(32)}`,
+    padding: `${pxToRem(6)} ${pxToRem(16)}`,
     fontSize: size.xs,
 
     "& .material-icon, .material-icons-round, svg": {
@@ -68,7 +55,7 @@ const contained = {
 
   large: {
     minHeight: pxToRem(47),
-    padding: `${pxToRem(14)} ${pxToRem(64)}`,
+    padding: `${pxToRem(12)} ${pxToRem(28)}`,
     fontSize: size.sm,
 
     "& .material-icon, .material-icons-round, svg": {
@@ -85,7 +72,6 @@ const contained = {
 
     "&:focus:not(:hover)": {
       backgroundColor: info.focus,
-      boxShadow: buttonBoxShadow.stateOfNotHover,
     },
   },
 
@@ -98,7 +84,6 @@ const contained = {
 
     "&:focus:not(:hover)": {
       backgroundColor: secondary.focus,
-      boxShadow: buttonBoxShadow.stateOfNotHover,
     },
   },
 };

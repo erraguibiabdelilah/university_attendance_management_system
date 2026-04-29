@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -19,80 +19,87 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 import Tooltip from "@mui/material/Tooltip";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-import SoftButton from "components/SoftButton";
-
-// Soft UI Dashboard React base styles
-import borders from "assets/theme/base/borders";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
 
 // Images
 import masterCardLogo from "assets/images/logos/mastercard.png";
 import visaLogo from "assets/images/logos/visa.png";
 
+// Material Dashboard 2 React context
+import { useMaterialUIController } from "context";
+
 function PaymentMethod() {
-  const { borderWidth, borderColor } = borders;
+  const [controller] = useMaterialUIController();
+  const { darkMode } = controller;
 
   return (
     <Card id="delete-account">
-      <SoftBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
-        <SoftTypography variant="h6" fontWeight="medium">
+      <MDBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
+        <MDTypography variant="h6" fontWeight="medium">
           Payment Method
-        </SoftTypography>
-        <SoftButton variant="gradient" color="dark">
+        </MDTypography>
+        <MDButton variant="gradient" color="dark">
           <Icon sx={{ fontWeight: "bold" }}>add</Icon>
           &nbsp;add new card
-        </SoftButton>
-      </SoftBox>
-      <SoftBox p={2}>
+        </MDButton>
+      </MDBox>
+      <MDBox p={2}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <SoftBox
-              border={`${borderWidth[1]} solid ${borderColor}`}
+            <MDBox
               borderRadius="lg"
               display="flex"
               justifyContent="space-between"
               alignItems="center"
               p={3}
+              sx={{
+                border: ({ borders: { borderWidth, borderColor } }) =>
+                  `${borderWidth[1]} solid ${borderColor}`,
+              }}
             >
-              <SoftBox component="img" src={masterCardLogo} alt="master card" width="10%" mr={2} />
-              <SoftTypography variant="h6" fontWeight="medium">
+              <MDBox component="img" src={masterCardLogo} alt="master card" width="10%" mr={2} />
+              <MDTypography variant="h6" fontWeight="medium">
                 ****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;7852
-              </SoftTypography>
-              <SoftBox ml="auto" lineHeight={0}>
+              </MDTypography>
+              <MDBox ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
                 <Tooltip title="Edit Card" placement="top">
                   <Icon sx={{ cursor: "pointer" }} fontSize="small">
                     edit
                   </Icon>
                 </Tooltip>
-              </SoftBox>
-            </SoftBox>
+              </MDBox>
+            </MDBox>
           </Grid>
           <Grid item xs={12} md={6}>
-            <SoftBox
-              border={`${borderWidth[1]} solid ${borderColor}`}
+            <MDBox
               borderRadius="lg"
               display="flex"
               justifyContent="space-between"
               alignItems="center"
               p={3}
+              sx={{
+                border: ({ borders: { borderWidth, borderColor } }) =>
+                  `${borderWidth[1]} solid ${borderColor}`,
+              }}
             >
-              <SoftBox component="img" src={visaLogo} alt="master card" width="10%" mr={2} />
-              <SoftTypography variant="h6" fontWeight="medium">
+              <MDBox component="img" src={visaLogo} alt="master card" width="10%" mr={2} />
+              <MDTypography variant="h6" fontWeight="medium">
                 ****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;5248
-              </SoftTypography>
-              <SoftBox ml="auto" lineHeight={0}>
+              </MDTypography>
+              <MDBox ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
                 <Tooltip title="Edit Card" placement="top">
                   <Icon sx={{ cursor: "pointer" }} fontSize="small">
                     edit
                   </Icon>
                 </Tooltip>
-              </SoftBox>
-            </SoftBox>
+              </MDBox>
+            </MDBox>
           </Grid>
         </Grid>
-      </SoftBox>
+      </MDBox>
     </Card>
   );
 }

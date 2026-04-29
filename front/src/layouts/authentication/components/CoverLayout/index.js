@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -19,113 +19,70 @@ import PropTypes from "prop-types";
 // @mui material components
 import Grid from "@mui/material/Grid";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+// import MDTypography from "components/MDTypography";
 
-// Soft UI Dashboard React examples
+// Material Dashboard 2 React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
 // Authentication layout components
 import Footer from "layouts/authentication/components/Footer";
 
-function CoverLayout({ color, header, title, description, image, top, children }) {
+function CoverLayout({ coverHeight, image, children }) {
   return (
-    <PageLayout background="white">
+    <PageLayout>
       <DefaultNavbar
         action={{
           type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-react",
+          route: "https://creative-tim.com/product/material-dashboard-react",
           label: "free download",
-          color: "dark",
+        }}
+        transparent
+        light
+      />
+      <MDBox
+        width="calc(100% - 2rem)"
+        minHeight={coverHeight}
+        borderRadius="xl"
+        mx={2}
+        my={2}
+        pt={6}
+        pb={28}
+        sx={{
+          backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
+            image &&
+            `${linearGradient(
+              rgba(gradients.dark.main, 0.4),
+              rgba(gradients.dark.state, 0.4)
+            )}, url(${image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       />
-      <Grid
-        container
-        justifyContent="center"
-        sx={{
-          minHeight: "75vh",
-          margin: 0,
-        }}
-      >
-        <Grid item xs={11} sm={8} md={5} xl={3}>
-          <SoftBox mt={top}>
-            <SoftBox pt={3} px={3}>
-              {!header ? (
-                <>
-                  <SoftBox mb={1}>
-                    <SoftTypography variant="h3" fontWeight="bold" color={color} textGradient>
-                      {title}
-                    </SoftTypography>
-                  </SoftBox>
-                  <SoftTypography variant="body2" fontWeight="regular" color="text">
-                    {description}
-                  </SoftTypography>
-                </>
-              ) : (
-                header
-              )}
-            </SoftBox>
-            <SoftBox p={3}>{children}</SoftBox>
-          </SoftBox>
+      <MDBox mt={{ xs: -20, lg: -18 }} px={1} width="calc(100% - 2rem)" mx="auto">
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
+            {children}
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={5}>
-          <SoftBox
-            height="100%"
-            display={{ xs: "none", md: "block" }}
-            position="relative"
-            right={{ md: "-12rem", xl: "-16rem" }}
-            mr={-16}
-            sx={{
-              transform: "skewX(-10deg)",
-              overflow: "hidden",
-              borderBottomLeftRadius: ({ borders: { borderRadius } }) => borderRadius.lg,
-            }}
-          >
-            <SoftBox
-              ml={-8}
-              height="100%"
-              sx={{
-                backgroundImage: `url(${image})`,
-                backgroundSize: "cover",
-                transform: "skewX(10deg)",
-              }}
-            />
-          </SoftBox>
-        </Grid>
-      </Grid>
+      </MDBox>
       <Footer />
     </PageLayout>
   );
 }
 
-// Setting default values for the props of CoverLayout
+// Setting default props for the CoverLayout
 CoverLayout.defaultProps = {
-  header: "",
-  title: "",
-  description: "",
-  color: "info",
-  top: 20,
+  coverHeight: "35vh",
 };
 
 // Typechecking props for the CoverLayout
 CoverLayout.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "dark",
-    "light",
-  ]),
-  header: PropTypes.node,
-  title: PropTypes.string,
-  description: PropTypes.string,
+  coverHeight: PropTypes.string,
   image: PropTypes.string.isRequired,
-  top: PropTypes.number,
   children: PropTypes.node.isRequired,
 };
 

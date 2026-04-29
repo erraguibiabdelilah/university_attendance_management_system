@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 /** 
-  All of the routes for the Soft UI Dashboard React are added here,
+  All of the routes for the Material Dashboard 2 React are added here,
   You can add a new route, customize the routes and delete the routes here.
 
   Once you add a new route on this file it will be visible automatically on
@@ -35,99 +35,83 @@ Coded by www.creative-tim.com
   10. The `component` key is used to store the component of its route.
 */
 
-// Soft UI Dashboard React layouts
+// Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
-import VirtualReality from "layouts/virtual-reality";
 import RTL from "layouts/rtl";
+import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 
-// Soft UI Dashboard React icons
-import Shop from "examples/Icons/Shop";
-import Office from "examples/Icons/Office";
-import Settings from "examples/Icons/Settings";
-import Document from "examples/Icons/Document";
-import SpaceShip from "examples/Icons/SpaceShip";
-import CustomerSupport from "examples/Icons/CustomerSupport";
-import CreditCard from "examples/Icons/CreditCard";
-import Cube from "examples/Icons/Cube";
+// @mui icons
+import Icon from "@mui/material/Icon";
 
 const routes = [
   {
     type: "collapse",
     name: "Dashboard",
     key: "dashboard",
+    icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
-    icon: <Shop size="12px" />,
     component: <Dashboard />,
-    noCollapse: true,
   },
   {
     type: "collapse",
     name: "Tables",
     key: "tables",
+    icon: <Icon fontSize="small">table_view</Icon>,
     route: "/tables",
-    icon: <Office size="12px" />,
     component: <Tables />,
-    noCollapse: true,
   },
   {
     type: "collapse",
     name: "Billing",
     key: "billing",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/billing",
-    icon: <CreditCard size="12px" />,
     component: <Billing />,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "Virtual Reality",
-    key: "virtual-reality",
-    route: "/virtual-reality",
-    icon: <Cube size="12px" />,
-    component: <VirtualReality />,
-    noCollapse: true,
   },
   {
     type: "collapse",
     name: "RTL",
     key: "rtl",
+    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
     route: "/rtl",
-    icon: <Settings size="12px" />,
     component: <RTL />,
-    noCollapse: true,
   },
-  { type: "title", title: "Account Pages", key: "account-pages" },
+  {
+    type: "collapse",
+    name: "Notifications",
+    key: "notifications",
+    icon: <Icon fontSize="small">notifications</Icon>,
+    route: "/notifications",
+    component: <Notifications />,
+  },
   {
     type: "collapse",
     name: "Profile",
     key: "profile",
+    icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
-    icon: <CustomerSupport size="12px" />,
     component: <Profile />,
-    noCollapse: true,
   },
   {
     type: "collapse",
     name: "Sign In",
     key: "sign-in",
+    icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
-    icon: <Document size="12px" />,
     component: <SignIn />,
-    noCollapse: true,
   },
   {
     type: "collapse",
     name: "Sign Up",
     key: "sign-up",
+    icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
-    icon: <SpaceShip size="12px" />,
     component: <SignUp />,
-    noCollapse: true,
   },
 ];
 

@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2  React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -19,46 +19,66 @@ import { useMemo } from "react";
 import PropTypes from "prop-types";
 
 // react-chartjs-2 components
+import { Chart as ChartJS, RadialLinearScale, ArcElement, Tooltip, Legend } from "chart.js";
 import { PolarArea } from "react-chartjs-2";
 
 // @mui material components
 import Card from "@mui/material/Card";
+import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
 // PolarChart configurations
 import configs from "examples/Charts/PolarChart/configs";
 
-function PolarChart({ title, description, chart }) {
+ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
+
+function PolarChart({ icon, title, description, chart, height }) {
   const { data, options } = configs(chart.labels || [], chart.datasets || {});
 
   const renderChart = (
-    <SoftBox p={2}>
+    <MDBox py={2} pr={2} pl={icon.component ? 1 : 2}>
       {title || description ? (
-        <SoftBox px={description ? 1 : 0} pt={description ? 1 : 0}>
-          {title && (
-            <SoftBox mb={1}>
-              <SoftTypography variant="h6">{title}</SoftTypography>
-            </SoftBox>
+        <MDBox display="flex" px={description ? 1 : 0} pt={description ? 1 : 0}>
+          {icon.component && (
+            <MDBox
+              width="4rem"
+              height="4rem"
+              bgColor={icon.color || "dark"}
+              variant="gradient"
+              coloredShadow={icon.color || "dark"}
+              borderRadius="xl"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              color="white"
+              mt={-5}
+              mr={2}
+            >
+              <Icon fontSize="medium">{icon.component}</Icon>
+            </MDBox>
           )}
-          <SoftBox mb={2}>
-            <SoftTypography component="div" variant="button" fontWeight="regular" color="text">
-              {description}
-            </SoftTypography>
-          </SoftBox>
-        </SoftBox>
+          <MDBox mt={icon.component ? -2 : 0}>
+            {title && <MDTypography variant="h6">{title}</MDTypography>}
+            <MDBox mb={2}>
+              <MDTypography component="div" variant="button" color="text">
+                {description}
+              </MDTypography>
+            </MDBox>
+          </MDBox>
+        </MDBox>
       ) : null}
       {useMemo(
         () => (
-          <SoftBox p={4}>
-            <PolarArea data={data} options={options} />
-          </SoftBox>
+          <MDBox p={4} height={height}>
+            <PolarArea data={data} options={options} redraw />
+          </MDBox>
         ),
         [chart]
       )}
-    </SoftBox>
+    </MDBox>
   );
 
   return title || description ? <Card>{renderChart}</Card> : renderChart;
@@ -66,14 +86,29 @@ function PolarChart({ title, description, chart }) {
 
 // Setting default values for the props of PolarChart
 PolarChart.defaultProps = {
+  icon: { color: "info", component: "" },
   title: "",
   description: "",
 };
 
 // Typechecking props for the PolarChart
 PolarChart.propTypes = {
+  icon: PropTypes.shape({
+    color: PropTypes.oneOf([
+      "primary",
+      "secondary",
+      "info",
+      "success",
+      "warning",
+      "error",
+      "light",
+      "dark",
+    ]),
+    component: PropTypes.node,
+  }),
   title: PropTypes.string,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   chart: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired,
 };
 

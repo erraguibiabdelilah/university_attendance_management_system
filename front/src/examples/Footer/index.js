@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -20,11 +20,11 @@ import PropTypes from "prop-types";
 import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
-// Soft UI Dashboard React base styles
+// Material Dashboard 2 React base styles
 import typography from "assets/theme/base/typography";
 
 function Footer({ company, links }) {
@@ -33,17 +33,17 @@ function Footer({ company, links }) {
 
   const renderLinks = () =>
     links.map((link) => (
-      <SoftBox key={link.name} component="li" px={2} lineHeight={1}>
+      <MDBox key={link.name} component="li" px={2} lineHeight={1}>
         <Link href={link.href} target="_blank">
-          <SoftTypography variant="button" fontWeight="regular" color="text">
+          <MDTypography variant="button" fontWeight="regular" color="text">
             {link.name}
-          </SoftTypography>
+          </MDTypography>
         </Link>
-      </SoftBox>
+      </MDBox>
     ));
 
   return (
-    <SoftBox
+    <MDBox
       width="100%"
       display="flex"
       flexDirection={{ xs: "column", lg: "row" }}
@@ -51,7 +51,7 @@ function Footer({ company, links }) {
       alignItems="center"
       px={1.5}
     >
-      <SoftBox
+      <MDBox
         display="flex"
         justifyContent="center"
         alignItems="center"
@@ -61,20 +61,20 @@ function Footer({ company, links }) {
         px={1.5}
       >
         &copy; {new Date().getFullYear()}, made with
-        <SoftBox fontSize={size.md} color="text" mb={-0.5} mx={0.25}>
+        <MDBox fontSize={size.md} color="text" mb={-0.5} mx={0.25}>
           <Icon color="inherit" fontSize="inherit">
             favorite
           </Icon>
-        </SoftBox>
+        </MDBox>
         by
         <Link href={href} target="_blank">
-          <SoftTypography variant="button" fontWeight="medium">
+          <MDTypography variant="button" fontWeight="medium">
             &nbsp;{name}&nbsp;
-          </SoftTypography>
+          </MDTypography>
         </Link>
         for a better web.
-      </SoftBox>
-      <SoftBox
+      </MDBox>
+      <MDBox
         component="ul"
         sx={({ breakpoints }) => ({
           display: "flex",
@@ -92,8 +92,8 @@ function Footer({ company, links }) {
         })}
       >
         {renderLinks()}
-      </SoftBox>
-    </SoftBox>
+      </MDBox>
+    </MDBox>
   );
 }
 

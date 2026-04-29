@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -19,81 +19,62 @@ import PropTypes from "prop-types";
 // @mui material components
 import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-import SoftBadge from "components/SoftBadge";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
 // Timeline context
 import { useTimeline } from "examples/Timeline/context";
 
 // Custom styles for the TimelineItem
-import { timelineItem, timelineItemIcon } from "examples/Timeline/TimelineItem/styles";
+import timelineItem from "examples/Timeline/TimelineItem/styles";
 
-function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem }) {
+function TimelineItem({ color, icon, title, dateTime, description, lastItem }) {
   const isDark = useTimeline();
 
-  const renderBadges =
-    badges.length > 0
-      ? badges.map((badge, key) => {
-          const badgeKey = `badge-${key}`;
-
-          return (
-            <SoftBox key={badgeKey} mr={key === badges.length - 1 ? 0 : 0.5}>
-              <SoftBadge color={color} size="xs" badgeContent={badge} container />
-            </SoftBox>
-          );
-        })
-      : null;
-
   return (
-    <SoftBox position="relative" sx={(theme) => timelineItem(theme, { lastItem })}>
-      <SoftBox
-        bgColor={isDark ? "dark" : "white"}
-        width="1.625rem"
-        height="1.625rem"
+    <MDBox position="relative" mb={3} sx={(theme) => timelineItem(theme, { lastItem, isDark })}>
+      <MDBox
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        bgColor={color}
+        color="white"
+        width="2rem"
+        height="2rem"
         borderRadius="50%"
         position="absolute"
-        top="3.25%"
+        top="8%"
         left="2px"
         zIndex={2}
+        sx={{ fontSize: ({ typography: { size } }) => size.sm }}
       >
-        <Icon sx={(theme) => timelineItemIcon(theme, { color })}>{icon}</Icon>
-      </SoftBox>
-      <SoftBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
-        <SoftTypography variant="button" fontWeight="medium" color={isDark ? "white" : "dark"}>
+        <Icon fontSize="inherit">{icon}</Icon>
+      </MDBox>
+      <MDBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
+        <MDTypography variant="button" fontWeight="medium" color={isDark ? "white" : "dark"}>
           {title}
-        </SoftTypography>
-        <SoftBox mt={0.5}>
-          <SoftTypography
-            variant="caption"
-            fontWeight="medium"
-            color={isDark ? "secondary" : "text"}
-          >
+        </MDTypography>
+        <MDBox mt={0.5}>
+          <MDTypography variant="caption" color={isDark ? "secondary" : "text"}>
             {dateTime}
-          </SoftTypography>
-        </SoftBox>
-        <SoftBox mt={2} mb={1.5}>
+          </MDTypography>
+        </MDBox>
+        <MDBox mt={2} mb={1.5}>
           {description ? (
-            <SoftTypography variant="button" fontWeight="regular" color="text">
+            <MDTypography variant="button" color={isDark ? "white" : "dark"}>
               {description}
-            </SoftTypography>
+            </MDTypography>
           ) : null}
-        </SoftBox>
-        {badges.length > 0 ? (
-          <SoftBox display="flex" pb={lastItem ? 1 : 2}>
-            {renderBadges}
-          </SoftBox>
-        ) : null}
-      </SoftBox>
-    </SoftBox>
+        </MDBox>
+      </MDBox>
+    </MDBox>
   );
 }
 
 // Setting default values for the props of TimelineItem
 TimelineItem.defaultProps = {
   color: "info",
-  badges: [],
   lastItem: false,
   description: "",
 };
@@ -114,7 +95,6 @@ TimelineItem.propTypes = {
   title: PropTypes.string.isRequired,
   dateTime: PropTypes.string.isRequired,
   description: PropTypes.string,
-  badges: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   lastItem: PropTypes.bool,
 };
 

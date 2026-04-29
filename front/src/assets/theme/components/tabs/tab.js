@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v3.1.0
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -13,12 +13,12 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// Soft UI Dashboard React base styles
+// Material Dashboard 2 React base styles
 import typography from "assets/theme/base/typography";
 import borders from "assets/theme/base/borders";
 import colors from "assets/theme/base/colors";
 
-// Soft UI Dashboard React helper functions
+// Material Dashboard 2 React helper functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
 const { size, fontWeightRegular } = typography;
@@ -41,13 +41,13 @@ const tab = {
       textTransform: "none",
       lineHeight: "inherit",
       padding: pxToRem(4),
-      borderRadius: borderRadius.md,
+      borderRadius: borderRadius.lg,
       color: `${dark.main} !important`,
       opacity: "1 !important",
 
       "& .material-icons, .material-icons-round": {
         marginBottom: "0 !important",
-        marginRight: pxToRem(4),
+        marginRight: pxToRem(6),
       },
 
       "& svg": {

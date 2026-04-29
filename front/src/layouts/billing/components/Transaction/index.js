@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -19,35 +19,35 @@ import PropTypes from "prop-types";
 // @mui material components
 import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-import SoftButton from "components/SoftButton";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
 
 function Transaction({ color, icon, name, description, value }) {
   return (
-    <SoftBox key={name} component="li" py={1} pr={2} mb={1}>
-      <SoftBox display="flex" justifyContent="space-between" alignItems="center">
-        <SoftBox display="flex" alignItems="center">
-          <SoftBox mr={2}>
-            <SoftButton variant="outlined" color={color} size="small" iconOnly circular>
+    <MDBox key={name} component="li" py={1} pr={2} mb={1}>
+      <MDBox display="flex" justifyContent="space-between" alignItems="center">
+        <MDBox display="flex" alignItems="center">
+          <MDBox mr={2}>
+            <MDButton variant="outlined" color={color} iconOnly circular>
               <Icon sx={{ fontWeight: "bold" }}>{icon}</Icon>
-            </SoftButton>
-          </SoftBox>
-          <SoftBox display="flex" flexDirection="column">
-            <SoftTypography variant="button" fontWeight="medium" gutterBottom>
+            </MDButton>
+          </MDBox>
+          <MDBox display="flex" flexDirection="column">
+            <MDTypography variant="button" fontWeight="medium" gutterBottom>
               {name}
-            </SoftTypography>
-            <SoftTypography variant="caption" color="text">
+            </MDTypography>
+            <MDTypography variant="caption" color="text" fontWeight="regular">
               {description}
-            </SoftTypography>
-          </SoftBox>
-        </SoftBox>
-        <SoftTypography variant="button" color={color} fontWeight="medium" textGradient>
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+        <MDTypography variant="button" color={color} fontWeight="medium" textGradient>
           {value}
-        </SoftTypography>
-      </SoftBox>
-    </SoftBox>
+        </MDTypography>
+      </MDBox>
+    </MDBox>
   );
 }
 

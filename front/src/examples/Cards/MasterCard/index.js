@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -20,12 +20,12 @@ import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
 // Images
-import curved14 from "assets/images/curved-images/curved14.jpg";
+import pattern from "assets/images/illustrations/pattern-tree.svg";
 import masterCardLogo from "assets/images/logos/mastercard.png";
 
 function MasterCard({ color, number, holder, expires }) {
@@ -44,59 +44,62 @@ function MasterCard({ color, number, holder, expires }) {
 
   return (
     <Card
-      sx={({
-        palette: { gradients },
-        functions: { linearGradient, rgba },
-        boxShadows: { xl },
-      }) => ({
+      sx={({ palette: { gradients }, functions: { linearGradient }, boxShadows: { xl } }) => ({
         background: gradients[color]
-          ? `${linearGradient(
-              rgba(gradients[color].main, 0.8),
-              rgba(gradients[color].state, 0.8)
-            )}, url(${curved14})`
-          : `${linearGradient(
-              rgba(gradients.dark.main, 0.8),
-              rgba(gradients.dark.state, 0.8)
-            )}, url(${curved14})`,
+          ? linearGradient(gradients[color].main, gradients[color].state)
+          : linearGradient(gradients.dark.main, gradients.dark.state),
         boxShadow: xl,
+        position: "relative",
       })}
     >
-      <SoftBox p={2}>
-        <SoftBox color="white" p={1} lineHeight={0} display="inline-block">
+      <MDBox
+        position="absolute"
+        top={0}
+        left={0}
+        width="100%"
+        height="100%"
+        opacity={0.2}
+        sx={{
+          backgroundImage: `url(${pattern})`,
+          backgroundSize: "cover",
+        }}
+      />
+      <MDBox position="relative" zIndex={2} p={2}>
+        <MDBox color="white" p={1} lineHeight={0} display="inline-block">
           <Icon fontSize="default">wifi</Icon>
-        </SoftBox>
-        <SoftTypography variant="h5" color="white" fontWeight="medium" sx={{ mt: 3, mb: 5, pb: 1 }}>
+        </MDBox>
+        <MDTypography variant="h5" color="white" fontWeight="medium" sx={{ mt: 3, mb: 5, pb: 1 }}>
           {num1}&nbsp;&nbsp;&nbsp;{num2}&nbsp;&nbsp;&nbsp;{num3}&nbsp;&nbsp;&nbsp;{num4}
-        </SoftTypography>
-        <SoftBox display="flex" justifyContent="space-between" alignItems="center">
-          <SoftBox display="flex" alignItems="center">
-            <SoftBox mr={3} lineHeight={1}>
-              <SoftTypography variant="button" color="white" fontWeight="regular" opacity={0.8}>
+        </MDTypography>
+        <MDBox display="flex" justifyContent="space-between" alignItems="center">
+          <MDBox display="flex" alignItems="center">
+            <MDBox mr={3} lineHeight={1}>
+              <MDTypography variant="button" color="white" fontWeight="regular" opacity={0.8}>
                 Card Holder
-              </SoftTypography>
-              <SoftTypography
+              </MDTypography>
+              <MDTypography
                 variant="h6"
                 color="white"
                 fontWeight="medium"
                 textTransform="capitalize"
               >
                 {holder}
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox lineHeight={1}>
-              <SoftTypography variant="button" color="white" fontWeight="regular" opacity={0.8}>
+              </MDTypography>
+            </MDBox>
+            <MDBox lineHeight={1}>
+              <MDTypography variant="button" color="white" fontWeight="regular" opacity={0.8}>
                 Expires
-              </SoftTypography>
-              <SoftTypography variant="h6" color="white" fontWeight="medium">
+              </MDTypography>
+              <MDTypography variant="h6" color="white" fontWeight="medium">
                 {expires}
-              </SoftTypography>
-            </SoftBox>
-          </SoftBox>
-          <SoftBox display="flex" justifyContent="flex-end" width="20%">
-            <SoftBox component="img" src={masterCardLogo} alt="master card" width="60%" mt={1} />
-          </SoftBox>
-        </SoftBox>
-      </SoftBox>
+              </MDTypography>
+            </MDBox>
+          </MDBox>
+          <MDBox display="flex" justifyContent="flex-end" width="20%">
+            <MDBox component="img" src={masterCardLogo} alt="master card" width="60%" mt={1} />
+          </MDBox>
+        </MDBox>
+      </MDBox>
     </Card>
   );
 }

@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2  React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -20,21 +20,33 @@ import PropTypes from "prop-types";
 
 // react-chartjs-2 components
 import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 // @mui material components
 import Card from "@mui/material/Card";
+import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
 // VerticalBarChart configurations
 import configs from "examples/Charts/BarCharts/VerticalBarChart/configs";
 
-// Soft UI Dashboard React base styles
+// Material Dashboard 2 React base styles
 import colors from "assets/theme/base/colors";
 
-function VerticalBarChart({ title, description, height, chart }) {
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+function VerticalBarChart({ icon, title, description, height, chart }) {
   const chartDatasets = chart.datasets
     ? chart.datasets.map((dataset) => ({
         ...dataset,
@@ -52,30 +64,46 @@ function VerticalBarChart({ title, description, height, chart }) {
   const { data, options } = configs(chart.labels || [], chartDatasets);
 
   const renderChart = (
-    <SoftBox p={2}>
+    <MDBox py={2} pr={2} pl={icon.component ? 1 : 2}>
       {title || description ? (
-        <SoftBox px={description ? 1 : 0} pt={description ? 1 : 0}>
-          {title && (
-            <SoftBox mb={1}>
-              <SoftTypography variant="h6">{title}</SoftTypography>
-            </SoftBox>
+        <MDBox display="flex" px={description ? 1 : 0} pt={description ? 1 : 0}>
+          {icon.component && (
+            <MDBox
+              width="4rem"
+              height="4rem"
+              bgColor={icon.color || "dark"}
+              variant="gradient"
+              coloredShadow={icon.color || "dark"}
+              borderRadius="xl"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              color="white"
+              mt={-5}
+              mr={2}
+            >
+              <Icon fontSize="medium">{icon.component}</Icon>
+            </MDBox>
           )}
-          <SoftBox mb={2}>
-            <SoftTypography component="div" variant="button" fontWeight="regular" color="text">
-              {description}
-            </SoftTypography>
-          </SoftBox>
-        </SoftBox>
+          <MDBox mt={icon.component ? -2 : 0}>
+            {title && <MDTypography variant="h6">{title}</MDTypography>}
+            <MDBox mb={2}>
+              <MDTypography component="div" variant="button" color="text">
+                {description}
+              </MDTypography>
+            </MDBox>
+          </MDBox>
+        </MDBox>
       ) : null}
       {useMemo(
         () => (
-          <SoftBox height={height}>
-            <Bar data={data} options={options} />
-          </SoftBox>
+          <MDBox height={height}>
+            <Bar data={data} options={options} redraw />
+          </MDBox>
         ),
         [chart, height]
       )}
-    </SoftBox>
+    </MDBox>
   );
 
   return title || description ? <Card>{renderChart}</Card> : renderChart;
@@ -83,6 +111,7 @@ function VerticalBarChart({ title, description, height, chart }) {
 
 // Setting default values for the props of VerticalBarChart
 VerticalBarChart.defaultProps = {
+  icon: { color: "info", component: "" },
   title: "",
   description: "",
   height: "19.125rem",
@@ -90,6 +119,19 @@ VerticalBarChart.defaultProps = {
 
 // Typechecking props for the VerticalBarChart
 VerticalBarChart.propTypes = {
+  icon: PropTypes.shape({
+    color: PropTypes.oneOf([
+      "primary",
+      "secondary",
+      "info",
+      "success",
+      "warning",
+      "error",
+      "light",
+      "dark",
+    ]),
+    component: PropTypes.node,
+  }),
   title: PropTypes.string,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

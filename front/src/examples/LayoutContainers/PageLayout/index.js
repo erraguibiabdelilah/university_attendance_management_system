@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -21,14 +21,14 @@ import { useLocation } from "react-router-dom";
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
 
-// Soft UI Dashboard React context
-import { useSoftUIController, setLayout } from "context";
+// Material Dashboard 2 React context
+import { useMaterialUIController, setLayout } from "context";
 
 function PageLayout({ background, children }) {
-  const [, dispatch] = useSoftUIController();
+  const [, dispatch] = useMaterialUIController();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function PageLayout({ background, children }) {
   }, [pathname]);
 
   return (
-    <SoftBox
+    <MDBox
       width="100vw"
       height="100%"
       minHeight="100vh"
@@ -44,7 +44,7 @@ function PageLayout({ background, children }) {
       sx={{ overflowX: "hidden" }}
     >
       {children}
-    </SoftBox>
+    </MDBox>
   );
 }
 

@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -22,38 +22,33 @@ import PropTypes from "prop-types";
 // @mui material components
 import Card from "@mui/material/Card";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
-import SoftAvatar from "components/SoftAvatar";
-import SoftButton from "components/SoftButton";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+import MDAvatar from "components/MDAvatar";
+import MDButton from "components/MDButton";
 
-function ProfilesList({ title, profiles }) {
+function ProfilesList({ title, profiles, shadow }) {
   const renderProfiles = profiles.map(({ image, name, description, action }) => (
-    <SoftBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
-      <SoftBox mr={2}>
-        <SoftAvatar src={image} alt="something here" variant="rounded" shadow="md" />
-      </SoftBox>
-      <SoftBox
-        display="flex"
-        flexDirection="column"
-        alignItems="flex-start"
-        justifyContent="center"
-      >
-        <SoftTypography variant="button" fontWeight="medium">
+    <MDBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
+      <MDBox mr={2}>
+        <MDAvatar src={image} alt="something here" shadow="md" />
+      </MDBox>
+      <MDBox display="flex" flexDirection="column" alignItems="flex-start" justifyContent="center">
+        <MDTypography variant="button" fontWeight="medium">
           {name}
-        </SoftTypography>
-        <SoftTypography variant="caption" color="text">
+        </MDTypography>
+        <MDTypography variant="caption" color="text">
           {description}
-        </SoftTypography>
-      </SoftBox>
-      <SoftBox ml="auto">
+        </MDTypography>
+      </MDBox>
+      <MDBox ml="auto">
         {action.type === "internal" ? (
-          <SoftButton component={Link} to={action.route} variant="text" color="info">
+          <MDButton component={Link} to={action.route} variant="text" color="info">
             {action.label}
-          </SoftButton>
+          </MDButton>
         ) : (
-          <SoftButton
+          <MDButton
             component="a"
             href={action.route}
             target="_blank"
@@ -62,32 +57,38 @@ function ProfilesList({ title, profiles }) {
             color={action.color}
           >
             {action.label}
-          </SoftButton>
+          </MDButton>
         )}
-      </SoftBox>
-    </SoftBox>
+      </MDBox>
+    </MDBox>
   ));
 
   return (
-    <Card sx={{ height: "100%" }}>
-      <SoftBox pt={2} px={2}>
-        <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
+    <Card sx={{ height: "100%", boxShadow: !shadow && "none" }}>
+      <MDBox pt={2} px={2}>
+        <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
-        </SoftTypography>
-      </SoftBox>
-      <SoftBox p={2}>
-        <SoftBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
+        </MDTypography>
+      </MDBox>
+      <MDBox p={2}>
+        <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           {renderProfiles}
-        </SoftBox>
-      </SoftBox>
+        </MDBox>
+      </MDBox>
     </Card>
   );
 }
+
+// Setting default props for the ProfilesList
+ProfilesList.defaultProps = {
+  shadow: true,
+};
 
 // Typechecking props for the ProfilesList
 ProfilesList.propTypes = {
   title: PropTypes.string.isRequired,
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  shadow: PropTypes.bool,
 };
 
 export default ProfilesList;

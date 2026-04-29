@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -21,12 +21,12 @@ import Icon from "@mui/material/Icon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
-// Soft UI Dashboard Materail-UI example components
-import Table from "examples/Tables/Table";
+// Material Dashboard 2 React examples
+import DataTable from "examples/Tables/DataTable";
 
 // Data
 import data from "layouts/dashboard/components/Projects/data";
@@ -61,12 +61,12 @@ function Projects() {
 
   return (
     <Card>
-      <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-        <SoftBox>
-          <SoftTypography variant="h6" gutterBottom>
+      <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+        <MDBox>
+          <MDTypography variant="h6" gutterBottom>
             Projects
-          </SoftTypography>
-          <SoftBox display="flex" alignItems="center" lineHeight={0}>
+          </MDTypography>
+          <MDBox display="flex" alignItems="center" lineHeight={0}>
             <Icon
               sx={{
                 fontWeight: "bold",
@@ -76,30 +76,27 @@ function Projects() {
             >
               done
             </Icon>
-            <SoftTypography variant="button" fontWeight="regular" color="text">
+            <MDTypography variant="button" fontWeight="regular" color="text">
               &nbsp;<strong>30 done</strong> this month
-            </SoftTypography>
-          </SoftBox>
-        </SoftBox>
-        <SoftBox color="text" px={2}>
+            </MDTypography>
+          </MDBox>
+        </MDBox>
+        <MDBox color="text" px={2}>
           <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
             more_vert
           </Icon>
-        </SoftBox>
+        </MDBox>
         {renderMenu}
-      </SoftBox>
-      <SoftBox
-        sx={{
-          "& .MuiTableRow-root:not(:last-child)": {
-            "& td": {
-              borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                `${borderWidth[1]} solid ${borderColor}`,
-            },
-          },
-        }}
-      >
-        <Table columns={columns} rows={rows} />
-      </SoftBox>
+      </MDBox>
+      <MDBox>
+        <DataTable
+          table={{ columns, rows }}
+          showTotalEntries={false}
+          isSorted={false}
+          noEndBorder
+          entriesPerPage={false}
+        />
+      </MDBox>
     </Card>
   );
 }

@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v3.1.0
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -13,33 +13,31 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// Soft UI Dashboard React Base Styles
+// Material Dashboard 2 React Base Styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 
-// Soft UI Dashboard React Helper Functions
+// Material Dashboard 2 React Helper Functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
-const { transparent, info, secondary, grey } = colors;
+const { text, info, secondary, transparent } = colors;
 const { size } = typography;
 
 const buttonText = {
   base: {
     backgroundColor: transparent.main,
-    height: "max-content",
-    color: info.main,
+    minHeight: pxToRem(40),
+    color: text.main,
     boxShadow: "none",
-    padding: `${pxToRem(6)} ${pxToRem(12)}`,
+    padding: `${pxToRem(10)} ${pxToRem(24)}`,
 
     "&:hover": {
       backgroundColor: transparent.main,
       boxShadow: "none",
-      color: info.focus,
     },
 
     "&:focus": {
       boxShadow: "none",
-      color: info.focus,
     },
 
     "&:active, &:active:focus, &:active:hover": {
@@ -48,59 +46,56 @@ const buttonText = {
     },
 
     "&:disabled": {
-      color: grey[600],
       boxShadow: "none",
     },
 
-    "& .material-icons, .material-icons-round, svg, span": {
+    "& .material-icon, .material-icons-round, svg": {
       fontSize: `${pxToRem(16)} !important`,
     },
   },
 
   small: {
+    minHeight: pxToRem(32),
+    padding: `${pxToRem(6)} ${pxToRem(16)}`,
     fontSize: size.xs,
 
-    "& .material-icons, .material-icons-round, svg, span": {
+    "& .material-icon, .material-icons-round, svg": {
       fontSize: `${pxToRem(12)} !important`,
     },
   },
 
   large: {
+    minHeight: pxToRem(47),
+    padding: `${pxToRem(12)} ${pxToRem(28)}`,
     fontSize: size.sm,
 
-    "& .material-icons, .material-icons-round, svg, span": {
+    "& .material-icon, .material-icons-round, svg": {
       fontSize: `${pxToRem(22)} !important`,
     },
   },
 
   primary: {
     color: info.main,
-    backgroundColor: transparent.main,
 
     "&:hover": {
-      color: info.focus,
-      backgroundColor: transparent.main,
+      color: info.main,
     },
 
     "&:focus:not(:hover)": {
       color: info.focus,
-      backgroundColor: transparent.focus,
       boxShadow: "none",
     },
   },
 
   secondary: {
-    color: secondary.focus,
-    backgroundColor: transparent.main,
+    color: secondary.main,
 
     "&:hover": {
-      color: secondary.focus,
-      backgroundColor: transparent.main,
+      color: secondary.main,
     },
 
     "&:focus:not(:hover)": {
       color: secondary.focus,
-      backgroundColor: transparent.focus,
       boxShadow: "none",
     },
   },

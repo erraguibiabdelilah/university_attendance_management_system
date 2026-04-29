@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -16,17 +16,15 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
 
-// Soft UI Dashboard React components
-import MasterCard from "examples/Cards/MasterCard";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
-
-// Soft UI Dashboard React examples
+// Material Dashboard 2 React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
+import MasterCard from "examples/Cards/MasterCard";
+import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
 // Billing page components
 import PaymentMethod from "layouts/billing/components/PaymentMethod";
@@ -37,9 +35,9 @@ import Transactions from "layouts/billing/components/Transactions";
 function Billing() {
   return (
     <DashboardLayout>
-      <DashboardNavbar />
-      <SoftBox mt={4}>
-        <SoftBox mb={1.5}>
+      <DashboardNavbar absolute isMini />
+      <MDBox mt={8}>
+        <MDBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={8}>
               <Grid container spacing={3}>
@@ -71,8 +69,8 @@ function Billing() {
               <Invoices />
             </Grid>
           </Grid>
-        </SoftBox>
-        <SoftBox my={3}>
+        </MDBox>
+        <MDBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={7}>
               <BillingInformation />
@@ -81,8 +79,8 @@ function Billing() {
               <Transactions />
             </Grid>
           </Grid>
-        </SoftBox>
-      </SoftBox>
+        </MDBox>
+      </MDBox>
       <Footer />
     </DashboardLayout>
   );

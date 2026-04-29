@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -23,15 +23,15 @@ import PropTypes from "prop-types";
 import { Breadcrumbs as MuiBreadcrumbs } from "@mui/material";
 import Icon from "@mui/material/Icon";
 
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 
 function Breadcrumbs({ icon, title, route, light }) {
   const routes = route.slice(0, -1);
 
   return (
-    <SoftBox mr={{ xs: 0, xl: 8 }}>
+    <MDBox mr={{ xs: 0, xl: 8 }}>
       <MuiBreadcrumbs
         sx={{
           "& .MuiBreadcrumbs-separator": {
@@ -40,7 +40,7 @@ function Breadcrumbs({ icon, title, route, light }) {
         }}
       >
         <Link to="/">
-          <SoftTypography
+          <MDTypography
             component="span"
             variant="body2"
             color={light ? "white" : "dark"}
@@ -48,11 +48,11 @@ function Breadcrumbs({ icon, title, route, light }) {
             sx={{ lineHeight: 0 }}
           >
             <Icon>{icon}</Icon>
-          </SoftTypography>
+          </MDTypography>
         </Link>
         {routes.map((el) => (
           <Link to={`/${el}`} key={el}>
-            <SoftTypography
+            <MDTypography
               component="span"
               variant="button"
               fontWeight="regular"
@@ -62,10 +62,10 @@ function Breadcrumbs({ icon, title, route, light }) {
               sx={{ lineHeight: 0 }}
             >
               {el}
-            </SoftTypography>
+            </MDTypography>
           </Link>
         ))}
-        <SoftTypography
+        <MDTypography
           variant="button"
           fontWeight="regular"
           textTransform="capitalize"
@@ -73,9 +73,9 @@ function Breadcrumbs({ icon, title, route, light }) {
           sx={{ lineHeight: 0 }}
         >
           {title.replace("-", " ")}
-        </SoftTypography>
+        </MDTypography>
       </MuiBreadcrumbs>
-      <SoftTypography
+      <MDTypography
         fontWeight="bold"
         textTransform="capitalize"
         variant="h6"
@@ -83,8 +83,8 @@ function Breadcrumbs({ icon, title, route, light }) {
         noWrap
       >
         {title.replace("-", " ")}
-      </SoftTypography>
-    </SoftBox>
+      </MDTypography>
+    </MDBox>
   );
 }
 

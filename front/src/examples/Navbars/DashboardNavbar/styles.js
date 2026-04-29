@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard React - v4.0.1
+* Material Dashboard 2 React - v2.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -14,9 +14,9 @@ Coded by www.creative-tim.com
 */
 function navbar(theme, ownerState) {
   const { palette, boxShadows, functions, transitions, breakpoints, borders } = theme;
-  const { transparentNavbar, absolute, light } = ownerState;
+  const { transparentNavbar, absolute, light, darkMode } = ownerState;
 
-  const { dark, white, text, transparent } = palette;
+  const { dark, white, text, transparent, background } = palette;
   const { navbarBoxShadow } = boxShadows;
   const { rgba, pxToRem } = functions;
   const { borderRadius } = borders;
@@ -25,7 +25,9 @@ function navbar(theme, ownerState) {
     boxShadow: transparentNavbar || absolute ? "none" : navbarBoxShadow,
     backdropFilter: transparentNavbar || absolute ? "none" : `saturate(200%) blur(${pxToRem(30)})`,
     backgroundColor:
-      transparentNavbar || absolute ? `${transparent.main} !important` : rgba(white.main, 0.8),
+      transparentNavbar || absolute
+        ? `${transparent.main} !important`
+        : rgba(darkMode ? background.default : white.main, 0.8),
 
     color: () => {
       let color;
@@ -103,10 +105,10 @@ const navbarRow = ({ breakpoints }, { isMini }) => ({
 });
 
 const navbarIconButton = ({ typography: { size }, breakpoints }) => ({
-  px: 0.75,
+  px: 1,
 
   "& .material-icons, .material-icons-round": {
-    fontSize: `${size.md} !important`,
+    fontSize: `${size.xl} !important`,
   },
 
   "& .MuiTypography-root": {
