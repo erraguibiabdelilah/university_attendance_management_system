@@ -118,4 +118,9 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return dao.findAll();
     }
+
+    @Override
+    public void deleteById(Long id) {
+        dao.deleteById(id);
+    }
 }
