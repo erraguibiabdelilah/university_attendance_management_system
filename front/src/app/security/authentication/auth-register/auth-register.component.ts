@@ -2,7 +2,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../../shared/services/auth';
+import { AuthService } from '../../services/auth.service';
 import { User } from '../../../shared/models/user';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
