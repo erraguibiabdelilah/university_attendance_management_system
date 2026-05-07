@@ -1,7 +1,3 @@
-export interface UserAuthority {
-  authority: string;
-}
-
 export class User {
   public id:number ;
   public firstName:string;
@@ -13,9 +9,8 @@ export class User {
   public credentialsNonExpired: boolean = true;
   public accountNonLocked: boolean = true;
   public accountNonExpired: boolean = true;
-  public authorities: Array<string | UserAuthority>;
+  public role: string;
   public encoding : string[];
-
 
   constructor() {
   }

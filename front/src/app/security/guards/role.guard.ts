@@ -9,13 +9,8 @@ const hasRole = (requiredRole: string): boolean => {
 
   try {
     const user = JSON.parse(userRaw);
-    const authorities = user?.authorities ?? [];
-    return authorities.some((role: { authority?: string } | string) => {
-      if (typeof role === 'string') {
-        return role === requiredRole || role === `ROLE_${requiredRole}`;
-      }
-      return role?.authority === requiredRole || role?.authority === `ROLE_${requiredRole}`;
-    });
+    const role = user?.role;
+    return role === requiredRole || role === `ROLE_${requiredRole}`;
   } catch {
     return false;
   }

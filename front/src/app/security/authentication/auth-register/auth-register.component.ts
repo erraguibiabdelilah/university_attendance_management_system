@@ -42,7 +42,7 @@ export class AuthRegisterComponent {
   public initialiseItem() {
     this.connectedUser.username=this.registerForm.value.username?? '';
     this.connectedUser.password=this.registerForm.value.password?? '';
-    this.connectedUser.authorities=['USER'];
+    this.connectedUser.role='ROLE_USER';
     this.item=this.connectedUser;
     console.log(this.item);
   }
