@@ -26,34 +26,34 @@ export class AuthLoginComponent {
   });
 
   public login() {
-    this.itemInitialisation();
-    this.service.login().subscribe({
-      next: (token) => {
-        localStorage.setItem('token', token);
+  const credentials = this.loginForm.value;
 
-        this.getUserByUsesrname(this.user.username).subscribe({
-          next: (data) => {
-            this.connectedUser = data;
-            this.connectedUser.password = undefined;
-            localStorage.setItem('user', JSON.stringify(this.connectedUser));
-            this.router.navigate(['/dashboard']);
-          }
-        });
-      }
-    });
-  }
+  this.service.login(credentials).subscribe({
+    next: (response) => {
+      const token = response.token || response;
 
+      localStorage.setItem('token', token);
+
+      this.service.loadUserByUsername(credentials.username!).subscribe({
+        next: (user) => {
+          user.password = undefined;
+
+          localStorage.setItem('user', JSON.stringify(user));
+
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => console.error('User fetch error', err)
+      });
+    },
+    error: (err) => {
+      console.error('Login failed', err);
+    }
+  });
+}
   public getUserByUsesrname(username: string) {
     return this.service.loadUserByUsername(username);
   }
 
-  itemInitialisation() {
-    this.user.username = this.loginForm.value.username ?? '';
-    this.user.password = this.loginForm.value.password ?? '';
-    this.user.authorities = ['STUDENT'];
-    this.item = this.user;
-    console.log(this.item);
-  }
 
   get item(): User {
     return this.service.item;
