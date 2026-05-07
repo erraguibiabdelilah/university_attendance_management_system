@@ -5,7 +5,6 @@ import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { AppRoutingModule } from './app/app-routing.module';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { AppComponent } from './app/app.component';
-import { provideHttpClient } from '@angular/common/http';
 import { appConfig } from './app/app-config';
 
 if (environment.production) {
@@ -13,5 +12,5 @@ if (environment.production) {
 }
 
 bootstrapApplication(AppComponent, {
-  providers: [importProvidersFrom(BrowserModule, AppRoutingModule), provideAnimations(),provideHttpClient(),...appConfig.providers]
+  providers: [importProvidersFrom(BrowserModule, AppRoutingModule), provideAnimations(), ...appConfig.providers]
 }).catch((err) => console.error(err));

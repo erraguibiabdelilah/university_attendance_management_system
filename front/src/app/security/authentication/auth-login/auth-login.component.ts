@@ -4,7 +4,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { User } from 'src/app/shared/models/user';
-import { AuthService } from 'src/app/shared/services/auth';
+import { AuthService } from 'src/app/security/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
