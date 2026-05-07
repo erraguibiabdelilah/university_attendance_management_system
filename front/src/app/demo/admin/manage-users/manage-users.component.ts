@@ -78,6 +78,15 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
+  getPrimaryAuthority(user: User): string {
+    const primaryAuthority = user.authorities?.[0];
+    if (!primaryAuthority) {
+      return '';
+    }
+
+    return typeof primaryAuthority === 'string' ? primaryAuthority : primaryAuthority.authority;
+  }
+
   private resolveHttpError(error: HttpErrorResponse): string {
     if (error.status === 401) {
       return 'Unauthorized access. Please login again.';
