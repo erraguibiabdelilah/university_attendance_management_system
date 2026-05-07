@@ -1,0 +1,14 @@
+<div class="card p-3">
+  <h4>Create Attendance Session</h4>
+  <div *ngIf="toast" class="alert alert-info py-2">{{toast}}</div>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="row g-3">
+    <div class="col-md-4"><label>Module</label><select formControlName="nomModule" class="form-select"><option value="">Select</option><option *ngFor="let m of modules" [value]="m">{{m}}</option></select></div>
+    <div class="col-md-4"><label>Filiere</label><select formControlName="filiere" class="form-select"><option value="">Select</option><option *ngFor="let f of filieres" [value]="f">{{f}}</option></select></div>
+    <div class="col-md-4"><label>Promo</label><select formControlName="promo" class="form-select"><option value="">Select</option><option *ngFor="let p of promos" [value]="p">{{p}}</option></select></div>
+    <div class="col-md-6"><label>Type séance</label><select formControlName="typeSeance" class="form-select"><option value="">Select</option><option *ngFor="let t of typeSeances" [value]="t">{{t}}</option></select></div>
+    <div class="col-md-6"><label>Date</label><input class="form-control" formControlName="date" type="date"></div>
+    <div class="col-12"><h6>Students</h6><div class="row"><div class="col-md-4" *ngFor="let s of students"><div class="form-check"><input type="checkbox" class="form-check-input" (change)="toggleStudent(s.id, $any($event.target).checked)"><label class="form-check-label">{{s.label}}</label></div></div></div></div>
+    <div class="col-12" *ngIf="students.length===0"><app-empty-state title="No students loaded" message="Select filiere and promo to load students."></app-empty-state></div>
+    <div class="col-12"><button class="btn btn-primary" [disabled]="loading">{{loading ? 'Saving...' : 'Create Session'}}</button></div>
+  </form>
+</div>

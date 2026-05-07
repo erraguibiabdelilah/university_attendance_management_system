@@ -40,6 +40,23 @@ const routes: Routes = [
         path: 'attributes',
         component: Entitys
       },
+
+      {
+        path: 'attendance/create',
+        loadComponent: () => import('./pages/attendance/create-absence/create-absence.page').then((c) => c.CreateAbsencePage)
+      },
+      {
+        path: 'attendance/mark',
+        loadComponent: () => import('./pages/attendance/mark-attendance/mark-attendance.page').then((c) => c.MarkAttendancePage)
+      },
+      {
+        path: 'attendance/history',
+        loadComponent: () => import('./pages/attendance/teacher-absence-history/teacher-absence-history.page').then((c) => c.TeacherAbsenceHistoryPage)
+      },
+      {
+        path: 'attendance/student-stats',
+        loadComponent: () => import('./pages/attendance/student-statistics/student-statistics.page').then((c) => c.StudentStatisticsPage)
+      },
       {
         path: 'admin/manage-users',
         canActivate: [adminGuard],
