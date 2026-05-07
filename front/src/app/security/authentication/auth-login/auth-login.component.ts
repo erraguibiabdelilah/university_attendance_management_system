@@ -51,6 +51,18 @@ export class AuthLoginComponent {
     });
   }
 
+          localStorage.setItem('user', JSON.stringify(user));
+
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => console.error('User fetch error', err)
+      });
+    },
+    error: (err) => {
+      console.error('Login failed', err);
+    }
+  });
+}
   public getUserByUsesrname(username: string) {
     return this.service.loadUserByUsername(username);
   }
