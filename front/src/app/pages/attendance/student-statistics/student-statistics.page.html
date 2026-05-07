@@ -1,0 +1,10 @@
+<div class="card p-3">
+  <h4>Student Statistics</h4>
+  <div class="input-group mb-3"><span class="input-group-text">Student ID</span><input type="number" class="form-control" [formControl]="form.controls.studentId"><button class="btn btn-primary" (click)="load()">Load</button></div>
+  <div *ngIf="message" class="alert alert-danger">{{message}}</div>
+  <div class="row" *ngIf="stats">
+    <div class="col-md-4"><div class="card p-3 text-center"><h6>Total Sessions</h6><h2>{{stats.totalSessions}}</h2></div></div>
+    <div class="col-md-4"><div class="card p-3 text-center"><h6>Total Absences</h6><h2>{{stats.totalAbsences}}</h2></div></div>
+    <div class="col-md-4"><div class="card p-3 text-center"><h6>Attendance %</h6><h2>{{percentage}}%</h2></div></div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="card p-3">
+  <h4>Teacher Absence History</h4>
+  <div class="row g-2 mb-3"><div class="col-md-3"><input type="number" class="form-control" [formControl]="form.controls.teacherId" placeholder="Teacher ID"></div><div class="col-md-5"><input class="form-control" [formControl]="form.controls.search" (input)="apply()" placeholder="Search module, filiere, promo..."></div><div class="col-md-2"><button class="btn btn-primary w-100" (click)="load()">Load</button></div></div>
+  <div class="table-responsive"><table class="table table-striped" *ngIf="paged.length"><thead><tr><th>Module</th><th>Filiere</th><th>Promo</th><th>Date</th><th>Type</th></tr></thead><tbody><tr *ngFor="let a of paged"><td>{{a.nomModule}}</td><td>{{a.filiere}}</td><td>{{a.promo}}</td><td>{{a.date | date}}</td><td>{{a.typeSeance}}</td></tr></tbody></table></div>
+  <div *ngIf="!filtered.length" class="text-muted">No attendance sessions found.</div>
+</div>
+
+<div class="d-flex justify-content-end gap-2" *ngIf="filtered.length>pageSize"><button class="btn btn-sm btn-outline-secondary" (click)="prev()">Prev</button><span class="align-self-center">Page {{page}}</span><button class="btn btn-sm btn-outline-secondary" (click)="next()">Next</button></div>

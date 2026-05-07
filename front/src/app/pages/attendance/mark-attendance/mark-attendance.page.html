@@ -1,0 +1,7 @@
+<div class="card p-3">
+  <h4>Mark Attendance</h4>
+  <div *ngIf="message" class="alert alert-info py-2">{{message}}</div>
+  <div class="input-group mb-3"><span class="input-group-text">Absence ID</span><input class="form-control" type="number" [formControl]="form.controls.absenceId"><button class="btn btn-outline-primary" (click)="loadDetails()">Load</button></div>
+  <div *ngFor="let d of details" class="form-check border-bottom py-2"><input class="form-check-input" type="checkbox" [checked]="getIds().includes(d.studentId)" (change)="toggle(d.studentId,$any($event.target).checked)"><label class="form-check-label">{{d.studentPrenom}} {{d.studentNom}} ({{d.studentCNE}})</label></div>
+  <button class="btn btn-primary mt-3" [disabled]="loading || !details.length" (click)="save()">Save</button>
+</div>

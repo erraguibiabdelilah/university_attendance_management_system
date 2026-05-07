@@ -75,6 +75,38 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         icon: 'users'
       }
+,      {
+        id: 'attendance-create',
+        title: 'Create Attendance',
+        type: 'item',
+        url: '/attendance/create',
+        classes: 'nav-item',
+        icon: 'check-circle'
+      },
+      {
+        id: 'attendance-mark',
+        title: 'Mark Attendance',
+        type: 'item',
+        url: '/attendance/mark',
+        classes: 'nav-item',
+        icon: 'edit'
+      },
+      {
+        id: 'attendance-history',
+        title: 'Absence History',
+        type: 'item',
+        url: '/attendance/history',
+        classes: 'nav-item',
+        icon: 'clock-circle'
+      },
+      {
+        id: 'attendance-stats',
+        title: 'Student Stats',
+        type: 'item',
+        url: '/attendance/student-stats',
+        classes: 'nav-item',
+        icon: 'bar-chart'
+      }
     ]
   }
 ];

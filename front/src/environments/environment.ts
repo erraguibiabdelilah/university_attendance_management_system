@@ -8,7 +8,7 @@ export const environment = {
   name: 'default',
   appVersion: packageInfo.version,
   production: false,
-  apiUrl: 'http://localhost:8080/api/uca/'
+  apiUrl: 'http://localhost:8080/api'
 };
 
 /*
