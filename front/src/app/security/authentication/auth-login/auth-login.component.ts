@@ -26,6 +26,11 @@ export class AuthLoginComponent {
   });
 
   public login() {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
     this.itemInitialisation();
     this.service.login().subscribe({
       next: (token) => {
@@ -39,6 +44,9 @@ export class AuthLoginComponent {
             this.router.navigate(['/dashboard']);
           }
         });
+      },
+      error: (err) => {
+        console.error('Login failed (401 likely means invalid credentials or mismatched payload):', err);
       }
     });
   }
@@ -50,7 +58,8 @@ export class AuthLoginComponent {
   itemInitialisation() {
     this.user.username = this.loginForm.value.username ?? '';
     this.user.password = this.loginForm.value.password ?? '';
-    this.user.authorities = ['STUDENT'];
+    // Keep payload aligned with registration/backend expectations
+    this.user.authorities = ['USER'];
     this.item = this.user;
     console.log(this.item);
   }
