@@ -1,12 +1,14 @@
 package org.example.universityattendancemanagementsystem.bean;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,25 +18,17 @@ public class User implements UserDetails {
     private String promo;
     private String username;
     private String password;
+    private String role;
 
     private boolean enabled = true;
     private boolean credentialsNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean accountNonExpired = true;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Collection<Role> authorities;
-
     @OneToMany(mappedBy = "user")
     private List<FaceEncoding> encodings;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String username, String password) {
         this.username = username;
@@ -42,106 +36,52 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role == null || role.isBlank()) {
+            return List.of();
+        }
+        return List.of(new SimpleGrantedAuthority(this.role));
     }
 
     @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
+    public String getPromo() { return promo; }
+    public void setPromo(String promo) { this.promo = promo; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
+
+    public List<FaceEncoding> getEncodings() { return encodings; }
+    public void setEncodings(List<FaceEncoding> encodings) { this.encodings = encodings; }
 
     @Override
-    public Collection<Role> getAuthorities() {
-        return authorities;
-    }
+    public boolean isEnabled() { return enabled; }
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
+    @Override
+    public boolean isCredentialsNonExpired() { return credentialsNonExpired; }
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) { this.credentialsNonExpired = credentialsNonExpired; }
 
-    public Long getId() {
-        return id;
-    }
+    @Override
+    public boolean isAccountNonLocked() { return accountNonLocked; }
+    public void setAccountNonLocked(boolean accountNonLocked) { this.accountNonLocked = accountNonLocked; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        lastName = lastName;
-    }
-
-    public String getPromo() {
-        return promo;
-    }
-
-    public void setPromo(String promo) {
-        this.promo = promo;
-    }
-
-    public void setAuthorities(Collection<Role> authorities) {
-        this.authorities = authorities;
-    }
-
-    public List<FaceEncoding> getEncodings() {
-        return encodings;
-    }
-
-    public void setEncodings(List<FaceEncoding> encodings) {
-        this.encodings = encodings;
-    }
+    @Override
+    public boolean isAccountNonExpired() { return accountNonExpired; }
+    public void setAccountNonExpired(boolean accountNonExpired) { this.accountNonExpired = accountNonExpired; }
 }

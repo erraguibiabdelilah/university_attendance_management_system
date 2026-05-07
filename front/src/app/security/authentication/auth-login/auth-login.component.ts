@@ -1,8 +1,5 @@
-// project import
 import { Component, inject } from '@angular/core';
-
 import { Router, RouterModule } from '@angular/router';
-
 import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/security/services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -51,18 +48,6 @@ export class AuthLoginComponent {
     });
   }
 
-          localStorage.setItem('user', JSON.stringify(user));
-
-          this.router.navigate(['/dashboard']);
-        },
-        error: (err) => console.error('User fetch error', err)
-      });
-    },
-    error: (err) => {
-      console.error('Login failed', err);
-    }
-  });
-}
   public getUserByUsesrname(username: string) {
     return this.service.loadUserByUsername(username);
   }
@@ -70,8 +55,7 @@ export class AuthLoginComponent {
   itemInitialisation() {
     this.user.username = this.loginForm.value.username ?? '';
     this.user.password = this.loginForm.value.password ?? '';
-    // Keep payload aligned with registration/backend expectations
-    this.user.authorities = ['USER'];
+    this.user.role = 'ROLE_USER';
     this.item = this.user;
     console.log(this.item);
   }

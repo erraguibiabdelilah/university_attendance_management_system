@@ -56,7 +56,7 @@ export class ManageUsersComponent implements OnInit {
     user.lastName = rest.join(' ');
     user.username = this.userForm.value.email ?? '';
     user.password = this.userForm.value.password ?? '';
-    user.authorities = [this.userForm.value.role ?? 'STUDENT'];
+    user.role = `ROLE_${this.userForm.value.role ?? 'STUDENT'}`;
 
     this.adminUserService.create(user).subscribe({
       next: () => {
@@ -79,12 +79,7 @@ export class ManageUsersComponent implements OnInit {
   }
 
   getPrimaryAuthority(user: User): string {
-    const primaryAuthority = user.authorities?.[0];
-    if (!primaryAuthority) {
-      return '';
-    }
-
-    return typeof primaryAuthority === 'string' ? primaryAuthority : primaryAuthority.authority;
+    return user.role ?? '';
   }
 
   private resolveHttpError(error: HttpErrorResponse): string {
