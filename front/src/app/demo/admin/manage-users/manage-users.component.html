@@ -47,7 +47,7 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.firstName }} {{ user.lastName }}</td>
                 <td>{{ user.username }}</td>
-                <td>{{ user.authorities?.[0]?.authority || user.authorities?.[0] }}</td>
+                <td>{{ getPrimaryAuthority(user) }}</td>
                 <td><button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Delete</button></td>
               </tr>
             </tbody>
