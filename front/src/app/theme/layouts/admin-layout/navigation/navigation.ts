@@ -66,6 +66,14 @@ export const NavigationItems: NavigationItem[] = [
         url: '/attributes',
         classes: 'nav-item',
         icon: 'chrome'
+      },
+      {
+        id: 'manage-users',
+        title: 'Manage Users',
+        type: 'item',
+        url: '/admin/manage-users',
+        classes: 'nav-item',
+        icon: 'users'
       }
     ]
   }
