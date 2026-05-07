@@ -26,17 +26,30 @@ export class AuthLoginComponent {
   });
 
   public login() {
-  const credentials = this.loginForm.value;
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
 
-  this.service.login(credentials).subscribe({
-    next: (response) => {
-      const token = response.token || response;
+    this.itemInitialisation();
+    this.service.login().subscribe({
+      next: (token) => {
+        localStorage.setItem('token', token);
 
-      localStorage.setItem('token', token);
-
-      this.service.loadUserByUsername(credentials.username!).subscribe({
-        next: (user) => {
-          user.password = undefined;
+        this.getUserByUsesrname(this.user.username).subscribe({
+          next: (data) => {
+            this.connectedUser = data;
+            this.connectedUser.password = undefined;
+            localStorage.setItem('user', JSON.stringify(this.connectedUser));
+            this.router.navigate(['/dashboard']);
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Login failed (401 likely means invalid credentials or mismatched payload):', err);
+      }
+    });
+  }
 
           localStorage.setItem('user', JSON.stringify(user));
 
@@ -54,6 +67,14 @@ export class AuthLoginComponent {
     return this.service.loadUserByUsername(username);
   }
 
+  itemInitialisation() {
+    this.user.username = this.loginForm.value.username ?? '';
+    this.user.password = this.loginForm.value.password ?? '';
+    // Keep payload aligned with registration/backend expectations
+    this.user.authorities = ['USER'];
+    this.item = this.user;
+    console.log(this.item);
+  }
 
   get item(): User {
     return this.service.item;
