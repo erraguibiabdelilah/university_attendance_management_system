@@ -1,7 +1,7 @@
 package org.example.universityattendancemanagementsystem.security.dao;
 
 
-import org.example.universityattendancemanagementsystem.security.bean.User;
+import org.example.universityattendancemanagementsystem.bean.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package org.example.universityattendancemanagementsystem.security.ws.facad.admin;
 
-import org.example.universityattendancemanagementsystem.security.bean.Role;
+import org.example.universityattendancemanagementsystem.bean.Role;
 import org.example.universityattendancemanagementsystem.security.services.facad.RoleService;
 import org.springframework.web.bind.annotation.*;
 

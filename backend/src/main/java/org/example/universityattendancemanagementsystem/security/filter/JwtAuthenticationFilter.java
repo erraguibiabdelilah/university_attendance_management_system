@@ -5,7 +5,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.universityattendancemanagementsystem.security.bean.User;
+import org.example.universityattendancemanagementsystem.bean.User;
 import org.example.universityattendancemanagementsystem.security.services.utils.JwtUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

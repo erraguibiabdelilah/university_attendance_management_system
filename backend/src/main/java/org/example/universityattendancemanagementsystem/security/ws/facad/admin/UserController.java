@@ -1,6 +1,6 @@
 package org.example.universityattendancemanagementsystem.security.ws.facad.admin;
 
-import org.example.universityattendancemanagementsystem.security.bean.User;
+import org.example.universityattendancemanagementsystem.bean.User;
 import org.example.universityattendancemanagementsystem.security.services.facad.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

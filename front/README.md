@@ -1,227 +1,174 @@
-# [Material Dashboard 2 React](http://demos.creative-tim.com/material-dashboard-react/#/dashboard?ref=readme-mdr) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https://www.creative-tim.com/product/material-dashboard-react&text=Check%20Material%20Dashboard%202%20react%20made%20by%20@CreativeTim%20#webdesign%20#dashboard%20#materialdesign%20#react%20https://www.creative-tim.com/product/material-dashboard-react)
+# Mantis Free Angular Bootstrap Admin Template [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Get%20Mantis%20Angular%20-%20The%20most%20Beautiful%20Bootstrap%20Designed%20Admin%20Dashboard%20Template%20&url=https://mantisdashboard.com&via=codedthemes&hashtags=angular,webdev,developers,javascript)
 
-![version](https://img.shields.io/badge/version-2.2.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/material-dashboard-react.svg)](https://github.com/creativetimofficial/material-dashboard-react/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/material-dashboard-react.svg)](https://github.com/creativetimofficial/material-dashboard-react/issues?q=is%3Aissue+is%3Aclosed)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Price](https://img.shields.io/badge/price-FREE-0098f7.svg)](https://github.com/codedthemes/mantis-free-angular-admin-template/blob/master/LICENSE)
+[![GitHub package version](https://img.shields.io/github/package-json/v/codedthemes/mantis-free-angular-admin-template)](https://github.com/codedthemes/mantis-free-angular-admin-template/)
+[![Download ZIP](https://img.shields.io/badge/Download-ZIP-blue?style=flat-square&logo=github)](https://codedthemes.com/item/mantis-angular-free-admin-template/)
+[![Join Discord](https://img.shields.io/badge/Join-Discord-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.com/invite/p2E2WhCb6s)
 
-![Image](https://s3.amazonaws.com/creativetim_bucket/products/71/original/material-dashboard-react.jpg?1638950990)
+Mantis is a free Angular admin dashboard template built with Angular and the latest Bootstrap 5. It is meant to provide the best possible User Experience with highly customizable, feature-rich pages. It is a comprehensive dashboard template featuring an easy-to-use and intuitive responsive design, suitable for viewing on both retina screens and laptops.
 
-Material Dashboard 2 React is our newest free MUI Admin Template based on React. If you’re a developer looking to create an admin dashboard that is developer-friendly, rich with features, and highly customisable, here is your match. Our innovative MUI & React dashboard comes with a beautiful design inspired by Google's Material Design and it will help you create stunning websites & web apps to delight your clients.
+### Name Derived From Nature
 
-**Fully Coded Elements**
-Material Dashboard 2 React is built with over 70 frontend individual elements, like buttons, inputs, navbars, nav tabs, cards, or alerts, giving you the freedom of choosing and combining. All components can take variations in color, which you can easily modify using MUI styled() API and sx prop. You will save a lot of time going from prototyping to full-functional code because all elements are implemented.
+The Mantis Logo is inspired by the insect name 'Mantises', as they have triangular heads with flexible Necks. Also, the name is derived from two popular design systems, Material and Ant Design (M-Ant-is).
 
-This free MUI & React Dashboard is coming with prebuilt design blocks, so the development process is seamless,
-switching from our pages to the real website is very easy to be done.
 
-Special thanks go to:
+✨ Support us! If you like this theme, click the ⭐ (Top right) and let it shine
 
-- [Nepcha Analytics](https://nepcha.com?ref=readme) for the analytics tool. Nepcha is already integrated with Material Dashboard React. You can use it to gain insights into your sources of traffic.
+![IMG_8566.jpg](https://org-public-assets.s3.us-west-2.amazonaws.com/Free-Version-Banners/GITHUB-FREE-ANGULAR-REPO%20-%20Mantis.jpg)
 
-**Documentation built by Developers**
+## Table of contents
 
-Each element is well presented in very complex documentation.
-
-You can read more about the [documentation here](https://www.creative-tim.com/learning-lab/react/overview/material-dashboard/).
-
-**Example Pages**
-
-If you want to get inspiration or just show something directly to your clients, you can jump-start your development with our pre-built example pages. You will be able to quickly set up the basic structure for your web project.
-
-View [example pages here](https://demos.creative-tim.com/material-dashboard-react/#/dashboard).
-
-**HELPFUL LINKS**
-
-- View [Github Repository](https://github.com/creativetimofficial/material-dashboard-react)
-- Check [FAQ Page](https://www.creative-tim.com/faq)
-
-#### Special thanks
-
-During the development of this dashboard, we have used many existing resources from awesome developers. We want to thank them for providing their tools open source:
-
-- [MUI](https://mui.com/) - The React UI library for faster and easier web development.
-- [React ChartJS 2](http://reactchartjs.github.io/react-chartjs-2/#/) - Simple yet flexible React charting for designers & developers.
-- [ChromaJS](https://gka.github.io/chroma.js/) - A small-ish zero-dependency JavaScript library for all kinds of color conversions and color scales.
-
-Let us know your thoughts below. And good luck with development!
-
-## Table of Contents
-
-- [Versions](#versions)
-- [Demo](#demo)
-- [Quick Start](#quick-start)
-- [Deploy](#deploy)
+- [Getting Started](#getting-started)
+- [Download](#download)
+- [Why Mantis?](#why-mantis)
+- [What's included in Premium Version?](#whats-included-in-premium-version)
 - [Documentation](#documentation)
-- [File Structure](#file-structure)
-- [Browser Support](#browser-support)
-- [Resources](#resources)
-- [Reporting Issues](#reporting-issues)
-- [Technical Support or Questions](#technical-support-or-questions)
-- [Licensing](#licensing)
-- [Useful Links](#useful-links)
+- [Browser support](#browser-support)
+- [Technology Stack](#technology-stack)
+- [Mantis Figma UI Kit](#mantis-figma-ui-kit)
+- [Other Technologies](#other-technologies)
+- 💰[Save more with Big Bundle](#save-more-with-big-bundle)💰
+- [More Angular Dashboard Templates](#more-angular-dashboard-templates)
+- [Issues?](#issues)
+- [License](#license)
+- [Contributor](#contributor)   
+- [Useful Resources](#useful-resources)
+- [Community](#community)
+- [Follow us](#follow-us)
 
-## Versions
+## Getting Started
 
-[<img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/react-logo.png?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr)
+1. Clone from GitHub
 
-| React |
-| ----- |
+```
+git clone https://github.com/codedthemes/mantis-free-angular-admin-template.git
+```
 
-| [![Material Dashboard React](https://s3.amazonaws.com/creativetim_bucket/products/71/thumb/material-dashboard-react.jpg?1638950990)](http://demos.creative-tim.com/material-dashboard-react/#/dashboard?ref=readme-mdr)
+2. Install packages
 
-## Demo
+```
+yarn
+```
 
-- [Dashboard](http://demos.creative-tim.com/material-dashboard-react/#/dashboard?ref=readme-sudr)
-- [Profile](https://demos.creative-tim.com/material-dashboard-react/#/profile?ref=readme-sudr)
-- [RTL](https://demos.creative-tim.com/material-dashboard-react/#/rtl?ref=readme-sudr)
-- [Sign In](https://demos.creative-tim.com/material-dashboard-react/#/authentication/sign-in?ref=readme-sudr)
-- [Sign Up](https://demos.creative-tim.com/material-dashboard-react/#/authentication/sign-up?ref=readme-sudr)
+3. Run project
 
-[View More](https://demos.creative-tim.com/material-dashboard-react/#/dashboard?ref=readme-mdr).
+```
+yarn start
+```
 
-## Quick start
+## Download
 
-Quick start options:
+- Mantis Free 
+    - [Live Preview](https://mantisdashboard.com/angular/free/) 
+    - [Download](https://codedthemes.com/item/mantis-angular-free-admin-template/)
+- Mantis Pro 
+    - [Live Preview](https://mantisdashboard.com/angular/default) 
+    - [Download](https://codedthemes.com/item/mantis-angular-admin-template/)
+      
+## Why Mantis? 
 
-- Download from [Creative Tim](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr).
+Mantis offers everything you need to create dashboards. We have included the following high-end features in our initial release:
 
-## Terminal Commands
+- Modern aesthetics UI design
+- Bootstrap components
+- Fully Responsive, all modern browsers supported
+- Easy to use code structure
+- Flexible & High-Performance code
+- Easy Documentation Guide
 
-1. Download and Install NodeJs LTS version from [NodeJs Official Page](https://nodejs.org/en/download/).
-2. Navigate to the root ./ directory of the product and run `yarn install` or `npm install` to install our local dependencies.
+## What's included in Premium Version?
+The [Pro version](https://codedthemes.com/item/mantis-angular-admin-template/) of Mantis Angular Dashboard template contains features like TypeScript, Apps, Authentication Methods (i.e. JWT), Advance Components, Form Plugins, Layouts, Widgets, and many more.
 
-## Deploy
-
-:rocket: You can deploy your own version of the template to Genezio with one click:
-
-[![Deploy to Genezio](https://raw.githubusercontent.com/Genez-io/graphics/main/svg/deploy-button.svg)](https://app.genez.io/start/deploy?repository=https://github.com/creativetimofficial/material-dashboard-react&utm_source=github&utm_medium=referral&utm_campaign=github-creativetim&utm_term=deploy-project&utm_content=button-head)
+| [Mantis Free](https://mantisdashboard.com/angular/free/) | [Mantis](https://codedthemes.com/item/mantis-angular-admin-template/) |
+| ----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **9** Demo pages                                      | **45+** demo pages                                                                                                                                             |
+| -                                                     | ✓ Multi-language                                                                                                                                               |
+| -                                                     | ✓ Dark/Light Mode 🌓                                                                                                                                           |
+| -                                                     | ✓ TypeScript version                                                                                                                                           |
+| -                                                     | ✓ 6+ color Options           |
+| -                                                     | ✓ RTL                                                                                                                                                          |
+| -                                                     | ✓ [More components](https://mantisdashboard.com/angular/default/components/basic/alert)                                                                                     |
+| ✓ [MIT License](https://github.com/codedthemes/mantis-free-angular-admin-template/blob/master/LICENSE)                                           | ✓ [Pro License](https://codedthemes.com/item/mantis-angular-admin-template/?utm_source=free_demo&utm_medium=codedthemes&utm_campaign=button_download_premium) |
 
 ## Documentation
 
-The documentation for the Material Dashboard is hosted at our [website](https://www.creative-tim.com/learning-lab/react/overview/material-dashboard/?ref=readme-mdr).
+[Mantis Angular documentation](https://codedthemes.gitbook.io/mantis-angular/) helps you with installation, deployment, and troubleshooting.
 
-### What's included
+## Browser support
+<img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/chrome.png" width="45" height="45" > <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/edge.png" width="45" height="45" > <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/safari.png" width="45" height="45" > <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/firefox.png" width="45" height="45" > <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/opera.png" width="45" height="45" >
 
-Within the download you'll find the following directories and files:
+## Technology Stack
 
-```
-material-dashboard-react
-    ├── public
-    │   ├── apple-icon.png
-    │   ├── favicon.png
-    │   ├── index.html
-    │   ├── manifest.json
-    │   └── robots.txt
-    ├── src
-    │   ├── assets
-    │   │   ├── images
-    │   │   └── theme
-    │   │       ├── base
-    │   │       ├── components
-    │   │       ├── functions
-    │   │       ├── index.js
-    │   │       └── theme-rtl.js
-    │   │   └── theme-dark
-    │   │       ├── base
-    │   │       ├── components
-    │   │       ├── functions
-    │   │       ├── index.js
-    │   │       └── theme-rtl.js
-    │   ├── components
-    │   │   ├── MDAlert
-    │   │   ├── MDAvatar
-    │   │   ├── MDBadge
-    │   │   ├── MDBox
-    │   │   ├── MDButton
-    │   │   ├── MDInput
-    │   │   ├── MDPagination
-    │   │   ├── MDProgress
-    │   │   ├── MDSnackbar
-    │   │   └── MDTypography
-    │   ├── context
-    │   ├── examples
-    │   │   ├── Breadcrumbs
-    │   │   ├── Cards
-    │   │   ├── Charts
-    │   │   ├── Configurator
-    │   │   ├── Footer
-    │   │   ├── Items
-    │   │   ├── LayoutContainers
-    │   │   ├── Lists
-    │   │   ├── Navbars
-    │   │   ├── Sidenav
-    │   │   ├── Tables
-    │   │   └── Timeline
-    │   ├── layouts
-    │   │   ├── authentication
-    │   │   ├── billing
-    │   │   ├── dashboard
-    │   │   ├── notifications
-    │   │   ├── profile
-    │   │   ├── rtl
-    │   │   └── tables
-    │   ├── App.js
-    │   ├── index.js
-    │   └── routes.js
-    ├── .eslintrc.json
-    ├── .prettierrc.json
-    ├── CHANGELOG.md
-    ├── ISSUE_TEMPLATE.md
-    ├── jsconfig.json
-    ├── LICENSE.md
-    ├── package.json
-    └── README.md
-```
+- Bootstrap 5
+- Angular 20
 
-## Browser Support
+## Mantis Figma UI Kit
+<div>
+  <a href="https://codedthemes.com/item/mantis-free-figma-ui-kit/">
+    <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/Banners/Figma_Free_Mantis.png" width="450" alt="Figma Free">
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://codedthemes.com/item/mantis-figma-ui-kit/">
+    <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/Banners/Figma_Pro_Mantis.png" width="450" alt="Figma Pro">
+  </a>
+</div>
 
-At present, we officially aim to support the last two versions of the following browsers:
+## Other Technologies 
+| Technology | Free | Pro |
+|-----------|------|------|
+| <p align="center"><img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Bootstrap.png" width="25" height="25"></p> | [**Free**](https://codedthemes.com/item/mantis-bootstrap-free-admin-template/) | [**Pro**](https://codedthemes.com/item/mantis-bootstrap-admin-dashboard/) |
+| <p align="center"><img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/React.png" width="30" height="30"></p> | [**Free**](https://codedthemes.com/item/mantis-free-mui-admin-template/) | [**Pro**](https://codedthemes.com/item/mantis-mui-react-dashboard-template/) |
+| <p align="center"><img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Vue.png" width="25" height="25"></p> | [**Free**](https://codedthemes.com/item/mantis-free-vuetify-vuejs-admin-template/) | [**Pro**](https://codedthemes.com/item/mantis-vue-admin-template/) |
 
-<img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/chrome.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/firefox.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/edge.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/safari.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/opera.png" width="64" height="64">
+## Save more with Big Bundle
 
-## Resources
+[![bundle-image](https://org-public-assets.s3.us-west-2.amazonaws.com/Banners/Bundle+banner.png)](https://links.codedthemes.com/jhFBJ)
 
-- [Live Preview](https://demos.creative-tim.com/material-dashboard-react/#/dashboard?ref=readme-mdr)
-- [Download Page](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr)
-- Documentation is [here](https://www.creative-tim.com/learning-lab/react/overview/material-dashboard/?ref=readme-mdr)
-- [License Agreement](https://www.creative-tim.com/license?ref=readme-mdr)
-- [Support](https://www.creative-tim.com/contact-us?ref=readme-mdr)
-- Issues: [Github Issues Page](https://github.com/creativetimofficial/material-dashboard-react/issues)
-- [Nepcha Analytics](https://nepcha.com?ref=readme) - Analytics tool for your website
+## More Angular Dashboard Templates
 
-## Reporting Issues
+| Dashboard | FREE | PRO | 
+| ----- | ---- | ---- |
+| <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Berry%20with%20name.png"  height="30" style="display:inline-block; vertical-align:middle;"> | [**Free**](https://codedthemes.com/item/berry-angular-free-admin-template/) | [**Pro**](https://codedthemes.com/item/berry-angular-admin-dashboard-template/)</span>|
+| <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Datta%20with%20name.png" height="30" style="display:inline-block; vertical-align:middle;">  | [**Free**](https://codedthemes.com/item/datta-able-angular-lite/) | [**Pro**](https://codedthemes.com/item/datta-able-angular/)</span>|
+| <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Gradient%20with%20name.png" height="30" style="display:inline-block; vertical-align:middle;"> | [**Free**](https://codedthemes.com/item/gradient-able-angular-free-admin-template/) | [**Pro**](https://codedthemes.com/item/gradient-able-angular-admin-template/)</span>|
 
-We use GitHub Issues as the official bug tracker for the Material Dashboard React. Here are some advices for our users that want to report an issue:
+## Issues
 
-1. Make sure that you are using the latest version of the Material Dashboard React. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr).
-2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
-3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
+Please generate a [Github issue](https://github.com/codedthemes/mantis-free-angular-admin-template/issues) if you found a bug in any version. We are try our best to resolve the issue.
 
-## Technical Support or Questions
+## License 
+- Licensed under [MIT](https://github.com/codedthemes/mantis-free-angular-admin-template/blob/master/LICENSE)
+- Copyright © [CodedThemes](https://codedthemes.com/)
 
-If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us?ref=readme-mdr) instead of opening an issue.
+## Contributor
 
-## Licensing
+**CodedThemes Team**
+- https://x.com/codedthemes
+- https://github.com/codedthemes
 
-- Copyright 2023 [Creative Tim](https://www.creative-tim.com?ref=readme-mdr)
-- Creative Tim [license](https://www.creative-tim.com/license?ref=readme-mdr)
+**Rakesh Nakrani** 
+- https://x.com/rakesh_nakrani
 
-## Useful Links
+**Brijesh Dobariya**
+- https://x.com/dobaria_brijesh
 
-- [More products](https://www.creative-tim.com/templates?ref=readme-mdr) from Creative Tim
+## Useful Resources
+- [More Admin Templates From CodedThemes](https://codedthemes.com/item/category/admin-templates/)
+- [Freebies From CodedThemes](https://codedthemes.com/item/category/free-templates/)
+- [Big Bundles](https://codedthemes.com/item/big-bundle/)
+- [Figma UI Kits](https://codedthemes.com/item/category/templates/figma/)
+- [Affiliate Program](https://codedthemes.com/affiliate/)
+- [Blogs](https://blog.codedthemes.com/)
 
-- [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
+## Community
+- 👥Follow [@codedthemes](https://x.com/codedthemes)
+- 🔗Join [Discord](https://discord.com/invite/p2E2WhCb6s)
+- 🔔Subscribe to [Codedtheme Blogs](https://blog.codedthemes.com/)
 
-- [Freebies](https://www.creative-tim.com/bootstrap-themes/free?ref=readme-mdr) from Creative Tim
-
-- [Affiliate Program](https://www.creative-tim.com/affiliates/new?ref=readme-mdr) (earn money)
-
-##### Social Media
-
-Twitter: <https://twitter.com/CreativeTim>
-
-Facebook: <https://www.facebook.com/CreativeTim>
-
-Dribbble: <https://dribbble.com/creativetim>
-
-Google+: <https://plus.google.com/+CreativetimPage>
-
-Instagram: <https://instagram.com/creativetimofficial>
+## Follow Us
+- [Twitter](https://twitter.com/codedthemes) 🐦
+- [Dribbble](https://dribbble.com/codedthemes) 🏀
+- [Github](https://github.com/codedthemes) 🐙
+- [LinkedIn](https://www.linkedin.com/company/codedthemes/) 💼
+- [Instagram](https://www.instagram.com/codedthemes/) 📷
+- [Facebook](https://www.facebook.com/codedthemes) 🟦

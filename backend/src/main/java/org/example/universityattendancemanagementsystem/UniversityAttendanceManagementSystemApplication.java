@@ -1,7 +1,7 @@
 package org.example.universityattendancemanagementsystem;
 
-import org.example.universityattendancemanagementsystem.security.bean.Role;
-import org.example.universityattendancemanagementsystem.security.bean.User;
+import org.example.universityattendancemanagementsystem.bean.Role;
+import org.example.universityattendancemanagementsystem.bean.User;
 import org.example.universityattendancemanagementsystem.security.dao.RoleDao;
 import org.example.universityattendancemanagementsystem.security.dao.UserDao;
 import org.springframework.boot.CommandLineRunner;
@@ -37,8 +37,12 @@ public class UniversityAttendanceManagementSystemApplication implements CommandL
         roleDao.save(student_role);
 
         User admin = new User("admin@123", "admin123");
+        User student = new User("abdelilah@abdelilah", "abdelilah@abdelilah");
         admin.setAuthorities(List.of(admin_role));
+        student.setAuthorities(List.of(student_role ));
+
 
         userDao.save(admin);
+        userDao.save(student);
     }
 }

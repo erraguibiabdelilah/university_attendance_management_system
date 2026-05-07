@@ -1,6 +1,6 @@
 package org.example.universityattendancemanagementsystem.security.services.facad;
 
-import org.example.universityattendancemanagementsystem.security.bean.User;
+import org.example.universityattendancemanagementsystem.bean.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;

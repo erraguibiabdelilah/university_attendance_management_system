@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.universityattendancemanagementsystem.security.bean.Role;
+import org.example.universityattendancemanagementsystem.bean.FaceEncoding;
+import org.example.universityattendancemanagementsystem.bean.Role;
 
 import java.util.Collection;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,6 +22,6 @@ public class UserDto {
     private String LastName;
     private String promo;
     private String username;
-    private String photo;
     private Collection<Role> authorities;
+    private List<FaceEncoding> encodings;
 }

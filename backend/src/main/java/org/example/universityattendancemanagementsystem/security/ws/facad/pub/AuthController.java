@@ -1,14 +1,14 @@
 package org.example.universityattendancemanagementsystem.security.ws.facad.pub;
 
 
-import org.example.universityattendancemanagementsystem.security.bean.User;
+import org.example.universityattendancemanagementsystem.bean.User;
 import org.example.universityattendancemanagementsystem.security.services.facad.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/auth/")
+@RequestMapping("api/uca/auth/")
 public class AuthController {
     private UserService userService;
 

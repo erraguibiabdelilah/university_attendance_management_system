@@ -1,7 +1,7 @@
 package org.example.universityattendancemanagementsystem.security.services.utils;
 
 
-import org.example.universityattendancemanagementsystem.security.bean.User;
+import org.example.universityattendancemanagementsystem.bean.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 

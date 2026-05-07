@@ -49,9 +49,10 @@ public class WebSecurityConfig {
                         // Endpoints publics - PAS besoin de token
                         .requestMatchers(
                                 // Authentification
-                                "/api/auth/**",
-                                "/api/auth/login/",
-                                "/api/auth/username/**",
+                                "/api/uca/auth/**",
+                                "/api/uca/auth/login/",
+                                "/api/uca/auth/sign-in/",
+                                "/api/uca/auth/username/**",
                                 // Documentation
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",

@@ -1,11 +1,10 @@
 package org.example.universityattendancemanagementsystem.security.services.impl;
 
-import org.example.universityattendancemanagementsystem.security.bean.User;
+import org.example.universityattendancemanagementsystem.bean.User;
 import org.example.universityattendancemanagementsystem.security.dao.UserDao;
 import org.example.universityattendancemanagementsystem.security.services.facad.RoleService;
 import org.example.universityattendancemanagementsystem.security.services.facad.UserService;
 import org.example.universityattendancemanagementsystem.security.services.utils.JwtUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

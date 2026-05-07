@@ -1,7 +1,7 @@
 package org.example.universityattendancemanagementsystem.security.services.facad;
 
 
-import org.example.universityattendancemanagementsystem.security.bean.Role;
+import org.example.universityattendancemanagementsystem.bean.Role;
 
 import java.util.Collection;
 import java.util.List;

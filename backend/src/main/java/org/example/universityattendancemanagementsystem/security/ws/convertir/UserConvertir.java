@@ -1,6 +1,6 @@
 package org.example.universityattendancemanagementsystem.security.ws.convertir;
 
-import org.example.universityattendancemanagementsystem.security.bean.User;
+import org.example.universityattendancemanagementsystem.bean.User;
 import org.example.universityattendancemanagementsystem.security.ws.dto.UserDto;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +13,9 @@ public class UserConvertir {
         bean.setFirstName(dto.getFirstName());
         bean.setLastName(dto.getLastName());
         bean.setPromo(dto.getPromo());
-        bean.setPhoto(dto.getPhoto());
         bean.setUsername(dto.getUsername());
         bean.setAuthorities(dto.getAuthorities());
+        bean.setEncodings(dto.getEncodings());
         return bean;
     }
 
@@ -25,9 +25,9 @@ public class UserConvertir {
         dto.setFirstName(bean.getFirstName());
         dto.setLastName(bean.getLastName());
         dto.setPromo(bean.getPromo());
-        dto.setPhoto(bean.getPhoto());
         dto.setUsername(bean.getUsername());
         dto.setAuthorities(bean.getAuthorities());
+        dto.setEncodings(bean.getEncodings());
         return dto;
     }
 

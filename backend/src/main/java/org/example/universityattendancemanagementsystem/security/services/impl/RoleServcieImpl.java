@@ -1,7 +1,7 @@
 package org.example.universityattendancemanagementsystem.security.services.impl;
 
 
-import org.example.universityattendancemanagementsystem.security.bean.Role;
+import org.example.universityattendancemanagementsystem.bean.Role;
 import org.example.universityattendancemanagementsystem.security.dao.RoleDao;
 import org.example.universityattendancemanagementsystem.security.services.facad.RoleService;
 import org.springframework.stereotype.Service;
