@@ -17,6 +17,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +35,13 @@ public class Absence {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id", nullable = false)
-    private Teacher teacher;
+    private User teacher;
 
     @Column(nullable = false)
     private String nomModule;
 
     @Column(nullable = false)
-    private String filiere;
+    private String filier;
 
     @Column(nullable = false)
     private String promo;
@@ -49,7 +50,7 @@ public class Absence {
     private String typeSeance;
 
     @Column(nullable = false)
-    private LocalDateTime date;
+    private LocalDate date;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

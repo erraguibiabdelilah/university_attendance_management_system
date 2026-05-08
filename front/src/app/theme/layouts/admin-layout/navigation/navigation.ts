@@ -44,12 +44,13 @@ export const NavigationItems: NavigationItem[] = [
     icon: 'icon-navigation',
     children: [
       {
-        id: 'Projects',
-        title: 'Projects',
+        id: '',
+        title: 'User Management',
         type: 'item',
-        url: '/projects',
+        url: '/users',
         classes: 'nav-item',
-        icon: 'chrome'
+        icon: 'chrome',
+        hidden: true
       },
       {
         id: 'Entities',
@@ -66,14 +67,6 @@ export const NavigationItems: NavigationItem[] = [
         url: '/attributes',
         classes: 'nav-item',
         icon: 'chrome'
-      },
-      {
-        id: 'manage-users',
-        title: 'Manage Users',
-        type: 'item',
-        url: '/admin/manage-users',
-        classes: 'nav-item',
-        icon: 'users'
       }
     ]
   }

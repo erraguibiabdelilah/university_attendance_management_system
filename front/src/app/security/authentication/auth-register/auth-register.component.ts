@@ -2,10 +2,8 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../shared/services/auth';
 import { User } from '../../../shared/models/user';
-import { AsyncLocalStorage } from 'node:async_hooks';
-import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Component({
   selector: 'app-auth-register',
@@ -42,7 +40,7 @@ export class AuthRegisterComponent {
   public initialiseItem() {
     this.connectedUser.username=this.registerForm.value.username?? '';
     this.connectedUser.password=this.registerForm.value.password?? '';
-    this.connectedUser.role='ROLE_USER';
+    this.connectedUser.role='STUDENT';
     this.item=this.connectedUser;
     console.log(this.item);
   }

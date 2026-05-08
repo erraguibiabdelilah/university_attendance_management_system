@@ -2,11 +2,8 @@ import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
-  // Skip token only for authentication endpoints that must be called anonymously
-  const isAnonymousAuthEndpoint =
-    req.url.includes('/auth/sign-in/') || req.url.includes('/auth/login/');
-
-  if (isAnonymousAuthEndpoint) {
+  // Ne pas ajouter le token aux routes auth
+  if (req.url.includes('/api/uca/auth')) {
     return next(req);
   }
 

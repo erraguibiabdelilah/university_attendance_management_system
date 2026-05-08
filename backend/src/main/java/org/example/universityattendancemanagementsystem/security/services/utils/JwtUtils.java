@@ -55,26 +55,19 @@ public class JwtUtils {
         return expiration.before(new Date());
     }
 
-
     private void addRolesClaim(UserDetails userDetails, Map<String, Object> claims) {
-
         if (userDetails == null || userDetails.getAuthorities() == null || userDetails.getAuthorities().isEmpty()) {
             return;
         }
 
-        String roles = "";
+        // Récupérer le premier (et unique) rôle comme String
+        String role = userDetails.getAuthorities()
+                .stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse("");
 
-        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
-
-        for (GrantedAuthority granted : authorities) {
-            roles += granted.getAuthority() + ",";
-        }
-
-        if (!roles.isEmpty()) {
-            roles = roles.substring(0, roles.length() - 1);
-        }
-
-        claims.put("roles", "[" + roles + "]");
+        claims.put("role", role);
     }
 
     public void registerAuthenticationTokenInContext(UserDetails userDetails,

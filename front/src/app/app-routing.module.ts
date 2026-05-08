@@ -5,16 +5,14 @@ import { RouterModule, Routes } from '@angular/router';
 // Project import
 import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.component';
 import { GuestLayoutComponent } from './theme/layouts/guest-layout/guest-layout.component';
-import { Projects } from './view/projects/listeOfProject/projects';
 import { Entitys } from './view/entitys/listEntitys/entitys/entitys';
-import { authGuard } from './security/guards/auth.guard';
-import { adminGuard } from './security/guards/role.guard';
+import { Users } from './view/users/users/users';
+
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
-    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -27,8 +25,8 @@ const routes: Routes = [
       },
 
       {
-        path: 'projects',
-        component: Projects
+        path: 'users',
+        component: Users
       },
 
       {
@@ -39,11 +37,6 @@ const routes: Routes = [
       {
         path: 'attributes',
         component: Entitys
-      },
-      {
-        path: 'admin/manage-users',
-        canActivate: [adminGuard],
-        loadComponent: () => import('./demo/admin/manage-users/manage-users.component').then((c) => c.ManageUsersComponent)
       }
     ]
   },
@@ -55,6 +48,10 @@ const routes: Routes = [
         path: 'login',
         loadComponent: () => import('./security/authentication/auth-login/auth-login.component').then((c) => c.AuthLoginComponent)
       },
+      {
+        path: 'register',
+        loadComponent: () => import('./security/authentication/auth-register/auth-register.component').then((c) => c.AuthRegisterComponent)
+      }
     ]
   }
 ];

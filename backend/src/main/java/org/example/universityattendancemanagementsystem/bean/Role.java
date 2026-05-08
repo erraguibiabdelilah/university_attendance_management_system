@@ -1,7 +1,15 @@
 package org.example.universityattendancemanagementsystem.bean;
 
-public enum Role {
-    ADMIN,
-    TEACHER,
-    STUDENT
+import org.jspecify.annotations.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
+        ADMIN,
+        TEACHER,
+        STUDENT;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

@@ -13,7 +13,7 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['projects/**/*']
+    ignores: ['users/**/*']
   },
   ...compat
     .extends(

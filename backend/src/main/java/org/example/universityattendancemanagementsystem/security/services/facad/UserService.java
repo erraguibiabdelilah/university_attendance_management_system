@@ -11,7 +11,9 @@ public interface UserService extends UserDetailsService {
     public User save(User user );
 
 
-    List<User> findAll();
+    User update(User user);
 
     void deleteById(Long id);
+
+    List<User> findAll();
 }

@@ -1,8 +1,12 @@
+// project import
 import { Component, inject } from '@angular/core';
+
 import { Router, RouterModule } from '@angular/router';
+
 import { User } from 'src/app/shared/models/user';
-import { AuthService } from 'src/app/security/services/auth.service';
+import { AuthService } from 'src/app/shared/services/auth';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NavigationItems } from '../../../theme/layouts/admin-layout/navigation/navigation';
 
 @Component({
   selector: 'app-auth-login',
@@ -23,11 +27,6 @@ export class AuthLoginComponent {
   });
 
   public login() {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
-
     this.itemInitialisation();
     this.service.login().subscribe({
       next: (token) => {
@@ -38,16 +37,25 @@ export class AuthLoginComponent {
             this.connectedUser = data;
             this.connectedUser.password = undefined;
             localStorage.setItem('user', JSON.stringify(this.connectedUser));
+            this.adminRoutes(this.connectedUser.role);
             this.router.navigate(['/dashboard']);
           }
         });
-      },
-      error: (err) => {
-        console.error('Login failed (401 likely means invalid credentials or mismatched payload):', err);
       }
     });
   }
 
+  adminRoutes(role: string) {
+    const isAdmin = role === 'ADMIN';
+
+    NavigationItems.forEach((group) => {
+      group.children?.forEach((item) => {
+        if (item.url === '/users') {
+          item.hidden = !isAdmin; // 👈 logique correcte
+        }
+      });
+    });
+  }
   public getUserByUsesrname(username: string) {
     return this.service.loadUserByUsername(username);
   }
@@ -55,7 +63,6 @@ export class AuthLoginComponent {
   itemInitialisation() {
     this.user.username = this.loginForm.value.username ?? '';
     this.user.password = this.loginForm.value.password ?? '';
-    this.user.role = 'ROLE_USER';
     this.item = this.user;
     console.log(this.item);
   }
