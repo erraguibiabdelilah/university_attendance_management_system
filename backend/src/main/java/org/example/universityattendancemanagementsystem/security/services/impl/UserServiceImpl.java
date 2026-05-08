@@ -1,6 +1,7 @@
 package org.example.universityattendancemanagementsystem.security.services.impl;
 
 import org.example.universityattendancemanagementsystem.bean.User;
+import org.example.universityattendancemanagementsystem.bean.Role;
 import org.example.universityattendancemanagementsystem.security.dao.UserDao;
 import org.example.universityattendancemanagementsystem.security.services.facad.UserService;
 import org.example.universityattendancemanagementsystem.security.services.utils.JwtUtils;
@@ -172,5 +173,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return dao.findAll();
+    }
+
+    @Override
+    public List<User> findStudentsByFiliereAndPromo(String filiere, String promo) {
+        return dao.findByFilierAndPromoAndRole(filiere, promo, Role.STUDENT);
     }
 }
