@@ -6,6 +6,7 @@ import { forkJoin, of } from 'rxjs';
 import { AbsenceService } from '../../shared/service/absence.service';
 import { AbsenceDto } from '../../shared/model/absence.model';
 import { AbsenceDetailDto } from '../../shared/model/absence-detail.model';
+import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-absence',
@@ -19,7 +20,7 @@ export class AbsenceComponent {
   typeSeances: string[] = ['COURS', 'TD', 'TP'];
 
   today: string = new Date().toISOString().split('T')[0];
-  students: any[] = [];
+  students: User[] = [];
   absenceDetails: AbsenceDetailDto[] = [];
   isLoading = false;
   successMessage = '';
@@ -30,7 +31,6 @@ export class AbsenceComponent {
   promo = this.promos[0];
   filiere = this.filieres[0];
   typeSeance = this.typeSeances[0];
-  createdAt = new Date().toISOString();
 
   constructor(private readonly absenceService: AbsenceService) {
     this.teacherId = this.getTeacherIdFromStorage();
@@ -89,7 +89,7 @@ export class AbsenceComponent {
       promo: this.promo,
       typeSeance: this.typeSeance,
       date: this.today,
-      createdAt: this.createdAt
+      createdAt: new Date().toISOString()
     };
 
     this.isLoading = true;

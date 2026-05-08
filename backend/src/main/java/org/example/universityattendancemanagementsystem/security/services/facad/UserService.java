@@ -16,4 +16,6 @@ public interface UserService extends UserDetailsService {
     void deleteById(Long id);
 
     List<User> findAll();
+
+    List<User> findStudentsByFiliereAndPromo(String filiere, String promo);
 }
