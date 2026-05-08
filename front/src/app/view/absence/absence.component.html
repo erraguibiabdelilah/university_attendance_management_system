@@ -1,0 +1,87 @@
+<div class="container py-4">
+  <h3 class="mb-4">Gestion des absences</h3>
+
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Nom du module</label>
+          <input type="text" class="form-control" [(ngModel)]="nomModule" name="nomModule" required />
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Promo</label>
+          <select class="form-select" [(ngModel)]="promo" name="promo">
+            <option *ngFor="let p of promos" [value]="p">{{ p }}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Filière</label>
+          <select class="form-select" [(ngModel)]="filiere" name="filiere">
+            <option *ngFor="let f of filieres" [value]="f">{{ f }}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Type de séance</label>
+          <select class="form-select" [(ngModel)]="typeSeance" name="typeSeance">
+            <option *ngFor="let t of typeSeances" [value]="t">{{ t }}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Date</label>
+          <input type="date" class="form-control" [value]="today" readonly />
+        </div>
+
+        <input type="hidden" [(ngModel)]="createdAt" name="createdAt" />
+
+        <div class="col-12 d-flex align-items-center gap-2 mt-2">
+          <button class="btn btn-primary" type="button" (click)="onSearch()" [disabled]="isLoading">
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Rechercher
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm" *ngIf="students.length > 0">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle mb-3">
+          <thead class="table-light">
+            <tr>
+              <th>CNE</th>
+              <th>Prénom</th>
+              <th>Nom</th>
+              <th class="text-center">Absent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students; let i = index">
+              <td>{{ student.cne }}</td>
+              <td>{{ student.firstName }}</td>
+              <td>{{ student.lastName }}</td>
+              <td class="text-center">
+                <input type="checkbox" [(ngModel)]="absenceDetails[i].estAbsent" [name]="'estAbsent' + i" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button class="btn btn-success" type="button" (click)="onSave()" [disabled]="students.length === 0 || isLoading">
+        Enregistrer
+      </button>
+    </div>
+  </div>
+</div>
