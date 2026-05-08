@@ -7,6 +7,7 @@ import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.compon
 import { GuestLayoutComponent } from './theme/layouts/guest-layout/guest-layout.component';
 import { Entitys } from './view/entitys/listEntitys/entitys/entitys';
 import { Users } from './view/users/users/users';
+import { AbsenceComponent } from './view/absence/absence.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: 'attributes',
         component: Entitys
+      },
+      {
+        path: 'attendance-management',
+        component: AbsenceComponent
       }
     ]
   },

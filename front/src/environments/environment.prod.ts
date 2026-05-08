@@ -4,5 +4,6 @@ export const environment = {
   name: 'production',
   appVersion: packageInfo.version,
   production: true,
-  apiUrl: 'http://ipv4/api/api_backend/'
+  apiUrl: 'http://ipv4/api/api_backend/',
+  attendanceManagementPath: '/attendance-management'
 };
