@@ -1,3 +1,5 @@
+import { AbsenceDetailDto } from './absence-detail.model';
+
 export interface AbsenceDto {
   id?: number;
   teacherId: number;
