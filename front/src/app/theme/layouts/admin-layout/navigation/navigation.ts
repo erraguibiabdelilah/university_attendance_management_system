@@ -1,3 +1,4 @@
+import { environment } from '../../../../../environments/environment';
 export interface NavigationItem {
   id: string;
   title: string;
@@ -67,6 +68,14 @@ export const NavigationItems: NavigationItem[] = [
         url: '/attributes',
         classes: 'nav-item',
         icon: 'chrome'
+      },
+      {
+        id: 'AttendanceManagement',
+        title: 'Attendance Management',
+        type: 'item',
+        url: environment.attendanceManagementPath,
+        classes: 'nav-item',
+        icon: 'book'
       }
     ]
   }
