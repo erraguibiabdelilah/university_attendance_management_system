@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { forkJoin, of } from 'rxjs';
@@ -17,22 +17,24 @@ import { User } from '../../shared/models/user';
 export class AbsenceComponent {
   promos: string[] = Array.from({ length: 7 }, (_, i) => (2020 + i).toString());
   filieres: string[] = ['IRISI', 'SIT', 'GC'];
-  typeSeances: string[] = ['COURS', 'TD', 'TP'];
 
-  today: string = new Date().toISOString().split('T')[0];
+  date: string = new Date().toISOString().split('T')[0];
   students: User[] = [];
   absenceDetails: AbsenceDetailDto[] = [];
   isLoading = false;
   successMessage = '';
   errorMessage = '';
+  private readonly absenceService = inject(AbsenceService);
+
   teacherId: number;
+  currentAbsence?: AbsenceDto;
 
   nomModule = '';
   promo = this.promos[0];
   filiere = this.filieres[0];
-  typeSeance = this.typeSeances[0];
+  private readonly defaultTypeSeance = 'COURS';
 
-  constructor(private readonly absenceService: AbsenceService) {
+  constructor() {
     this.teacherId = this.getTeacherIdFromStorage();
   }
 
@@ -50,24 +52,45 @@ export class AbsenceComponent {
     }
   }
 
-  onSearch(): void {
+  get isAttendanceStep(): boolean {
+    return !!this.currentAbsence?.id;
+  }
+
+  onNext(): void {
     this.successMessage = '';
     this.errorMessage = '';
-    this.isLoading = true;
+    this.students = [];
+    this.absenceDetails = [];
+    this.currentAbsence = undefined;
 
-    this.absenceService.getStudentsByFiliereAndPromo(this.filiere, this.promo).subscribe({
-      next: (data) => {
-        this.students = data ?? [];
-        this.absenceDetails = this.students.map((s) => ({
-          studentId: s.id,
-          estAbsent: false
-        }));
-        this.isLoading = false;
+    if (!this.isAbsenceFormValid()) {
+      this.errorMessage = 'Veuillez renseigner la filière, le module, la promo et la date.';
+      return;
+    }
+
+    const absence: AbsenceDto = {
+      teacherId: this.teacherId,
+      nomModule: this.nomModule.trim(),
+      filiere: this.filiere,
+      promo: this.promo,
+      typeSeance: this.defaultTypeSeance,
+      date: this.date
+    };
+
+    this.isLoading = true;
+    this.absenceService.saveAbsence(absence).subscribe({
+      next: (savedAbsence) => {
+        if (!savedAbsence.id) {
+          this.errorMessage = 'Absence enregistrée sans identifiant retourné.';
+          this.isLoading = false;
+          return;
+        }
+
+        this.currentAbsence = savedAbsence;
+        this.loadStudentsForAttendance();
       },
       error: () => {
-        this.students = [];
-        this.absenceDetails = [];
-        this.errorMessage = 'Erreur lors du chargement des étudiants.';
+        this.errorMessage = 'Erreur lors de l’enregistrement de l’absence.';
         this.isLoading = false;
       }
     });
@@ -77,54 +100,64 @@ export class AbsenceComponent {
     this.successMessage = '';
     this.errorMessage = '';
 
-    if (!this.nomModule || this.students.length === 0) {
-      this.errorMessage = 'Veuillez renseigner le module et rechercher des étudiants.';
+    if (!this.currentAbsence?.id || this.students.length === 0) {
+      this.errorMessage = 'Veuillez créer une absence et charger les étudiants avant d’enregistrer.';
       return;
     }
 
-    const absence: AbsenceDto = {
-      teacherId: this.teacherId,
-      nomModule: this.nomModule,
-      filiere: this.filiere,
-      promo: this.promo,
-      typeSeance: this.typeSeance,
-      date: this.today,
-      createdAt: new Date().toISOString()
-    };
-
     this.isLoading = true;
-    this.absenceService.saveAbsence(absence).subscribe({
-      next: (savedAbsence) => {
-        const absenceId = savedAbsence.id;
+    const detailRequests = this.absenceDetails.map((detail) =>
+      this.absenceService.saveAbsenceDetail({
+        ...detail,
+        absenceId: this.currentAbsence?.id
+      })
+    );
 
-        if (!absenceId) {
-          this.errorMessage = 'Absence enregistrée sans identifiant retourné.';
-          this.isLoading = false;
-          return;
-        }
+    const saveDetails$ = detailRequests.length > 0 ? forkJoin(detailRequests) : of([]);
 
-        const detailRequests = this.absenceDetails.map((detail) =>
-          this.absenceService.saveAbsenceDetail({
-            ...detail,
-            absenceId
-          })
-        );
-
-        const saveDetails$ = detailRequests.length > 0 ? forkJoin(detailRequests) : of([]);
-
-        saveDetails$.subscribe({
-          next: () => {
-            this.successMessage = 'Absence et détails enregistrés avec succès.';
-            this.isLoading = false;
-          },
-          error: () => {
-            this.errorMessage = 'Erreur lors de l’enregistrement des détails d’absence.';
-            this.isLoading = false;
-          }
-        });
+    saveDetails$.subscribe({
+      next: () => {
+        this.successMessage = 'Les détails de présence ont été enregistrés avec succès.';
+        this.isLoading = false;
       },
       error: () => {
-        this.errorMessage = 'Erreur lors de l’enregistrement de l’absence.';
+        this.errorMessage = 'Erreur lors de l’enregistrement des détails d’absence.';
+        this.isLoading = false;
+      }
+    });
+  }
+
+  resetWorkflow(): void {
+    this.successMessage = '';
+    this.errorMessage = '';
+    this.students = [];
+    this.absenceDetails = [];
+    this.currentAbsence = undefined;
+  }
+
+  private isAbsenceFormValid(): boolean {
+    return !!this.filiere && !!this.promo && !!this.date && this.nomModule.trim().length > 0 && this.teacherId > 0;
+  }
+
+  private loadStudentsForAttendance(): void {
+    this.absenceService.getStudentsByFiliereAndPromo(this.filiere, this.promo).subscribe({
+      next: (data) => {
+        this.students = data ?? [];
+        this.absenceDetails = this.students.map((student) => ({
+          studentId: student.id,
+          estAbsent: false
+        }));
+        this.isLoading = false;
+
+        if (this.students.length === 0) {
+          this.errorMessage = 'Aucun étudiant trouvé pour cette filière et cette promo.';
+        }
+      },
+      error: () => {
+        this.students = [];
+        this.absenceDetails = [];
+        this.currentAbsence = undefined;
+        this.errorMessage = 'Absence créée, mais erreur lors du chargement des étudiants.';
         this.isLoading = false;
       }
     });
