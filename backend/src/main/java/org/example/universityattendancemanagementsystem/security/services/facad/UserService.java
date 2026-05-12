@@ -17,5 +17,5 @@ public interface UserService extends UserDetailsService {
 
     List<User> findAll();
 
-    List<User> findStudentsByFiliereAndPromo(String filiere, String promo);
+    List<User> findUserByFilierAndPromo(String filier, String promo);
 }

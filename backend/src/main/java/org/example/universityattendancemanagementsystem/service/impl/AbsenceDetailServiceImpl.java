@@ -3,7 +3,6 @@ package org.example.universityattendancemanagementsystem.service.impl;
 import org.example.universityattendancemanagementsystem.bean.Absence;
 import org.example.universityattendancemanagementsystem.bean.AbsenceDetail;
 import org.example.universityattendancemanagementsystem.bean.User;
-import org.example.universityattendancemanagementsystem.bean.Role;
 import org.example.universityattendancemanagementsystem.dao.AbsenceDetailDao;
 import org.example.universityattendancemanagementsystem.security.dao.UserDao;
 import org.example.universityattendancemanagementsystem.dao.AbsenceDao;
@@ -54,40 +53,15 @@ public class AbsenceDetailServiceImpl implements AbsenceDetailService {
 
     @Override
     public AbsenceDetailDto save(AbsenceDetailDto dto) {
-        validateAbsenceDetail(dto);
-
         Absence absence = absenceDao.findById(dto.getAbsenceId())
-                .orElseThrow(() -> new IllegalArgumentException("Absence non trouvée avec l'id: " + dto.getAbsenceId()));
+                .orElseThrow(() -> new RuntimeException("Absence non trouvée avec l'id: " + dto.getAbsenceId()));
 
         User student = userDao.findById(dto.getStudentId())
-                .orElseThrow(() -> new IllegalArgumentException("Étudiant non trouvé avec l'id: " + dto.getStudentId()));
-
-        validateStudentMatchesAbsence(absence, student);
+                .orElseThrow(() -> new RuntimeException("Étudiant non trouvé avec l'id: " + dto.getStudentId()));
 
         AbsenceDetail detail = absenceDetailConvertir.toBean(dto, absence, student);
         AbsenceDetail saved = absenceDetailDao.save(detail);
         return absenceDetailConvertir.toDto(saved);
-    }
-
-    private void validateAbsenceDetail(AbsenceDetailDto dto) {
-        if (dto == null) {
-            throw new IllegalArgumentException("Le détail d'absence est obligatoire.");
-        }
-        if (dto.getAbsenceId() == null) {
-            throw new IllegalArgumentException("L'absence est obligatoire.");
-        }
-        if (dto.getStudentId() == null) {
-            throw new IllegalArgumentException("L'étudiant est obligatoire.");
-        }
-    }
-
-    private void validateStudentMatchesAbsence(Absence absence, User student) {
-        if (student.getRole() != Role.STUDENT) {
-            throw new IllegalArgumentException("Seuls les étudiants peuvent être associés à une absence.");
-        }
-        if (!absence.getFilier().equals(student.getFilier()) || !absence.getPromo().equals(student.getPromo())) {
-            throw new IllegalArgumentException("L'étudiant ne correspond pas à la filière et à la promo de l'absence.");
-        }
     }
 
     @Override

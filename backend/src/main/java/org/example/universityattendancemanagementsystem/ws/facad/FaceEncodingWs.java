@@ -1,47 +1,68 @@
 package org.example.universityattendancemanagementsystem.ws.facad;
 
+import lombok.RequiredArgsConstructor;
 import org.example.universityattendancemanagementsystem.bean.FaceEncoding;
 import org.example.universityattendancemanagementsystem.service.facad.FaceEncodingService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.universityattendancemanagementsystem.ws.dto.RecognitionRequest;
+import org.example.universityattendancemanagementsystem.ws.dto.SaveEncodingRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/uca/encodings")
+@RequestMapping("/api/face")
+@RequiredArgsConstructor
+@CrossOrigin("*")
 public class FaceEncodingWs {
 
-    @Autowired
-    private FaceEncodingService service;
+    private final FaceEncodingService service;
 
-    // Ajouter encoding
-    @PostMapping("/add")
-    public ResponseEntity<?> addEncoding(@RequestParam Long userId,
-                                         @RequestParam String encoding,
-                                         @RequestParam(required = false) String imagePath) {
+    @PostMapping("/save-encoding")
+    public ResponseEntity<?> saveEncoding(@RequestBody SaveEncodingRequest req) {
+
+        FaceEncoding saved = service.saveEncoding(
+                req.getUserId(),
+                req.getEncoding(),
+                req.getPhotoIndex()
+        );
+
+        return ResponseEntity.ok(saved);
+    }
+
+    @PostMapping("/recognize")
+    public ResponseEntity<?> recognize(@RequestBody RecognitionRequest req) {
+
+        Long userId = service.recognizeFace(req.getEncoding());
+
+        if (userId == null) {
+
+            return ResponseEntity.status(404)
+                    .body(Map.of("message", "Visage inconnu"));
+        }
+
+        return ResponseEntity.ok(Map.of(
+                "userId", userId,
+                "message", "Visage reconnu"
+        ));
+    }
+
+    @GetMapping("/status/{userId}")
+    public ResponseEntity<?> getStatus(@PathVariable Long userId) {
 
         return ResponseEntity.ok(
-                service.saveEncoding(userId, encoding, imagePath)
+                Map.of("complete",
+                        service.isRegistrationComplete(userId))
         );
     }
 
-    // Récupérer encodings d’un user
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<FaceEncoding>> getUserEncodings(@PathVariable Long userId) {
-        return ResponseEntity.ok(service.getEncodingsByUser(userId));
-    }
+    @DeleteMapping("/reset/{userId}")
+    public ResponseEntity<?> reset(@PathVariable Long userId) {
 
-    // Supprimer encoding
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        service.deleteEncoding(id);
-        return ResponseEntity.ok("Deleted");
-    }
+        service.resetEncodings(userId);
 
-    // tous les encodings
-    @GetMapping("/")
-    public ResponseEntity<List<FaceEncoding>> getAll() {
-        return ResponseEntity.ok(service.getAll());
+        return ResponseEntity.ok(
+                Map.of("message", "Reset effectué")
+        );
     }
 }

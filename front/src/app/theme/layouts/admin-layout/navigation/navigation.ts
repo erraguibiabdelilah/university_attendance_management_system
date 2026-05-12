@@ -1,4 +1,3 @@
-import { environment } from '../../../../../environments/environment';
 export interface NavigationItem {
   id: string;
   title: string;
@@ -54,6 +53,15 @@ export const NavigationItems: NavigationItem[] = [
         hidden: true
       },
       {
+        id: '',
+        title: 'Attendance Management',
+        type: 'item',
+        url: '/attendance',
+        classes: 'nav-item',
+        icon: 'chrome',
+
+      },
+      {
         id: 'Entities',
         title: 'Entities',
         type: 'item',
@@ -68,14 +76,6 @@ export const NavigationItems: NavigationItem[] = [
         url: '/attributes',
         classes: 'nav-item',
         icon: 'chrome'
-      },
-      {
-        id: 'AttendanceManagement',
-        title: 'Attendance Management',
-        type: 'item',
-        url: environment.attendanceManagementPath,
-        classes: 'nav-item',
-        icon: 'book'
       }
     ]
   }

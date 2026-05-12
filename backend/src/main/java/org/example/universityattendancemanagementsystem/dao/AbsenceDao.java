@@ -23,4 +23,6 @@ public interface AbsenceDao extends JpaRepository<Absence, Long> {
             String filier,
             LocalDate date
     );
+
+
 }

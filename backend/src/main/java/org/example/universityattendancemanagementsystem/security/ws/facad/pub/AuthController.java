@@ -19,12 +19,10 @@ public class AuthController {
         return userService.signIn(user);
     }
 
-
     @GetMapping("username/{username}")
     public UserDetails loadUserByUsername(@PathVariable String username) throws UsernameNotFoundException {
         return userService.loadUserByUsername(username);
     }
-
 
     @PostMapping("login/")
     public User save(@RequestBody  User user) {
@@ -44,10 +42,13 @@ public class AuthController {
         return userService.findAll();
     }
 
-
-
-
+    @GetMapping("filier/{filier}/promo/{promo}")
+    public List<User> findUserByFilierAndPromo(@PathVariable String filier,@PathVariable String promo) {
+        return userService.findUserByFilierAndPromo(filier, promo);
+    }
     public AuthController(UserService userService){
         this.userService=userService;
     }
+
+
 }

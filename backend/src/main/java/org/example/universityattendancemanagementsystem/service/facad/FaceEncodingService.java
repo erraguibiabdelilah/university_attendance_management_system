@@ -7,14 +7,14 @@ import java.util.List;
 public interface FaceEncodingService {
 
     // Ajouter un encoding
-    FaceEncoding saveEncoding(Long userId, String encoding, String imagePath);
+    FaceEncoding saveEncoding(Long userId, String encoding, Integer photoIndex);
 
-    // Récupérer encodings d’un user
-    List<FaceEncoding> getEncodingsByUser(Long userId);
+    boolean isRegistrationComplete(Long userId);
 
-    // Supprimer encoding
-    void deleteEncoding(Long id);
+    List<FaceEncoding> getUserEncodings(Long userId);
 
-    // Tous les encodings
-    List<FaceEncoding> getAll();
+    void resetEncodings(Long userId);
+
+    Long recognizeFace(String encoding);
+
 }

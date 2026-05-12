@@ -1,25 +1,22 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
+
   // Ne pas ajouter le token aux routes auth
-  if (req.url.includes('/api/uca/auth')) {
+  if (req.url.includes('/api/uca/auth/login')) {
     return next(req);
   }
 
-  const storedToken = localStorage.getItem('token');
-  const token = storedToken && storedToken !== 'null' && storedToken !== 'undefined' ? storedToken.trim() : '';
+  const token = localStorage.getItem('token');
 
-  if (!token) {
-    return next(req);
-  }
+  if (token && token !== 'null' && token !== 'undefined') {
 
-  const authorization = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-
-  return next(
-    req.clone({
+    req = req.clone({
       setHeaders: {
-        Authorization: authorization
+        Authorization: `Bearer ${token}`
       }
-    })
-  );
+    });
+  }
+
+  return next(req);
 };

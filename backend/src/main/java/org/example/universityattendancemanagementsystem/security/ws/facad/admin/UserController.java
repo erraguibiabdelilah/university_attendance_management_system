@@ -27,12 +27,6 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/students/{filiere}/{promo}")
-    public List<User> findStudentsByFiliereAndPromo(@PathVariable String filiere,
-                                                    @PathVariable String promo) {
-        return userService.findStudentsByFiliereAndPromo(filiere, promo);
-    }
-
     public UserController(UserService userService){
         this.userService=userService;
     }

@@ -1,7 +1,10 @@
 package org.example.universityattendancemanagementsystem.ws.facad;
 
+import org.example.universityattendancemanagementsystem.service.facad.AbsenceDetailService;
+import org.example.universityattendancemanagementsystem.ws.dto.AbsenceDetailDto;
 import org.example.universityattendancemanagementsystem.ws.dto.AbsenceDto;
 import org.example.universityattendancemanagementsystem.service.facad.AbsenceService;
+import org.example.universityattendancemanagementsystem.ws.dto.AbsencePyloadDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +19,12 @@ import java.util.Optional;
 public class AbsenceWs {
 
     private final AbsenceService absenceService;
+    private final AbsenceDetailService absenceDetailService;
 
-    public AbsenceWs(AbsenceService absenceService) {
+
+    public AbsenceWs(AbsenceService absenceService , AbsenceDetailService absenceDetailService) {
         this.absenceService = absenceService;
+        this.absenceDetailService=absenceDetailService;
     }
 
     @GetMapping
@@ -53,8 +59,12 @@ public class AbsenceWs {
     }
 
     @PostMapping
-    public ResponseEntity<AbsenceDto> save(@RequestBody AbsenceDto dto) {
-        return ResponseEntity.ok(absenceService.save(dto));
+    public int save(@RequestBody AbsencePyloadDto pyload) {
+        AbsenceDto  savedAbsence = absenceService.save(pyload.getAbsence());
+        for (AbsenceDetailDto elmt : pyload.getDetails()) {
+        elmt.setAbsenceId(savedAbsence.getId());
+        absenceDetailService.save(elmt); }
+         return 1;
     }
 
     @DeleteMapping("delete/{id}")
@@ -62,4 +72,5 @@ public class AbsenceWs {
         absenceService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
 }
