@@ -52,6 +52,8 @@
 
     const video = document.getElementById("video");
 
+    const USER_ID = 1;
+
     let currentPhoto = 1;
 
     const encodings = [];
@@ -79,6 +81,14 @@
 
         try{
 
+            if(currentPhoto > 3){
+                throw new Error("Les 3 photos sont déjà capturées");
+            }
+
+            if(!video.videoWidth || !video.videoHeight){
+                throw new Error("Camera non prête");
+            }
+
             const canvas = document.createElement("canvas");
 
             canvas.width = video.videoWidth;
@@ -104,7 +114,7 @@
                     body:JSON.stringify({
                         frame:base64,
                         photoIndex:currentPhoto,
-                        userId:1
+                        userId:USER_ID
                     })
                 }
             );
@@ -138,7 +148,7 @@
                         "Content-Type":"application/json"
                     },
                     body:JSON.stringify({
-                        userId:1,
+                        userId:USER_ID,
                         encoding:pyData.encoding,
                         photoIndex:currentPhoto
                     })
@@ -147,7 +157,9 @@
 
             if(!javaResponse.ok){
 
-                throw new Error("Erreur Spring Boot");
+                const err = await javaResponse.json().catch(() => ({}));
+
+                throw new Error(err.detail || err.message || "Erreur Spring Boot");
             }
 
             const javaData = await javaResponse.json();

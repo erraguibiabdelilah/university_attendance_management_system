@@ -8,13 +8,11 @@ import org.example.universityattendancemanagementsystem.bean.User;
 import org.example.universityattendancemanagementsystem.dao.FaceEncodingDao;
 import org.example.universityattendancemanagementsystem.security.dao.UserDao;
 import org.example.universityattendancemanagementsystem.service.facad.FaceEncodingService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class FaceEncodingServiceImpl implements FaceEncodingService {
@@ -23,12 +21,19 @@ public class FaceEncodingServiceImpl implements FaceEncodingService {
     private final UserDao userRepository;
 
     private static final int MAX_PHOTOS = 3;
+    private static final int ENCODING_SIZE = 128;
+    private static final double MATCH_THRESHOLD = 0.6;
 
     @Override
     public FaceEncoding saveEncoding(Long userId, String encodingJson, Integer photoIndex) {
+        validateSaveRequest(userId, encodingJson, photoIndex);
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
+
+        if (repository.existsByUserAndPhotoIndex(user, photoIndex)) {
+            throw new IllegalStateException("Un encoding existe déjà pour cette photo.");
+        }
 
         if (repository.countByUser(user) >= MAX_PHOTOS) {
             throw new IllegalStateException("Maximum atteint.");
@@ -86,7 +91,7 @@ public class FaceEncodingServiceImpl implements FaceEncodingService {
 
             double distance = calculateDistance(target, dbEncoding);
 
-            if (distance < 0.6 && distance < minDistance) {
+            if (distance < MATCH_THRESHOLD && distance < minDistance) {
 
                 minDistance = distance;
 
@@ -101,16 +106,45 @@ public class FaceEncodingServiceImpl implements FaceEncodingService {
     // UTILITIES
     // ===============================
 
+    private void validateSaveRequest(Long userId, String encodingJson, Integer photoIndex) {
+        if (userId == null || userId <= 0) {
+            throw new IllegalArgumentException("userId invalide.");
+        }
+
+        if (photoIndex == null || photoIndex < 1 || photoIndex > MAX_PHOTOS) {
+            throw new IllegalArgumentException("photoIndex doit être entre 1 et 3.");
+        }
+
+        parseEncoding(encodingJson);
+    }
+
     private double[] parseEncoding(String json) {
+        if (json == null || json.isBlank()) {
+            throw new IllegalArgumentException("Encoding vide.");
+        }
 
-        json = json.replace("[", "").replace("]", "");
+        String normalized = json.trim();
 
-        return Arrays.stream(json.split(","))
+        if (!normalized.startsWith("[") || !normalized.endsWith("]")) {
+            throw new IllegalArgumentException("Encoding JSON invalide.");
+        }
+
+        double[] values = Arrays.stream(normalized.substring(1, normalized.length() - 1).split(","))
+                .map(String::trim)
                 .mapToDouble(Double::parseDouble)
                 .toArray();
+
+        if (values.length != ENCODING_SIZE) {
+            throw new IllegalArgumentException("Encoding doit contenir 128 valeurs.");
+        }
+
+        return values;
     }
 
     private double calculateDistance(double[] a, double[] b) {
+        if (a.length != b.length) {
+            throw new IllegalArgumentException("Les encodings doivent avoir la même dimension.");
+        }
 
         double sum = 0;
 
