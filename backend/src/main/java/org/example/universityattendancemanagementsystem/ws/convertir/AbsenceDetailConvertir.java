@@ -31,6 +31,8 @@ public class AbsenceDetailConvertir {
                 .studentLastName(detail.getStudent().getLastName())
                 .studentCne(detail.getStudent().getCne())
                 .estAbsent(detail.isEstAbsent())
+                .nomModule(detail.getAbsence().getNomModule())
+                .date(detail.getAbsence().getDate() != null ? detail.getAbsence().getDate().toString() : null)
                 .build();
     }
 

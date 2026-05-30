@@ -1,158 +1,135 @@
 package org.example.universityattendancemanagementsystem.service.impl;
 
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.universityattendancemanagementsystem.bean.FaceEncoding;
 import org.example.universityattendancemanagementsystem.bean.User;
 import org.example.universityattendancemanagementsystem.dao.FaceEncodingDao;
+
 import org.example.universityattendancemanagementsystem.security.dao.UserDao;
 import org.example.universityattendancemanagementsystem.service.facad.FaceEncodingService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FaceEncodingServiceImpl implements FaceEncodingService {
 
-    private final FaceEncodingDao repository;
-    private final UserDao userRepository;
+    private static final int EXPECTED_DIMENSIONS = 128;
 
-    private static final int MAX_PHOTOS = 3;
-    private static final int ENCODING_SIZE = 128;
-    private static final double MATCH_THRESHOLD = 0.6;
+    private final FaceEncodingDao faceEncodingDao;
+    private final UserDao userDao;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Override
-    public FaceEncoding saveEncoding(Long userId, String encodingJson, Integer photoIndex) {
-        validateSaveRequest(userId, encodingJson, photoIndex);
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
-
-        if (repository.existsByUserAndPhotoIndex(user, photoIndex)) {
-            throw new IllegalStateException("Un encoding existe déjà pour cette photo.");
+    private List<Double> parseEncoding(String encodingRaw) {
+        if (encodingRaw == null || encodingRaw.trim().isEmpty()) {
+            throw new IllegalArgumentException("L'encoding ne peut pas être null ou vide");
         }
-
-        if (repository.countByUser(user) >= MAX_PHOTOS) {
-            throw new IllegalStateException("Maximum atteint.");
+        String cleaned = encodingRaw.trim();
+        try {
+            if (cleaned.startsWith("[")) {
+                return objectMapper.readValue(cleaned, new TypeReference<List<Double>>() {});
+            } else {
+                throw new IllegalArgumentException("Format invalide : doit commencer par '['");
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Impossible de parser l'encoding JSON", e);
         }
-
-        FaceEncoding fe = new FaceEncoding();
-
-        fe.setUser(user);
-        fe.setEncoding(encodingJson);
-        fe.setPhotoIndex(photoIndex);
-
-        return repository.save(fe);
     }
 
-    @Override
-    public boolean isRegistrationComplete(Long userId) {
-
-        User user = userRepository.findById(userId).orElseThrow();
-
-        return repository.countByUser(user) == MAX_PHOTOS;
+    private void validateDimensions(List<Double> encoding) {
+        if (encoding.size() != EXPECTED_DIMENSIONS) {
+            throw new IllegalArgumentException(
+                    "L'encoding doit avoir " + EXPECTED_DIMENSIONS + " dimensions, reçu : " + encoding.size()
+            );
+        }
     }
 
-    @Override
-    public List<FaceEncoding> getUserEncodings(Long userId) {
-        return repository.findByUserId(userId);
+    private String serializeEncoding(List<Double> encoding) {
+        try {
+            return objectMapper.writeValueAsString(encoding);
+        } catch (Exception e) {
+            throw new IllegalStateException("Erreur sérialisation encoding", e);
+        }
     }
 
     @Override
     @Transactional
-    public void resetEncodings(Long userId) {
+    public FaceEncoding saveEncoding(Long userId, String encodingRaw) {
+        log.debug("Sauvegarde encoding pour userId={}", userId);
 
-        User user = userRepository.findById(userId).orElseThrow();
+        User user = userDao.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé : " + userId));
 
-        repository.deleteByUser(user);
+        List<Double> encoding = parseEncoding(encodingRaw);
+        validateDimensions(encoding);
+
+        // Vérifie si un encoding existe déjà
+        FaceEncoding existing = faceEncodingDao.findByUserId(userId);
+
+        if (existing != null) {
+            log.info("Mise à jour encoding existant userId={}", userId);
+            existing.setEncoding(serializeEncoding(encoding));
+            return faceEncodingDao.save(existing);
+        }
+
+        FaceEncoding faceEncoding = new FaceEncoding();
+        faceEncoding.setUser(user);
+        faceEncoding.setEncoding(serializeEncoding(encoding));
+
+        log.info("Nouvel encoding créé userId={}", userId);
+        return faceEncodingDao.save(faceEncoding);
     }
 
-    // ===============================
-    // RECONNAISSANCE FACIALE
-    // ===============================
-
     @Override
-    public Long recognizeFace(String encodingJson) {
+    @Transactional(readOnly = true)
+    public Long recognizeFace(String encodingRaw) {
+        List<Double> targetEncoding = parseEncoding(encodingRaw);
+        validateDimensions(targetEncoding);
 
-        double[] target = parseEncoding(encodingJson);
+        List<FaceEncoding> allEncodings = faceEncodingDao.findAll();
+        Long bestMatchUserId = null;
+        double bestDistance = Double.MAX_VALUE;
+        final double THRESHOLD = 0.6;
 
-        List<FaceEncoding> all = repository.findAll();
-
-        double minDistance = Double.MAX_VALUE;
-
-        Long matchedUserId = null;
-
-        for (FaceEncoding fe : all) {
-
-            double[] dbEncoding = parseEncoding(fe.getEncoding());
-
-            double distance = calculateDistance(target, dbEncoding);
-
-            if (distance < MATCH_THRESHOLD && distance < minDistance) {
-
-                minDistance = distance;
-
-                matchedUserId = fe.getUser().getId();
+        for (FaceEncoding fe : allEncodings) {
+            List<Double> storedEncoding = parseEncoding(fe.getEncoding());
+            double distance = calculateEuclideanDistance(targetEncoding, storedEncoding);
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                bestMatchUserId = fe.getUser().getId();
             }
         }
 
-        return matchedUserId;
+        return bestDistance > THRESHOLD ? null : bestMatchUserId;
     }
 
-    // ===============================
-    // UTILITIES
-    // ===============================
-
-    private void validateSaveRequest(Long userId, String encodingJson, Integer photoIndex) {
-        if (userId == null || userId <= 0) {
-            throw new IllegalArgumentException("userId invalide.");
+    private double calculateEuclideanDistance(List<Double> a, List<Double> b) {
+        double sum = 0.0;
+        for (int i = 0; i < a.size(); i++) {
+            double diff = a.get(i) - b.get(i);
+            sum += diff * diff;
         }
-
-        if (photoIndex == null || photoIndex < 1 || photoIndex > MAX_PHOTOS) {
-            throw new IllegalArgumentException("photoIndex doit être entre 1 et 3.");
-        }
-
-        parseEncoding(encodingJson);
-    }
-
-    private double[] parseEncoding(String json) {
-        if (json == null || json.isBlank()) {
-            throw new IllegalArgumentException("Encoding vide.");
-        }
-
-        String normalized = json.trim();
-
-        if (!normalized.startsWith("[") || !normalized.endsWith("]")) {
-            throw new IllegalArgumentException("Encoding JSON invalide.");
-        }
-
-        double[] values = Arrays.stream(normalized.substring(1, normalized.length() - 1).split(","))
-                .map(String::trim)
-                .mapToDouble(Double::parseDouble)
-                .toArray();
-
-        if (values.length != ENCODING_SIZE) {
-            throw new IllegalArgumentException("Encoding doit contenir 128 valeurs.");
-        }
-
-        return values;
-    }
-
-    private double calculateDistance(double[] a, double[] b) {
-        if (a.length != b.length) {
-            throw new IllegalArgumentException("Les encodings doivent avoir la même dimension.");
-        }
-
-        double sum = 0;
-
-        for (int i = 0; i < a.length; i++) {
-
-            sum += Math.pow(a[i] - b[i], 2);
-        }
-
         return Math.sqrt(sum);
+    }
+
+    @Override
+    @Transactional
+    public void deleteEncoding(Long userId) {
+        log.info("Suppression encoding pour userId={}", userId);
+        faceEncodingDao.deleteByUserId(userId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean hasEncoding(Long userId) {
+        return faceEncodingDao.existsByUserId(userId);
     }
 }

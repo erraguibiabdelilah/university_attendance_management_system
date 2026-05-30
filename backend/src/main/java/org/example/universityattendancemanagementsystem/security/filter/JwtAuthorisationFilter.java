@@ -28,6 +28,14 @@ public class JwtAuthorisationFilter extends OncePerRequestFilter {
     }
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.startsWith("/uploads/")
+            || path.startsWith("/api/uca/justification/fichier/")
+            || path.matches("/api/uca/auth/\\d+/photo");
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain)

@@ -1,7 +1,7 @@
 package org.example.universityattendancemanagementsystem.service.facad;
 
-import org.example.universityattendancemanagementsystem.bean.Absence;
 import org.example.universityattendancemanagementsystem.ws.dto.AbsenceDto;
+import org.example.universityattendancemanagementsystem.ws.dto.AbsencePyloadDto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,6 +21,10 @@ public interface AbsenceService {
     List<AbsenceDto> findAll();
 
     AbsenceDto save(AbsenceDto dto);
+
+    AbsenceDto update(Long id, AbsenceDto dto);
+
+    AbsenceDto updateWithDetails(Long id, AbsencePyloadDto payload);
 
     void deleteById(Long id);
 }

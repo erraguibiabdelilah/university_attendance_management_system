@@ -1,20 +1,18 @@
 package org.example.universityattendancemanagementsystem.service.facad;
 
 import org.example.universityattendancemanagementsystem.bean.FaceEncoding;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface FaceEncodingService {
 
-    // Ajouter un encoding
-    FaceEncoding saveEncoding(Long userId, String encoding, Integer photoIndex);
-
-    boolean isRegistrationComplete(Long userId);
-
-    List<FaceEncoding> getUserEncodings(Long userId);
-
-    void resetEncodings(Long userId);
+    FaceEncoding saveEncoding(Long userId, String encoding);
 
     Long recognizeFace(String encoding);
 
+
+    @Transactional
+    void deleteEncoding(Long userId);
+
+    @Transactional(readOnly = true)
+    boolean hasEncoding(Long userId);
 }

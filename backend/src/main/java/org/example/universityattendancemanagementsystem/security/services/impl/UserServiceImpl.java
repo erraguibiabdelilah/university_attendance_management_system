@@ -97,10 +97,8 @@ public class UserServiceImpl implements UserService {
         // Encoder le mot de passe
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        // Sauvegarder l'utilisateur
-        dao.save(user);
-
-        return user;
+        // Sauvegarder l'utilisateur et récupérer l'entité avec l'id généré
+        return dao.save(user);
     }
 
 

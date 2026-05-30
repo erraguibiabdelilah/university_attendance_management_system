@@ -17,4 +17,6 @@ public class AbsenceDetailDto {
     private String studentLastName;
     private String studentCne;
     private boolean estAbsent;
+    private String nomModule;
+    private String date;
 }

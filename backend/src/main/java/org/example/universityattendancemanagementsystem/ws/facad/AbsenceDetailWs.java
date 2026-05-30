@@ -42,6 +42,24 @@ public class AbsenceDetailWs {
         return ResponseEntity.ok(absenceDetailService.save(dto));
     }
 
+    // Enregistrer le push token de l'étudiant
+    @PutMapping("push-token/{studentId}")
+    public ResponseEntity<Void> savePushToken(@PathVariable Long studentId, @RequestBody java.util.Map<String, String> body) {
+        absenceDetailService.savePushToken(studentId, body.get("token"));
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<AbsenceDetailDto> update(@PathVariable Long id, @RequestBody AbsenceDetailDto dto) {
+        return ResponseEntity.ok(absenceDetailService.update(id, dto));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        absenceDetailService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         absenceDetailService.deleteById(id);

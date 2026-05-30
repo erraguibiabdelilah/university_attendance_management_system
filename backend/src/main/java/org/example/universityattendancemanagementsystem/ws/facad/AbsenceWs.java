@@ -67,6 +67,17 @@ public class AbsenceWs {
          return 1;
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<AbsenceDto> update(@PathVariable Long id, @RequestBody AbsencePyloadDto payload) {
+        return ResponseEntity.ok(absenceService.updateWithDetails(id, payload));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        absenceService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         absenceService.deleteById(id);

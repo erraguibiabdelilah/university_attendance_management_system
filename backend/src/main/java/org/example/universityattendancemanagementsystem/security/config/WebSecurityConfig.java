@@ -77,8 +77,10 @@ public class WebSecurityConfig {
 
                         // PUBLIC
                         .requestMatchers(
-
+                                "/api/face//save/encoding",
                                 "/api/uca/auth/**",
+                                "/uploads/**",
+                                "/api/uca/justification/fichier/**",
 
                                 "/swagger-ui.html",
 
@@ -143,10 +145,7 @@ public class WebSecurityConfig {
         CorsConfiguration configuration =
                 new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
-                List.of("http://localhost:4200")
-        );
-
+        configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedMethods(
                 List.of(
                         "GET",

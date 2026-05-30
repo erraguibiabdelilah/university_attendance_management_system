@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
     User findUserByUsername(String username);
+    boolean existsByUsername(String username);
 
     List<User> findUserByFilierAndPromoAndRole(String filier , String promo , Role role);
 

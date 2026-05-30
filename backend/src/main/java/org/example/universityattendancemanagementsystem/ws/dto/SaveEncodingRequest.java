@@ -1,12 +1,25 @@
 package org.example.universityattendancemanagementsystem.ws.dto;
+
 import lombok.Data;
 
-@Data
+
 public class SaveEncodingRequest {
-
     private Long userId;
-
     private String encoding;
 
-    private Integer photoIndex;
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getEncoding() {
+        return encoding;
+    }
+
+    public void setEncoding(String encoding) {
+        this.encoding = encoding;
+    }
 }

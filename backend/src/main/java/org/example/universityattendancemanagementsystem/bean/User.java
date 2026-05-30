@@ -27,10 +27,12 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean accountNonExpired = true;
+    private String expoPushToken;
+    private String photoUrl;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-    @JsonIgnore
+
     @OneToMany(mappedBy = "user")
     private List<FaceEncoding> encodings;
 
@@ -192,5 +194,21 @@ public class User implements UserDetails {
 
     public void setFilier(String filier) {
         this.filier = filier;
+    }
+
+    public String getExpoPushToken() {
+        return expoPushToken;
+    }
+
+    public void setExpoPushToken(String expoPushToken) {
+        this.expoPushToken = expoPushToken;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

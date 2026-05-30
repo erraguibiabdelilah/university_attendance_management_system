@@ -1,6 +1,5 @@
 package org.example.universityattendancemanagementsystem.service.facad;
 
-import org.example.universityattendancemanagementsystem.bean.AbsenceDetail;
 import org.example.universityattendancemanagementsystem.ws.dto.AbsenceDetailDto;
 
 import java.util.List;
@@ -17,5 +16,9 @@ public interface AbsenceDetailService {
 
     AbsenceDetailDto save(AbsenceDetailDto dto);
 
+    AbsenceDetailDto update(Long id, AbsenceDetailDto dto);
+
     void deleteById(Long id);
+
+    void savePushToken(Long studentId, String token);
 }

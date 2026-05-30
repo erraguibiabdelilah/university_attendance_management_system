@@ -5,20 +5,17 @@ import org.example.universityattendancemanagementsystem.bean.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface FaceEncodingDao  extends JpaRepository<FaceEncoding,Long> {
-    List<FaceEncoding> findByUser(User user);
+@Repository
+public interface FaceEncodingDao extends JpaRepository<FaceEncoding, Long> {
 
-    long countByUser(User user);
+    FaceEncoding findByUserId(Long userId);
 
-    boolean existsByUserAndPhotoIndex(User user, Integer photoIndex);
+    boolean existsByUserId(Long userId);
 
-    @Query("SELECT fe FROM FaceEncoding fe WHERE fe.user.id = :userId ORDER BY fe.photoIndex")
-    List<FaceEncoding> findByUserId(@Param("userId") Long userId);
-
-    void deleteByUser(User user);
-
-    List<FaceEncoding> findAll();
+    void deleteByUserId(Long userId);
 }
