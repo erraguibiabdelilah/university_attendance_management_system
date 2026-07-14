@@ -1,0 +1,135 @@
+<!-- ═══════════════════════════════════════════════════════════
+     auth-login.component.html  –  FST Marrakech Academic Heritage
+═══════════════════════════════════════════════════════════ -->
+
+<!-- ── Navbar institutionnelle ── -->
+<nav class="inst-nav">
+  <div class="inst-nav__inner">
+    <div class="inst-nav__brand">
+      <img src="assets/images/fst-logo.png" alt="FST Marrakech" class="inst-nav__logo" />
+    </div>
+    <div class="inst-nav__links">
+      <a href="https://www.fstg-marrakech.ac.ma" target="_blank" class="inst-nav__link">
+        <i class="bi bi-globe2"></i> Site officiel
+      </a>
+      <a href="mailto:contact@fstg-marrakech.ac.ma" class="inst-nav__link">
+        <i class="bi bi-envelope"></i> Contact
+      </a>
+      <a routerLink="/login" class="inst-nav__link inst-nav__link--primary">
+         <i class="bi bi-envelope"></i> Connexion
+     </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Layout principal ── -->
+<main class="login-page">
+
+  <!-- Panneau gauche : identité visuelle -->
+  <aside class="login-hero">
+    <div class="login-hero__content">
+      <img src="assets/images/fst-logo.png" alt="FST Marrakech" class="login-hero__logo" />
+      <h1 class="login-hero__title">Système de Gestion<br>des Présences</h1>
+      <p class="login-hero__sub">
+        Faculté des Sciences et Techniques<br>
+        Université Cadi Ayyad — Marrakech
+      </p>
+      <div class="login-hero__divider"></div>
+      <ul class="login-hero__features">
+        <li><i class="bi bi-check2-circle"></i> Suivi des absences en temps réel</li>
+        <li><i class="bi bi-check2-circle"></i> Reconnaissance faciale intégrée</li>
+        <li><i class="bi bi-check2-circle"></i> Gestion des justifications</li>
+      </ul>
+    </div>
+    <div class="login-hero__overlay"></div>
+  </aside>
+
+  <!-- Panneau droit : formulaire -->
+  <section class="login-form-panel">
+    <div class="login-card">
+
+      <!-- En-tête carte -->
+      <div class="login-card__header">
+        <div class="login-card__icon">
+          <i class="bi bi-shield-lock"></i>
+        </div>
+        <h2 class="login-card__title">Connexion</h2>
+        <p class="login-card__sub">Accédez à votre espace personnel</p>
+      </div>
+
+      <!-- Alerte erreur -->
+      @if (authErrorMessage) {
+        <div class="login-alert">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          {{ authErrorMessage }}
+        </div>
+      }
+
+      <!-- Formulaire -->
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form" novalidate>
+
+        <div class="f-group">
+          <label class="f-label" for="username">
+            <i class="bi bi-person"></i> Identifiant
+          </label>
+          <input
+            id="username"
+            type="text"
+            class="f-input"
+            [class.f-input--error]="loginForm.controls.username.invalid && loginForm.controls.username.touched"
+            formControlName="username"
+            placeholder="Votre nom d'utilisateur"
+            autocomplete="username" />
+          @if (loginForm.controls.username.hasError('required') && loginForm.controls.username.touched) {
+            <span class="f-error">L'identifiant est obligatoire.</span>
+          }
+        </div>
+
+        <div class="f-group">
+          <label class="f-label" for="password">
+            <i class="bi bi-lock"></i> Mot de passe
+          </label>
+          <input
+            id="password"
+            type="password"
+            class="f-input"
+            [class.f-input--error]="loginForm.controls.password.invalid && loginForm.controls.password.touched"
+            formControlName="password"
+            placeholder="Votre mot de passe"
+            autocomplete="current-password" />
+          @if (loginForm.controls.password.hasError('required') && loginForm.controls.password.touched) {
+            <span class="f-error">Le mot de passe est obligatoire.</span>
+          }
+        </div>
+
+        <div class="login-options">
+          <label class="f-check">
+            <input type="checkbox" class="f-check__input" id="remember" />
+            <span class="f-check__label">Se souvenir de moi</span>
+          </label>
+          <a href="javascript:" class="forgot-link">Mot de passe oublié ?</a>
+        </div>
+
+        <button type="submit" class="btn-login" [disabled]="isLoggingIn">
+          @if (isLoggingIn) {
+            <span class="spinner-border spinner-border-sm me-2"></span> Connexion…
+          } @else {
+            <i class="bi bi-box-arrow-in-right me-2"></i> Se connecter
+          }
+        </button>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer institutionnel ── -->
+<footer class="inst-footer">
+  <div class="inst-footer__inner">
+    <span>© {{ currentYear }} Faculté des Sciences et Techniques — Université Cadi Ayyad, Marrakech</span>
+    <span class="inst-footer__sep">|</span>
+    <span>Système de Gestion des Présences v1.0</span>
+  </div>
+</footer>

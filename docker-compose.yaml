@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+
+  backend:
+    build: ./backend
+    container_name: backapp
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: always
+
+  front:
+    build: ./front
+    container_name: front_app
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    restart: always
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

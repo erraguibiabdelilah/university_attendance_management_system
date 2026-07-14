@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "mobile_absence",
+    "slug": "mobile_absence",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      }
+    }
+  }
+}

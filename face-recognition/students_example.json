@@ -1,0 +1,27 @@
+[
+  {
+    "student_id": 1,
+    "name": "Ahmed Benali",
+    "image_path": "students/ahmed.jpg"
+  },
+  {
+    "student_id": 2,
+    "name": "Sara Idrissi",
+    "image_path": "students/sara.jpg"
+  },
+  {
+    "student_id": 3,
+    "name": "Yassine El Amrani",
+    "image_path": "students/yassine.jpg"
+  },
+  {
+    "student_id": 4,
+    "name": "Fatima Zahra Haddad",
+    "image_path": "students/fatima.jpg"
+  },
+  {
+    "student_id": 5,
+    "name": "Omar Chakir",
+    "image_path": "students/omar.jpg"
+  }
+]

@@ -1,0 +1,325 @@
+/**  =====================
+    2. Custom css start
+==========================  **/
+
+* {
+  &:focus {
+    outline: none;
+  }
+}
+
+.accordion {
+  --#{$prefix}accordion-color: #{$body-color};
+}
+
+a {
+  color: $black;
+  &:hover {
+    outline: none;
+    text-decoration: none;
+  }
+
+  &:not([href]) {
+    color: inherit;
+  }
+}
+
+p {
+  font-size: 14px;
+}
+
+h6,
+.h6,
+h5,
+.h5,
+h4,
+.h4,
+h3,
+.h3,
+h2,
+.h2,
+h1,
+.h1 {
+  color: var(--pc-heading-color);
+}
+
+b,
+strong {
+  font-weight: 600;
+}
+
+.breadcrumb-default-icon {
+  .breadcrumb-item + .breadcrumb-item::before {
+    position: relative;
+    top: 2px;
+  }
+}
+
+.btn-page {
+  .btn {
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+
+  .btn-group {
+    .btn {
+      margin-right: 0;
+      margin-bottom: 0;
+
+      &:last-child {
+        border-left: none;
+      }
+    }
+
+    label {
+      &:first-of-type {
+        border-right: none;
+      }
+    }
+  }
+}
+
+.material-icons-two-tone {
+  background-color: $body-color;
+  -webkit-text-fill-color: transparent;
+  vertical-align: text-bottom;
+  -webkit-background-clip: text;
+
+  &.text-white {
+    background-color: $white;
+  }
+}
+
+.img-radius {
+  border-radius: 50%;
+}
+
+.pc-icon {
+  &:not([class*='wid-']) {
+    width: 22px;
+  }
+
+  &:not([class*='hei-']) {
+    height: 22px;
+  }
+}
+
+/* ========================================================
+ ===============     document      ======================
+ ========================================================
+
+ Grid examples
+*/
+
+// modal box select
+.ng-dropdown-panel.ng-select-bottom {
+  z-index: 1099;
+}
+
+/* ================================    Blockquote Start  ===================== */
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1540px;
+  }
+}
+
+.media {
+  display: flex;
+
+  .media-body {
+    flex-grow: 1;
+  }
+}
+
+.blockquote {
+  padding: 0.5rem 1rem;
+}
+
+/* ================================    Blockquote End  ===================== */
+
+.color-card {
+  .card-body {
+    margin: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+    background: rgba(107, 117, 125, 0.08);
+    border-radius: $border-radius;
+  }
+}
+
+.color-block {
+  border-radius: $border-radius;
+  margin: 4px 0;
+
+  @each $name, $value in $more-colors {
+    $i: 100;
+
+    @while $i<=900 {
+      &.bg-#{$name}-#{$i} {
+        color: color-contrast(map-get($value, $i));
+      }
+
+      &.text-#{$name}-#{$i} {
+        background-color: color-contrast(map-get($value, $i));
+      }
+
+      $i: $i + 100;
+    }
+  }
+}
+
+.row {
+  > div {
+    .color-block {
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.pagination {
+  .page-item {
+    .page-link {
+      border-radius: 0;
+    }
+    &:first-child {
+      .page-link {
+        border-radius: var(--bs-pagination-border-radius) 0 0 var(--bs-pagination-border-radius);
+      }
+    }
+    &:last-child {
+      .page-link {
+        border-radius: 0 var(--bs-pagination-border-radius) var(--bs-pagination-border-radius) 0;
+      }
+    }
+  }
+}
+
+.form-search {
+  position: relative;
+  i {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    font-size: 20px;
+  }
+  .form-control {
+    padding-left: 50px;
+  }
+
+  &.product-search {
+    i {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.54);
+      top: 12px;
+    }
+
+    .form-control {
+      padding-left: 35px;
+    }
+  }
+}
+
+// offcanvas page css
+.customer-body {
+  height: calc(100% - 60px);
+}
+.offcanvas-top,
+.offcanvas-bottom {
+  min-height: 240px;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  FST Marrakech — Academic Heritage Design System overrides
+//  Palette : #622B14 · #995F2F · #F5EDE6 · #FFF8F6
+// ═══════════════════════════════════════════════════════════
+
+$fst-primary:   #622B14;
+$fst-hover:     #995F2F;
+$fst-light:     #F5EDE6;
+$fst-bg:        #FFF8F6;
+
+// ── Typographie globale ──────────────────────────────────────
+body {
+  font-family: 'Hanken Grotesk', sans-serif;
+  background-color: $fst-bg;
+}
+
+// ── Boutons primaires ────────────────────────────────────────
+.btn-primary {
+  background-color: $fst-primary !important;
+  border-color:     $fst-primary !important;
+  border-radius: 8px;
+  font-weight: 600;
+
+  &:hover, &:focus, &:active {
+    background-color: $fst-hover !important;
+    border-color:     $fst-hover !important;
+  }
+
+  &:disabled {
+    background-color: $fst-hover !important;
+    border-color:     $fst-hover !important;
+    opacity: 0.65;
+  }
+}
+
+.btn-outline-primary {
+  color: $fst-primary !important;
+  border-color: $fst-primary !important;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: $fst-primary !important;
+    color: #fff !important;
+  }
+}
+
+// ── Inputs / Form controls ───────────────────────────────────
+.form-control, .form-select {
+  border-radius: 8px;
+  border-color: #E8D5CC;
+
+  &:focus {
+    border-color: $fst-primary;
+    box-shadow: 0 0 0 3px rgba(98, 43, 20, 0.12);
+  }
+}
+
+// ── Cards ────────────────────────────────────────────────────
+.card {
+  border-radius: 12px;
+  border: 1px solid #F0E4DC;
+  box-shadow: 0 2px 12px rgba(98, 43, 20, 0.06);
+
+  .card-header {
+    border-bottom-color: #F0E4DC;
+
+    h5 { color: $fst-primary; }
+  }
+}
+
+// ── Badges ───────────────────────────────────────────────────
+.badge.bg-primary { background-color: $fst-primary !important; }
+
+// ── Links ────────────────────────────────────────────────────
+a.link-primary { color: $fst-primary !important; }
+
+// ── Pagination ───────────────────────────────────────────────
+.page-item.active .page-link {
+  background-color: $fst-primary;
+  border-color: $fst-primary;
+}
+.page-link {
+  color: $fst-primary;
+  &:hover { color: $fst-hover; }
+}
+
+// ── Checkbox / Radio ─────────────────────────────────────────
+.form-check-input:checked {
+  background-color: $fst-primary;
+  border-color: $fst-primary;
+}

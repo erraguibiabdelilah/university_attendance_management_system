@@ -1,0 +1,113 @@
+<ul class="list-unstyled">
+  <li class="pc-h-item">
+    <a href="https://github.com/codedthemes/mantis-free-angular-admin-template" target="_blank" class="pc-head-link me-0 bg-gray-200">
+      <i antIcon type="github" theme="outline"></i>
+    </a>
+  </li>
+  <li class="dropdown pc-h-item" ngbDropdown>
+    <a href="javascript:" class="pc-head-link dropdown-toggle arrow-none me-0 bg-gray-200" data-bs-toggle="dropdown" ngbDropdownToggle>
+      <i antIcon type="bell" theme="outline"></i>
+      @if (notifications.length > 0) {
+        <span class="badge bg-danger pc-h-badge">{{ notifications.length }}</span>
+      }
+    </a>
+    <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
+      <div class="dropdown-header d-flex align-items-center justify-content-between">
+        <h5 class="m-0">Absences</h5>
+        <span class="text-muted f-12">{{ notifications.length }} module(s)</span>
+      </div>
+      <div class="dropdown-divider mb-0"></div>
+      <ng-scrollbar style="min-height: 280px" visibility="hover">
+        <div class="dropdown-header p-0 text-wrap header-notification-scroll">
+          <div class="list-group list-group-flush w-100">
+            @if (notifications.length === 0) {
+              <div class="list-group-item text-center text-muted py-4">
+                <i antIcon theme="outline" type="check-circle" class="d-block f-24 mb-2 text-success"></i>
+                Aucune absence enregistrée
+              </div>
+            }
+            @for (notif of notifications; track notif.nomModule) {
+              <a class="list-group-item list-group-item-action">
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <div class="user-avatar" [class]="notif.count >= 3 ? 'bg-light-danger' : 'bg-light-warning'">
+                      <i class="d-flex" antIcon theme="outline" type="warning"></i>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <p class="text-body mb-0 fw-semibold">{{ notif.nomModule }}</p>
+                    <span [class]="notif.count >= 3 ? 'text-danger' : 'text-warning'">
+                      {{ notif.count }} absence{{ notif.count > 1 ? 's' : '' }}
+                    </span>
+                    @if (notif.date) {
+                      <span class="float-end text-muted f-12">{{ notif.date }}</span>
+                    }
+                  </div>
+                </div>
+              </a>
+            }
+          </div>
+        </div>
+      </ng-scrollbar>
+      <div class="dropdown-divider mt-0"></div>
+      <div class="text-center py-2">
+        <a routerLink="/absences" class="link-primary">Voir toutes les absences</a>
+      </div>
+    </div>
+  </li>
+  <li class="dropdown pc-h-item header-user-profile" ngbDropdown>
+    <a href="javascript:" class="pc-head-link dropdown-toggle arrow-none me-0" ngbDropdownToggle>
+      <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="user-avatar me-2" />
+      <span class="f-w-600">{{this.user.username ?? 'Hello'}}</span>
+    </a>
+    <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
+      <div class="dropdown-header">
+        <div class="d-flex mb-1">
+          <div class="flex-shrink-0">
+            <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="user-avatar wid-35" />
+          </div>
+          <div class="flex-grow-1 ms-3 text-start">
+            <h6 class="mb-0">Welcome</h6>
+            <span></span>
+          </div>
+          <a (click)="logout()" class="bg-transparent"><i class="d-flex f-20" antIcon theme="outline" type="logout"></i></a>
+        </div>
+      </div>
+      <ul ngbNav #nav="ngbNav" class="nav drp-tabs nav-fill nav-tabs">
+        <li ngbNavItem="1">
+          <a ngbNavLink>
+            <i antIcon theme="outline" type="user" class="me-2"></i>
+            Profile
+          </a>
+          <ng-template ngbNavContent>
+            @for (task of profile; track task) {
+              <div>
+                <a (click)="task.title==='Logout' && logout()" class="dropdown-item">
+                  <i class="text-muted" antIcon theme="outline" type="{{ task.icon }}"></i>
+                  <span>{{ task.title }}</span>
+                </a>
+              </div>
+            }
+          </ng-template>
+        </li>
+        <li ngbNavItem="2">
+          <a ngbNavLink>
+            <i class="me-2" antIcon theme="outline" type="setting"></i>
+            Setting
+          </a>
+          <ng-template ngbNavContent>
+            @for (task of setting; track task) {
+              <div>
+                <a class="dropdown-item">
+                  <i class="text-muted" antIcon theme="outline" type="{{ task.icon }}"></i>
+                  <span >{{ task.title }}</span>
+                </a>
+              </div>
+            }
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
+    </div>
+  </li>
+</ul>

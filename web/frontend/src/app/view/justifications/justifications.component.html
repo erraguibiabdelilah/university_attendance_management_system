@@ -1,0 +1,153 @@
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="mb-1 fw-bold">Justifications d'absences</h4>
+            <p class="text-muted mb-0">Gérez les justificatifs soumis par les étudiants</p>
+        </div>
+        <button class="btn btn-primary" (click)="loadAll()">
+            <i class="ti ti-refresh me-1"></i> Actualiser
+        </button>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="card stat-card cursor-pointer" [class.active-filter]="filterStatut === 'ALL'"
+                (click)="setFilter('ALL')">
+                <div class="card-body text-center py-3">
+                    <div class="stat-number text-primary">{{ count('ALL') }}</div>
+                    <div class="stat-label">Total</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card stat-card cursor-pointer" [class.active-filter]="filterStatut === 'EN_ATTENTE'"
+                (click)="setFilter('EN_ATTENTE')">
+                <div class="card-body text-center py-3">
+                    <div class="stat-number text-warning">{{ count('EN_ATTENTE') }}</div>
+                    <div class="stat-label">En attente</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card stat-card cursor-pointer" [class.active-filter]="filterStatut === 'VALIDE'"
+                (click)="setFilter('VALIDE')">
+                <div class="card-body text-center py-3">
+                    <div class="stat-number text-success">{{ count('VALIDE') }}</div>
+                    <div class="stat-label">Validées</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card stat-card cursor-pointer" [class.active-filter]="filterStatut === 'REFUSE'"
+                (click)="setFilter('REFUSE')">
+                <div class="card-body text-center py-3">
+                    <div class="stat-number text-danger">{{ count('REFUSE') }}</div>
+                    <div class="stat-label">Refusées</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body p-0">
+            <div *ngIf="isLoading" class="text-center py-5">
+                <div class="spinner-border text-primary"></div>
+                <p class="mt-2 text-muted">Chargement...</p>
+            </div>
+            <div *ngIf="!isLoading && filtered.length === 0" class="text-center py-5">
+                <i class="ti ti-file-off" style="font-size:3rem; color:#ccc"></i>
+                <p class="text-muted mt-2">Aucune justification trouvée</p>
+            </div>
+            <div class="table-responsive" *ngIf="!isLoading && filtered.length > 0">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Étudiant</th>
+                            <th>CNE</th>
+                            <th>Motif</th>
+                            <th>Fichier</th>
+                            <th>Date dépôt</th>
+                            <th>Statut</th>
+                            <th>Motif refus</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let j of filtered; let i = index">
+                            <td class="text-muted">{{ i + 1 }}</td>
+                            <td>
+                                <div class="fw-semibold">{{ j.studentFirstName }} {{ j.studentLastName }}</div>
+                                <small class="text-muted">ID: {{ j.studentId }}</small>
+                            </td>
+                            <td>{{ j.studentCne || '—' }}</td>
+                            <td>{{ j.motif || '—' }}</td>
+                            <td>
+                                <a [href]="'https://docs.google.com/viewer?url=' + encodeURIComponent(j.fichierUrl)"
+                                    target="_blank" class="btn btn-sm btn-outline-secondary">
+                                    <i class="ti ti-file me-1"></i>Voir
+                                </a>
+                            </td>
+                            <td>{{ j.dateDepot | date:'dd/MM/yyyy HH:mm' }}</td>
+                            <td>
+                                <span class="badge" [ngClass]="getStatutClass(j.statut!)">
+                                    {{ getStatutLabel(j.statut!) }}
+                                </span>
+                            </td>
+                            <td>
+                                <span *ngIf="j.motifRefus" class="text-danger small">{{ j.motifRefus }}</span>
+                                <span *ngIf="!j.motifRefus" class="text-muted">—</span>
+                            </td>
+                            <td class="text-center">
+                                <ng-container *ngIf="j.statut === 'EN_ATTENTE'">
+                                    <div class="d-flex gap-2 justify-content-center">
+                                        <button class="btn btn-success btn-sm px-3" (click)="valider(j)"
+                                            [disabled]="isSaving">✔ Valider</button>
+                                        <button class="btn btn-danger btn-sm px-3" (click)="openRefusModal(j)"
+                                            [disabled]="isSaving">✖ Refuser</button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="j.statut === 'VALIDE'"><span class="text-success fw-semibold">✔
+                                        Validée</span></ng-container>
+                                <ng-container *ngIf="j.statut === 'REFUSE'"><span class="text-danger fw-semibold">✖
+                                        Refusée</span></ng-container>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal refus -->
+<div class="modal-backdrop-custom" *ngIf="showRefusModal" (click)="closeRefusModal()">
+    <div class="modal-dialog-custom" (click)="$event.stopPropagation()">
+        <div class="card shadow-lg" style="width:420px">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="mb-0 fw-bold text-danger">Refuser la justification</h6>
+                <button class="btn-close" (click)="closeRefusModal()"></button>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-3">Étudiant : <strong>{{ selectedJustification?.studentFirstName }} {{
+                        selectedJustification?.studentLastName }}</strong></p>
+                <label class="form-label fw-semibold">Motif du refus <span class="text-danger">*</span></label>
+                <textarea class="form-control" rows="3" [(ngModel)]="motifRefus"
+                    placeholder="Expliquez la raison du refus..."></textarea>
+            </div>
+            <div class="card-footer d-flex justify-content-end gap-2">
+                <button class="btn btn-outline-secondary" (click)="closeRefusModal()">Annuler</button>
+                <button class="btn btn-danger" (click)="confirmerRefus()"
+                    [disabled]="!motifRefus.trim() || isSaving">Confirmer le refus</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" *ngIf="showToast">
+    <div class="toast show" [class.bg-success]="toastType === 'success'" [class.bg-danger]="toastType === 'error'"
+        style="color:white">
+        <div class="toast-body fw-semibold">{{ toastMessage }}</div>
+    </div>
+</div>

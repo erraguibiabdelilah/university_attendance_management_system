@@ -1,0 +1,31 @@
+<div class="row">
+  @for (analytic of AnalyticEcommerce; track analytic) {
+    <div class="col-md-6 col-xl-3">
+      <app-card [showHeader]="false" blockClass="dashboard-card">
+        <h6 class="mb-2 f-w-400 text-muted">{{ analytic.title }}</h6>
+        <h4 class="mb-3">
+          {{ analytic.amount }}
+          <span class="badge {{ analytic.background }} border {{ analytic.border }} ">
+            <i antIcon type="{{ analytic.icon }}" theme="outline"></i>
+            {{ analytic.percentage }}
+          </span>
+        </h4>
+        <p class="mb-0 text-muted text-sm">
+          You made an extra
+          <span class="{{ analytic.color }}">{{ analytic.number }}</span>
+          this year
+        </p>
+      </app-card>
+    </div>
+  }
+  <div class="col-md-12 col-xl-8">
+    <app-monthly-bar-chart [absencesParMoisParFiliere]="absencesParMoisParFiliere" />
+  </div>
+  <div class="col-md-12 col-xl-4">
+    <app-income-overview-chart [absencesTotalParFiliere]="absencesTotalParFiliere" />
+  </div>
+
+
+
+  <!-- [ sample-page ] end -->
+</div>

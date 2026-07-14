@@ -1,0 +1,125 @@
+2026-05-15 22:02:22 | INFO     | face_attendance | 🚀 AI Face Recognition Module starting up...
+2026-05-15 22:02:22 | INFO     | face_attendance |    Model backend : ArcFace
+2026-05-15 22:02:22 | INFO     | face_attendance |    Detector      : retinaface
+2026-05-15 22:02:22 | INFO     | face_attendance |    Threshold     : 0.68
+2026-05-15 22:09:43 | ERROR    | face_attendance | Failed to embed Ahmed: Image not found: students/ahmed.jpg
+2026-05-15 22:10:39 | INFO     | face_attendance | Student embeddings ready: 1/2 successful
+2026-05-15 22:10:41 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-15 22:10:41 | INFO     | face_attendance | Scan complete | class=INFO-2A | present=1/2 | unknown=0 | time=58.129s
+2026-05-15 22:13:31 | INFO     | face_attendance | Cache loaded: 1 entries from cache\INFO_2A_embeddings.json
+2026-05-15 22:13:33 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-15 22:13:36 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-15 22:13:36 | INFO     | face_attendance | Scan complete | class=INFO-2A | present=1/2 | unknown=0 | time=4.616s
+2026-05-15 22:14:25 | INFO     | face_attendance | Cache loaded: 2 entries from cache\INFO_2A_embeddings.json
+2026-05-15 22:14:28 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-15 22:14:31 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-15 22:14:31 | INFO     | face_attendance | Scan complete | class=INFO-2A | present=1/2 | unknown=0 | time=5.479s
+2026-05-15 22:35:45 | INFO     | face_attendance | Cache loaded: 3 entries from cache\INFO_2A_embeddings.json
+2026-05-15 22:35:45 | ERROR    | face_attendance | Failed to embed Ahmed: Image not found: students/ahmed.jpg
+2026-05-15 22:35:45 | ERROR    | face_attendance | Failed to embed Sara: Image not found: students/sara.jpg
+2026-05-15 22:35:45 | INFO     | face_attendance | Student embeddings ready: 0/2 successful
+2026-05-15 22:35:51 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-05-15 22:35:51 | INFO     | face_attendance | Scan complete | class=INFO-2A | present=0/2 | unknown=2 | time=5.794s
+2026-05-15 22:37:00 | INFO     | face_attendance | Cache loaded: 3 entries from cache\INFO_2A_embeddings.json
+2026-05-15 22:37:10 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-15 22:37:16 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-05-15 22:37:16 | INFO     | face_attendance | Scan complete | class=INFO-2A | present=2/2 | unknown=0 | time=15.859s
+2026-05-15 22:40:31 | INFO     | face_attendance | 🛑 AI Face Recognition Module shutting down...
+2026-05-17 17:00:44 | INFO     | face_attendance | 🚀 AI Face Recognition Module starting up...
+2026-05-17 17:00:44 | INFO     | face_attendance |    Model backend : ArcFace
+2026-05-17 17:00:44 | INFO     | face_attendance |    Detector      : retinaface
+2026-05-17 17:00:44 | INFO     | face_attendance |    Threshold     : 0.68
+2026-05-17 17:05:02 | INFO     | face_attendance | 🛑 AI Face Recognition Module shutting down...
+2026-05-17 17:05:20 | INFO     | face_attendance | 🚀 AI Face Recognition Module starting up...
+2026-05-17 17:05:20 | INFO     | face_attendance |    Model backend : ArcFace
+2026-05-17 17:05:20 | INFO     | face_attendance |    Detector      : retinaface
+2026-05-17 17:05:20 | INFO     | face_attendance |    Threshold     : 0.68
+2026-05-17 17:09:56 | INFO     | face_attendance | 🛑 AI Face Recognition Module shutting down...
+2026-05-17 17:10:24 | INFO     | face_attendance | 🚀 AI Face Recognition Module starting up...
+2026-05-17 17:10:24 | INFO     | face_attendance |    Model backend : ArcFace
+2026-05-17 17:10:24 | INFO     | face_attendance |    Detector      : retinaface
+2026-05-17 17:10:24 | INFO     | face_attendance |    Threshold     : 0.68
+2026-05-17 17:22:46 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-17 17:22:48 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-17 17:22:48 | INFO     | face_attendance | Scan complete | class=IRISI-S8 | present=1/2 | unknown=0 | time=23.598s
+2026-05-17 17:24:18 | INFO     | face_attendance | Cache loaded: 2 entries from cache\IRISI_S8_embeddings.json
+2026-05-17 17:24:19 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-17 17:24:25 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-05-17 17:24:25 | INFO     | face_attendance | Scan complete | class=IRISI-S8 | present=2/2 | unknown=0 | time=6.881s
+2026-05-17 17:28:02 | INFO     | face_attendance | Cache loaded: 2 entries from cache\IRISI_S8_embeddings.json
+2026-05-17 17:28:02 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-17 17:28:06 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-17 17:28:06 | INFO     | face_attendance | Scan complete | class=IRISI-S8 | present=0/2 | unknown=1 | time=3.825s
+2026-05-17 17:34:22 | INFO     | face_attendance | Cache loaded: 2 entries from cache\IRISI_S8_embeddings.json
+2026-05-17 17:34:23 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-17 17:34:26 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-17 17:34:26 | INFO     | face_attendance | Scan complete | class=IRISI-S8 | present=1/2 | unknown=0 | time=3.922s
+2026-05-17 17:36:47 | INFO     | face_attendance | Cache loaded: 2 entries from cache\IRISI_S8_embeddings.json
+2026-05-17 17:36:47 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-17 17:36:51 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-17 17:36:51 | INFO     | face_attendance | Scan complete | class=IRISI-S8 | present=1/2 | unknown=0 | time=3.688s
+2026-05-17 17:37:13 | INFO     | face_attendance | Cache loaded: 2 entries from cache\IRISI_S8_embeddings.json
+2026-05-17 17:37:13 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-17 17:37:16 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-17 17:37:16 | INFO     | face_attendance | Scan complete | class=IRISI-S8 | present=1/2 | unknown=0 | time=3.631s
+2026-05-17 19:13:49 | ERROR    | face_attendance | Failed to embed imane inae: Image not found: students/imane.png
+2026-05-17 19:13:49 | INFO     | face_attendance | Student embeddings ready: 1/2 successful
+2026-05-17 19:13:53 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-17 19:13:53 | INFO     | face_attendance | Scan complete | class=IRISI-S2 | present=1/2 | unknown=0 | time=12.519s
+2026-05-17 19:14:27 | INFO     | face_attendance | Cache loaded: 2 entries from cache\IRISI_S8_embeddings.json
+2026-05-17 19:14:27 | INFO     | face_attendance | Student embeddings ready: 1/1 successful
+2026-05-17 19:14:31 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-05-17 19:14:31 | INFO     | face_attendance | Scan complete | class=IRISI-S8 | present=1/1 | unknown=1 | time=3.919s
+2026-05-17 19:17:56 | INFO     | face_attendance | Cache loaded: 1 entries from cache\IRISI_S2_embeddings.json
+2026-05-17 19:17:57 | ERROR    | face_attendance | Failed to embed imane inae: Image not found: students/imane.png
+2026-05-17 19:18:02 | INFO     | face_attendance | Student embeddings ready: 2/3 successful
+2026-05-17 19:18:06 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-05-17 19:18:06 | INFO     | face_attendance | Scan complete | class=IRISI-S2 | present=2/3 | unknown=0 | time=9.583s
+2026-05-17 19:18:34 | INFO     | face_attendance | Cache loaded: 2 entries from cache\IRISI_S2_embeddings.json
+2026-05-17 19:18:34 | ERROR    | face_attendance | Failed to embed imane inae: Image not found: students/imane.png
+2026-05-17 19:18:35 | INFO     | face_attendance | Student embeddings ready: 2/3 successful
+2026-05-17 19:18:38 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-05-17 19:18:38 | INFO     | face_attendance | Scan complete | class=IRISI-S2 | present=2/3 | unknown=0 | time=4.737s
+2026-05-17 19:19:00 | INFO     | face_attendance | Cache loaded: 2 entries from cache\IRISI_S2_embeddings.json
+2026-05-17 19:19:01 | ERROR    | face_attendance | Failed to embed imane inae: Image not found: students/imane.png
+2026-05-17 19:19:07 | INFO     | face_attendance | Student embeddings ready: 3/4 successful
+2026-05-17 19:19:10 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-05-17 19:19:10 | INFO     | face_attendance | Scan complete | class=IRISI-S2 | present=2/4 | unknown=0 | time=10.681s
+2026-05-17 19:23:21 | INFO     | face_attendance | Student embeddings ready: 1/1 successful
+2026-05-17 19:23:25 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-17 19:23:25 | INFO     | face_attendance | Scan complete | class=IRISI-S1 | present=1/1 | unknown=0 | time=8.991s
+2026-05-17 19:23:39 | INFO     | face_attendance | Cache loaded: 3 entries from cache\IRISI_S2_embeddings.json
+2026-05-17 19:23:45 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-17 19:23:49 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-05-17 19:23:49 | INFO     | face_attendance | Scan complete | class=IRISI-S2 | present=2/2 | unknown=0 | time=9.474s
+2026-05-17 22:07:40 | INFO     | face_attendance | 🛑 AI Face Recognition Module shutting down...
+2026-05-18 12:01:27 | INFO     | face_attendance | 🚀 AI Face Recognition Module starting up...
+2026-05-18 12:01:27 | INFO     | face_attendance |    Model backend : ArcFace
+2026-05-18 12:01:27 | INFO     | face_attendance |    Detector      : retinaface
+2026-05-18 12:01:27 | INFO     | face_attendance |    Threshold     : 0.68
+2026-05-18 14:26:38 | INFO     | face_attendance | 🛑 AI Face Recognition Module shutting down...
+2026-05-19 02:19:54 | INFO     | face_attendance | 🚀 AI Face Recognition Module starting up...
+2026-05-19 02:19:54 | INFO     | face_attendance |    Model backend : ArcFace
+2026-05-19 02:19:54 | INFO     | face_attendance |    Detector      : retinaface
+2026-05-19 02:19:54 | INFO     | face_attendance |    Threshold     : 0.68
+2026-05-19 02:34:49 | INFO     | face_attendance | Cache loaded: 4 entries from cache\IRISI_S2_embeddings.json
+2026-05-19 02:34:50 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-05-19 02:35:04 | INFO     | face_attendance | Faces detected in classroom image: 1
+2026-05-19 02:35:04 | INFO     | face_attendance | Scan complete | class=IRISI-S2 | present=1/2 | unknown=0 | time=15.191s
+2026-05-19 02:59:43 | INFO     | face_attendance | 🛑 AI Face Recognition Module shutting down...
+2026-06-04 15:33:18 | INFO     | face_attendance | 🚀 AI Face Recognition Module starting up...
+2026-06-04 15:33:18 | INFO     | face_attendance |    Model backend : ArcFace
+2026-06-04 15:33:18 | INFO     | face_attendance |    Detector      : retinaface
+2026-06-04 15:33:18 | INFO     | face_attendance |    Threshold     : 0.68
+2026-06-04 17:32:06 | INFO     | face_attendance | Cache loaded: 4 entries from cache\IRISI_S2_embeddings.json
+2026-06-04 17:32:09 | INFO     | face_attendance | Student embeddings ready: 2/2 successful
+2026-06-04 17:32:24 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-06-04 17:32:24 | INFO     | face_attendance | Scan complete | class=IRISI-S2 | present=2/2 | unknown=0 | time=18.009s
+2026-06-04 17:52:38 | INFO     | face_attendance | Student embeddings ready: 3/3 successful
+2026-06-04 17:52:42 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-06-04 17:52:42 | INFO     | face_attendance | Scan complete | class=IRISI-S4 | present=2/3 | unknown=0 | time=17.834s
+2026-06-04 17:53:17 | INFO     | face_attendance | Cache loaded: 3 entries from cache\IRISI_S4_embeddings.json
+2026-06-04 17:53:20 | INFO     | face_attendance | Student embeddings ready: 3/3 successful
+2026-06-04 17:53:23 | INFO     | face_attendance | Faces detected in classroom image: 2
+2026-06-04 17:53:23 | INFO     | face_attendance | Scan complete | class=IRISI-S4 | present=2/3 | unknown=0 | time=6.334s
+2026-06-04 21:06:19 | INFO     | face_attendance | 🛑 AI Face Recognition Module shutting down...

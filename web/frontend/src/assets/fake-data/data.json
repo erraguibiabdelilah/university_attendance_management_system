@@ -1,0 +1,11 @@
+{
+  "filieres": ["IRISI", "SIT", "GC", "ERME", "IFA", "GE", "GMP", "GI", "GP", "MI", "I2A"],
+  "promos": ["S1", "S2", "S3", "S4", "S5", "S6"],
+  "typeSeances": [
+    { "value": "COURS", "label": "Cours magistral" },
+    { "value": "TD", "label": "Travaux dirigés" },
+    { "value": "TP", "label": "Travaux pratiques" },
+    { "value": "EXAM", "label": "Examen" },
+    { "value": "CC", "label": "Contrôle continu" }
+  ]
+}
